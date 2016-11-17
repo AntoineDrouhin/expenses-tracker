@@ -1,2 +1,7 @@
 node_modules/
 built/*
+
+# Logs
+logs
+*.log
+npm-debug.log*
