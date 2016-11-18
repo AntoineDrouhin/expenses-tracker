@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack && firefox index.html ",
+    "start": "webpack-dev-server --progress --color --inline --hot",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Antoine Drouhin",
@@ -22,6 +22,12 @@
     "babel-plugin-transform-react-jsx-source": "^6.9.0",
     "babel-preset-latest": "^6.16.0",
     "babel-preset-react": "^6.16.0",
-    "redux-devtools": "^3.3.1"
+    "babel-preset-react-hmre": "^1.1.1",
+    "css-loader": "^0.26.0",
+    "react-hot-loader": "^3.0.0-beta.6",
+    "redux-devtools": "^3.3.1",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.3",
+    "webpack-dev-server": "^1.16.2"
   }
 }
