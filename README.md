@@ -4,7 +4,44 @@
 npm install
 npm start
 ```
+### Dev Process
+J'ai suivi [ce processus](http://redux.js.org/docs/basics/Actions.html).
 
+Voici ce que j'ai pu abstraire :
+
+#### Define Actions
+- `ADD_EXPENSE` : Amount, date, type
+- `DELETE_EXPENSE` : id
+- `ADD_EXPENSETYPE` : label
+- `DELETE_EXPENSETYPE` : id
+
+#### Designing the State Shape
+```
+{
+  expenseTypes: [
+    id,
+    label
+  ]
+  expenses: [
+    {
+      id,
+      expenseType,
+      amount,
+      date
+    }, ...
+  ]
+}
+```
+
+#### Designing Component Hierarchy
+
+
+
+
+
+
+
+## Lettre à Aurel
 
 **Salut Aurel**, si tu lis ca c'est que ca va deja un peux mieux :)
 
