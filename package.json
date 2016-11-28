@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --progress --color --inline --hot",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "babel-tape-runner test/**/*.js"
   },
   "author": "Antoine Drouhin",
   "license": "MIT",
   "dependencies": {
+    "cross-env": "3.1.3",
     "react": "^15.3.2",
     "react-dom": "^15.4.0",
     "react-redux": "^4.4.6",
