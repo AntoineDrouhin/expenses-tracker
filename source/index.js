@@ -5,6 +5,8 @@ import { createStore } from 'redux'
 import expenseApp from './reducers'
 import App from './components/App'
 
+require("./style/Bootstrap-v3.3.6.css");
+
 const initialState = {
     expenses : [{
       id: 99,
