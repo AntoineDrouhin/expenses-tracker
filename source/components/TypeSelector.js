@@ -1,11 +1,12 @@
 import React, { PropTypes } from 'react'
+import { FormGroup, FormControl } from 'react-bootstrap'
 
 const TypeSelector = (props) => (
-  <select>
+  <FormControl componentClass="select">
     {props.expensesTypes.map(expenseType =>
-      <option key={expenseType.id}>{expenseType.label}</option>
+      <option key={expenseType.id} value={expenseType.id}>{expenseType.label}</option>
     )}
-  </select>
+  </FormControl>
 )
 
 TypeSelector.propTypes = {

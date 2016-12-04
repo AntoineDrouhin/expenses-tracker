@@ -7,9 +7,9 @@ const App = () => {
 
   return (
     <CenterPanel >
-      <CenterPanel>
-        <AddExpense />
-      </CenterPanel>
+
+      <AddExpense />
+
       <MonthlyExpenseList />
     </CenterPanel>
   )

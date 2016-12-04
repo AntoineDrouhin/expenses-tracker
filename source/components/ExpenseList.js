@@ -6,7 +6,7 @@ import CenterPanel from './CenterPanel.component.js'
 const ExpenseList = ({ expenses, onDeleteClick }) => (
   <CenterPanel >
   <Col mdOffset={1} md={10}>
-    <h3>My expenses</h3>
+    <h4>My expenses</h4>
     <Table style={{marginLeft: "auto", marginRight: "auto"}} responsive >
       <tbody >
         {expenses.map(expense =>
