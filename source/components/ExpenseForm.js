@@ -3,14 +3,18 @@ import TypeSelector from './TypeSelector'
 import { FormControl, Form, ControlLabel, Button, Col, Panel} from 'react-bootstrap'
 
 const ExpenseForm = (props) => {
-  let amount, type, date
+
+  let amountInput = null, typeInput = null, dateInput = null
+
+  // Actual date :  dd/mm/yyyy
+  let defaultDateValue = (new Date()).toISOString().substring(0,10)
 
   return (
     <Panel>
       <h4>Add an expense</h4>
       <form onSubmit={e => {
         e.preventDefault()
-        props.onValidate(parseInt(amount.value), 'Food')
+        props.onValidate(parseInt(amountInput.value), typeInput.value)
       }}>
 
         <Form inline>
@@ -20,13 +24,15 @@ const ExpenseForm = (props) => {
             <FormControl
               type="text"
               id="get-amount"
-              ref={node => amount = node }
+              inputRef={ (ref) => amountInput = ref }
               type="number" />
           </Col>
 
           <Col md={3}>
             <ControlLabel htmlFor="get-date">Date :</ControlLabel>
-            <FormControl id="get-date" type="date"></FormControl>
+            <FormControl id="get-date" type="date"
+              inputRef={ (ref) => dateInput = ref }
+              defaultValue={defaultDateValue} />
           </Col>
 
           <Col md={3}>
@@ -34,7 +40,12 @@ const ExpenseForm = (props) => {
               <ControlLabel htmlFor="get-type">Type :</ControlLabel>
             </Col>
             <Col md={12}>
-              <TypeSelector expensesTypes={props.expensesTypes}/>
+            <FormControl componentClass="select"
+              inputRef={ (ref) => typeInput = ref } >
+              {props.expensesTypes.map(expenseType =>
+                <option key={expenseType.id} value={expenseType.label}>{expenseType.label}</option>
+              )}
+            </FormControl>
             </Col>
           </Col>
 
