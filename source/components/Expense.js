@@ -1,13 +1,16 @@
 import React, { PropTypes } from 'react'
-
+import {Glyphicon, Button} from 'react-bootstrap'
 
 const Expense = ({onDeleteClick, expenseType, amount, expenseDate}) => (
-  <li>
-    <span style={{textAlign: 'left'}}>{expenseType}</span>
-    <span style={{textAlign: 'center'}}>{expenseDate}</span>
-    <span style={{textAlign: 'right', fontWeight: 'bold'}}>{amount}</span>
-    <span style={{textAlign: 'right'}} onClick={onDeleteClick}>Delete</span>
-  </li>
+  <tr>
+    <td>{expenseType}</td>
+    <td>{expenseDate}</td>
+    <td style={{fontWeight: 'bold'}}>{amount}</td>
+    <td onClick={onDeleteClick}></td>
+    <Button bsStyle="danger" >
+      <Glyphicon glyph="remove" />
+    </Button >
+  </tr>
 )
 
 Expense.propTypes = {

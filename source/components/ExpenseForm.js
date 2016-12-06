@@ -1,24 +1,63 @@
 import React, { PropTypes } from 'react'
 import TypeSelector from './TypeSelector'
+import { FormControl, Form, ControlLabel, Button, Col, Panel} from 'react-bootstrap'
 
 const ExpenseForm = (props) => {
-  let amount, type, date
+
+  let amountInput = null, typeInput = null, dateInput = null
+
+  // Actual date :  dd/mm/yyyy
+  let defaultDateValue = (new Date()).toISOString().substring(0,10)
+
   return (
-    <form onSubmit={e => {
-      e.preventDefault()
-      props.onValidate(parseInt(amount.value), 'Food')
-    }}>
-      <label htmlFor="get-amount">Amount :</label>
-      <input
-        id="get-amount"
-        ref={node => amount = node }
-        type="number"
-      ></input>
-      <label htmlFor="get-date">Date :</label>
-      <input id="get-date" type="date"></input>
-      <TypeSelector expensesTypes={props.expensesTypes}/>
-      <button type="submit">Validate</button>
-    </form>
+    <Panel>
+      <h4>Add an expense</h4>
+      <form onSubmit={e => {
+        e.preventDefault()
+        props.onValidate(parseInt(amountInput.value), typeInput.value)
+      }}>
+
+        <Form inline>
+
+          <Col md={3}>
+            <ControlLabel htmlFor="get-amount">Amount :</ControlLabel>
+            <FormControl
+              type="text"
+              id="get-amount"
+              inputRef={ (ref) => amountInput = ref }
+              type="number" />
+          </Col>
+
+          <Col md={3}>
+            <ControlLabel htmlFor="get-date">Date :</ControlLabel>
+            <FormControl id="get-date" type="date"
+              inputRef={ (ref) => dateInput = ref }
+              defaultValue={defaultDateValue} />
+          </Col>
+
+          <Col md={3}>
+            <Col md={12}>
+              <ControlLabel htmlFor="get-type">Type :</ControlLabel>
+            </Col>
+            <Col md={12}>
+            <FormControl componentClass="select"
+              inputRef={ (ref) => typeInput = ref } >
+              {props.expensesTypes.map(expenseType =>
+                <option key={expenseType.id} value={expenseType.label}>{expenseType.label}</option>
+              )}
+            </FormControl>
+            </Col>
+          </Col>
+
+          <Col md={3}>
+              <Button bsStyle="primary" type="submit">
+                Validate
+              </Button>
+          </Col>
+
+        </Form>
+      </form>
+    </Panel>
   )
 }
 

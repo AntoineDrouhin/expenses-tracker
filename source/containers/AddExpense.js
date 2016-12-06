@@ -15,6 +15,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onValidate: (amount, expenseType) => {
+      console.log(amount)
       dispatch(addExpense(amount, expenseType))
     }
   }
