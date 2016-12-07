@@ -13,13 +13,15 @@ const ExpenseList = ({ expenses, onDeleteClick }) => (
             <ExpenseItem
               key={expense.id}
               {...expense}
-              onDeleteClick={onDeleteClick} />
+              onDeleteClick={() => onDeleteClick(expense.id)} />
           )}
         </tbody >
       </Table >
     </Col>
   </CenterPanel>
 )
+
+
 
 ExpenseList.propTypes = {
   expenses : PropTypes.arrayOf(PropTypes.shape({
