@@ -1,22 +1,22 @@
 import React, { PropTypes } from 'react'
-import Expense from './Expense'
+import ExpenseItem from './ExpenseItem'
 import { Table, Panel, Col } from 'react-bootstrap'
 import CenterPanel from './CenterPanel.component.js'
 
 const ExpenseList = ({ expenses, onDeleteClick }) => (
   <CenterPanel >
-  <Col mdOffset={1} md={10}>
-    <h4>My expenses</h4>
-    <Table style={{marginLeft: "auto", marginRight: "auto"}} responsive >
-      <tbody >
-        {expenses.map(expense =>
-          <Expense
-            key={expense.id}
-            {...expense}
-            onDeleteClick={onDeleteClick} />
-        )}
-      </tbody >
-    </Table >
+    <Col mdOffset={1} md={10}>
+      <h4>My expenses</h4>
+      <Table style={{marginLeft: "auto", marginRight: "auto"}} responsive >
+        <tbody >
+          {expenses.map(expense =>
+            <ExpenseItem
+              key={expense.id}
+              {...expense}
+              onDeleteClick={onDeleteClick} />
+          )}
+        </tbody >
+      </Table >
     </Col>
   </CenterPanel>
 )
