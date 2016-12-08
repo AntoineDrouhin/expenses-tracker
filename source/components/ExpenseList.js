@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import ExpenseItem from './ExpenseItem'
 import { Table, Panel, Col } from 'react-bootstrap'
-import CenterPanel from './CenterPanel.component.js'
+import CenterPanel from './CenterPanel'
 
 const ExpenseList = (props) => (
   <CenterPanel >
