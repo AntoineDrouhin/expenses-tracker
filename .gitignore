@@ -7,3 +7,10 @@ build/*
 logs
 *.log
 npm-debug.log*
+
+dist/**/.woff2
+dist/**/.svg
+dist/**/.ttf
+dist/**/.eot
+dist/**/.woff
+dist/**/.js
