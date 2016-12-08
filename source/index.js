@@ -12,13 +12,13 @@ const initialState = {
       id: 99,
       date: Date.now(),
       amount: 75,
-      expenseType: 'Food',
+      expenseType: 'Food'
     },
     {
       id: 98,
       date: Date.now(),
       amount: 255,
-      expenseType: 'Tools',
+      expenseType: 'Tools'
     }],
     expensesTypes: [{
         id: 0,

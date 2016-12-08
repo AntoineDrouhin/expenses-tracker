@@ -2,11 +2,11 @@
 // Expenses
 let nextExpenseId = 0;
 
-export const addExpense = (amount,expenseType) => {
+export const addExpense = (amount, expenseType, date) => {
   return {
     type: 'ADD_EXPENSE',
     id: nextExpenseId++,
-    date: Date.now(),
+    date,
     amount,
     expenseType
   }

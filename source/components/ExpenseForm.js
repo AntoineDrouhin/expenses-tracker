@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import TypeSelector from './TypeSelector'
-import { FormControl, Form, ControlLabel, Button, Col, Panel} from 'react-bootstrap'
+import { FormControl, Form, ControlLabel, Button,
+  Col, Panel} from 'react-bootstrap'
 
 const ExpenseForm = (props) => {
 
@@ -14,7 +15,7 @@ const ExpenseForm = (props) => {
       <h4>Add an expense</h4>
       <form onSubmit={e => {
         e.preventDefault()
-        props.onValidate(parseInt(amountInput.value), typeInput.value)
+        props.onValidate(parseInt(amountInput.value), typeInput.value, new Date(dateInput.value))
       }}>
 
         <Form inline>
