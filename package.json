@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --progress --color --inline --hot",
-    "test": "babel-tape-runner test/**/*.js"
+    "test": "babel-tape-runner test/**/*.js",
+    "build": "webpack -p --config ./webpack.production.config.js"
   },
   "author": "Antoine Drouhin",
   "license": "MIT",
