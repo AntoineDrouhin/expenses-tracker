@@ -5,8 +5,9 @@ const CenterPanel = (props) => {
 
   let maxWidth = props.maxWidth ? props.maxWidth : "950px";
 
-  let cleanProps = Object.create(props)
-  delete cleanProps.maxWidth
+  let cleanProps = Object.assign({}, props)
+
+  props.maxWidth ? (delete cleanProps.maxWidth) : true
 
   return (
     <Panel style = {{

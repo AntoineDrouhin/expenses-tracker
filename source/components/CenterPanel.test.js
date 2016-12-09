@@ -51,7 +51,7 @@ test('CenterPanel component render inner div ', (assert) => {
       marginLeft: "auto",
       marginRight: "auto",
       maxWidth: "950px"
-    }} />
+    }} > <div> </div> </Panel>
   const actual = renderer.getRenderOutput()
 
   assert.jsxEquals(actual, expected, message)
