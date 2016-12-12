@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --progress --color --inline --hot",
-    "test": "babel-tape-runner test/**/*.js",
+    "test": "babel-tape-runner source/**/*.test.js | faucet",
     "build": "webpack -p --config ./webpack.production.config.js"
   },
   "author": "Antoine Drouhin",
@@ -27,11 +27,15 @@
     "babel-preset-react": "^6.16.0",
     "babel-preset-react-hmre": "^1.1.1",
     "css-loader": "0.26.1",
+    "extend-tape": "1.2.0",
+    "faucet": "0.0.1",
     "file-loader": "0.9.0",
+    "react-addons-test-utils": "15.4.1",
     "react-hot-loader": "^3.0.0-beta.6",
     "redux-devtools": "^3.3.1",
     "style-loader": "0.13.1",
     "tape": "4.6.3",
+    "tape-jsx-equals": "1.0.0",
     "url-loader": "0.5.7",
     "webpack": "^1.13.3",
     "webpack-dev-server": "^1.16.2"
