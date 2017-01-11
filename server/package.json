@@ -1,0 +1,23 @@
+{
+  "name": "expenses-tracker-server",
+  "version": "1.0.0",
+  "description": "An api to store expenses data for expenses-tracker app",
+  "main": "source/server.js",
+  "scripts": {
+    "start": "cross-env NODE_PATH=source NODE_ENV=production node source/server.js",
+    "start-dev": "cross-env NODE_PATH=source NODE_ENV=production nodemon source/server.js",
+    "debug": "cross-env NODE_PATH=source nodemon --debug-brk --inspect source/server.js",
+    "test": "exit -1"
+  },
+  "author": "Antoine Drouhin",
+  "license": "MIT",
+  "dependencies": {
+    "cross-env": "3.1.4",
+    "dotenv": "4.0.0",
+    "express": "4.14.0",
+    "mongoose": "4.7.6"
+  },
+  "devDependencies": {
+    "nodemon": "1.11.0"
+  }
+}
