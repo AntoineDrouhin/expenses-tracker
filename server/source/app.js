@@ -1,7 +1,8 @@
-const express = require('express');
+const express = require('express')
 
-const app = express();
-const mongoose = require('mongoose');
+const app = express()
+const cors = require('cors')
+const mongoose = require('mongoose')
 const mongodb_address = process.env.MONGODB_ADDRESS
 
 if (!mongodb_address)
@@ -10,6 +11,8 @@ if (!mongodb_address)
 mongoose.connect(mongodb_address);
 
 const Expense = mongoose.model('Expense', mongoose.Schema({ amount: Number }) );
+
+app.use(cors())
 
 app.get('/', (req, res) => {
   res.send('\n\nHello, world!\n\n');

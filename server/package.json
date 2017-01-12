@@ -12,6 +12,7 @@
   "author": "Antoine Drouhin",
   "license": "MIT",
   "dependencies": {
+    "cors": "2.8.1",
     "cross-env": "3.1.4",
     "dotenv": "4.0.0",
     "express": "4.14.0",
