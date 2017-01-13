@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { deleteExpense } from '../actions'
+import { removeExpense } from '../actions'
 import ExpenseList from '../components/ExpenseList'
 
 const getMonthlyExpenses = (expenses) => {
@@ -19,8 +19,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onDeleteClick: (id) => {
-      dispatch(deleteExpense(id))
+    onDeleteClick: (_id) => {
+      dispatch(removeExpense(_id))
     }
   }
 }

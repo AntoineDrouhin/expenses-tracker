@@ -4,9 +4,16 @@ module.exports = {
   entry: './source/index.js',
   output: {
     filename: 'bundle.js',
-    path: './build',
-    publicpath: './build'
+    path: './dist',
+    publicpath: './dist'
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'SERVER_ADDRESS': '"http://127.0.0.1:3000"'
+      }
+    })
+  ],
   module: {
     loaders: [
       {

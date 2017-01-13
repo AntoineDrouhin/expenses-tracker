@@ -1,9 +1,10 @@
+import { SET_EXPENSES, ADD_EXPENSE } from '../actions'
 
 const expense = (state = {}, action) => {
   switch (action.type) {
-    case 'ADD_EXPENSE':
+    case ADD_EXPENSE:
       return {
-        id: action.id,
+        _id: action._id,
         date: action.date,
         amount: action.amount,
         expenseType : action.expenseType
@@ -22,7 +23,10 @@ const expenses = (state = [], action) => {
         expense(undefined, action)
       ]
     case 'DELETE_EXPENSE':
-      return state.filter( expense => expense.id !== action.id )
+      return state.filter( expense => expense._id !== action._id )
+
+    case SET_EXPENSES:
+      return action.expenses
 
     default:
       return state

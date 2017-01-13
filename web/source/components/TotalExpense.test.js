@@ -11,12 +11,6 @@ test('TotalExpense contains 2 col item ', t => {
   t.equal(wrapper.find('Col').length, 2)
   t.end()
 })
-//
-// test('TotalExpense contains a 1st Col elem ', t => {
-//   const wrapper = shallow(<TotalExpense totalAmount={2}/>)
-//   t.equal(wrapper.find('Col[md=3]')[0], )
-//   t.end()
-// })
 
 test('The 1st Col elem has a son h3 containing "Total expense :"', t => {
   const wrapper = shallow(<TotalExpense totalAmount={0}/>)

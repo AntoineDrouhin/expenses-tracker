@@ -9,6 +9,13 @@ module.exports = {
     path:  './dist',
     publicpath: './dist'
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'SERVER_ADDRESS': '"http://localhost:3000"'
+      }
+    })
+  ],
   module: {
     loaders: [
       {
