@@ -15,9 +15,9 @@ const ExpenseList = (props) => {
           <tbody >
             {props.expenses.map(expense =>
               <ExpenseItem
-                key={expense.id}
+                key={expense._id}
                 {...expense}
-                onDeleteClick={() => props.onDeleteClick(expense.id)} />
+                onDeleteClick={() => props.onDeleteClick(expense._id)} />
             )}
           </tbody >
         </Table >
@@ -31,7 +31,7 @@ const ExpenseList = (props) => {
 
 ExpenseList.propTypes = {
   expenses : PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    _id: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
     expenseType: PropTypes.string.isRequired,
     amount: PropTypes.number.isRequired

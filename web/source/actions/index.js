@@ -1,17 +1,12 @@
 
-// Expenses
-let nextExpenseId = 0;
-
+// ---- Expenses ----
 export const ADD_EXPENSE = 'ADD_EXPENSE'
 export const addExpense = ( expense ) => {
   return Object.assign({ type: ADD_EXPENSE }, expense)
 }
 
-
-
 export const postExpense = (amount, expenseType, date) => {
   const expense = {amount, expenseType, date}
-
   return (dispatch) => {
     fetch(`${process.env.SERVER_ADDRESS}/expense`, {
       method: "POST",
@@ -19,15 +14,27 @@ export const postExpense = (amount, expenseType, date) => {
       body: JSON.stringify(expense)
     }).then(response => response.json())
     .then(json => dispatch(addExpense(Object.assign({}, json) ) ) )
+  }
+}
 
+export const removeExpense = (_id) => {
+  return function (dispatch) {
+    return fetch(`${process.env.SERVER_ADDRESS}/expense/${_id}`, {
+      method: "DELETE"
+    })
+      .then(response => {
+        if (response.ok) {
+          dispatch(deleteExpense(_id))
+        }
+      })
   }
 }
 
 export const DELETE_EXPENSE = 'DELETE_EXPENSE'
-export const deleteExpense = (id) => {
+export const deleteExpense = (_id) => {
   return {
     type: DELETE_EXPENSE,
-    id
+    _id
   }
 }
 
@@ -36,7 +43,6 @@ export const fetchExpenses = () => {
     return fetch(`${process.env.SERVER_ADDRESS}/expense`)
     .then(response => {
        const json = response.json()
-       console.log(json)
        return json
     })
     .then(json => dispatch(setExpenses(json)) )
@@ -50,24 +56,6 @@ export const setExpenses = (expenses) => {
     expenses
   }
 }
-
-//
-// export const REQUEST_EXPENSES = 'REQUEST_EXPENSES'
-// export function requestExpense() {
-//   return {
-//     type: REQUEST_EXPENSES
-//   }
-// }
-//
-// export const RECEIVE_EXPENSES = 'RECEIVE_EXPENSES'
-// export function receiveExpense(json) {
-//   return {
-//     type: RECEIVE_EXPENSES,
-//     expenses: json.data.children.map(child => child.data),
-//     receivedAt: Date.now()
-//   }
-// }
-
 
 //ExpenseType
 let nextExpenseTypeId = 0;

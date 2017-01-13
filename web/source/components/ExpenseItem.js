@@ -20,7 +20,7 @@ ExpenseItem.propTypes = {
   date : PropTypes.string.isRequired,
   expenseType : PropTypes.string.isRequired,
   amount : PropTypes.number.isRequired,
-  id: PropTypes.number.isRequired
+  _id: PropTypes.string.isRequired
 }
 
 export default ExpenseItem
