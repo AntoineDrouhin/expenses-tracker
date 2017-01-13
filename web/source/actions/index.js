@@ -3,13 +3,23 @@
 let nextExpenseId = 0;
 
 export const ADD_EXPENSE = 'ADD_EXPENSE'
-export const addExpense = (amount, expenseType, date) => {
-  return {
-    type: ADD_EXPENSE,
-    id: nextExpenseId--,
-    date,
-    amount,
-    expenseType
+export const addExpense = ( expense ) => {
+  return Object.assign({ type: ADD_EXPENSE }, expense)
+}
+
+
+
+export const postExpense = (amount, expenseType, date) => {
+  const expense = {amount, expenseType, date}
+
+  return (dispatch) => {
+    fetch(`${process.env.SERVER_ADDRESS}/expense`, {
+      method: "POST",
+      headers : new Headers({"Content-Type": "application/json"}),
+      body: JSON.stringify(expense)
+    }).then(response => response.json())
+    .then(json => dispatch(addExpense(Object.assign({}, json) ) ) )
+
   }
 }
 
@@ -25,9 +35,6 @@ export const fetchExpenses = () => {
   return function (dispatch) {
     return fetch(`${process.env.SERVER_ADDRESS}/expense`)
     .then(response => {
-      // if (response.headers.get("content-type") != "application/json")  {
-      //   throw new TypeError();
-      // }
        const json = response.json()
        console.log(json)
        return json

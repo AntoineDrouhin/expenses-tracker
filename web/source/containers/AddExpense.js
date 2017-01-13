@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { addExpense } from '../actions'
+import { postExpense } from '../actions'
 import ExpenseForm from '../components/ExpenseForm'
 
 const getExpensesTypes = (expensesTypes) => {
@@ -15,7 +15,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onValidate: (amount, expenseType, date) => {
-      dispatch(addExpense(amount, expenseType, date))
+      dispatch(postExpense(amount, expenseType, date))
     }
   }
 }

@@ -1,8 +1,8 @@
-import { SET_EXPENSES } from '../actions'
+import { SET_EXPENSES, ADD_EXPENSE } from '../actions'
 
 const expense = (state = {}, action) => {
   switch (action.type) {
-    case 'ADD_EXPENSE':
+    case ADD_EXPENSE:
       return {
         id: action.id,
         date: action.date,

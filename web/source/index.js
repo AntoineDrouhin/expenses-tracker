@@ -33,9 +33,7 @@ const store = createStore(
   )
 )
 
-store.dispatch(fetchExpenses()).then(() =>
-  console.log(store.getState())
-)
+store.dispatch(fetchExpenses())
 
 render(
   <Provider store={store}>
