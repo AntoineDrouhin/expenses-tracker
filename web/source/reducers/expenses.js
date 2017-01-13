@@ -1,3 +1,4 @@
+import { SET_EXPENSES } from '../actions'
 
 const expense = (state = {}, action) => {
   switch (action.type) {
@@ -23,6 +24,9 @@ const expenses = (state = [], action) => {
       ]
     case 'DELETE_EXPENSE':
       return state.filter( expense => expense.id !== action.id )
+
+    case SET_EXPENSES:
+      return action.expenses
 
     default:
       return state
