@@ -4,6 +4,7 @@ const app = express()
 const cors = require('cors')
 const mongoose = require('mongoose')
 const mongodb_address = process.env.MONGODB_ADDRESS
+const bodyParser = require('body-parser')
 
 const ExpenseModel = require('./model/expense.js')
 
@@ -13,6 +14,7 @@ if (!mongodb_address)
 mongoose.connect(mongodb_address);
 
 app.use(cors())
+app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
   res.send('\n\nHello, world!\n\n');
@@ -28,19 +30,20 @@ app.route('/expense')
     })
   })
   .post((req, res) => {
-    console.log('post expense')
-    const expense = new ExpenseModel(
-      { date: req.body.date,
-        amount: req.body.amount,
-        expenseType: req.body.expenseType
-      })
-    expense.save(function (err) {
+    console.log('post expense', req.body, req.params)
+    console.dir(req.body)
+    const expense = new ExpenseModel({
+      date: req.body.date,
+      amount: req.body.amount,
+      expenseType: req.body.expenseType
+    })
+    expense.save(function (err, room) {
       if (err) {
         console.log(err);
       } else {
         console.log('Expense saved, value : '+ expense.amount);
       }
-      res.sendStatus(200)
+      res.send(room)
     });
   })
   .delete((req, res) => {
