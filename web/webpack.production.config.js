@@ -12,7 +12,7 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        'SERVER_ADDRESS': '"localhost:3000"'
+        'SERVER_ADDRESS': '"http://localhost:3000"'
       }
     })
   ],
