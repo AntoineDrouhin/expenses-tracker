@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { FormGroup, FormControl } from 'react-bootstrap'
+import { FormControl } from 'react-bootstrap'
 
 const TypeSelector = (props) => (
   <FormControl componentClass="select">

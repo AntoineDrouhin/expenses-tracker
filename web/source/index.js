@@ -8,21 +8,21 @@ import App from './components/App'
 
 import { fetchExpenses } from './actions/expense_asyncActions.js'
 
-require("./style/Bootstrap-v3.3.6.css");
+require('./style/Bootstrap-v3.3.6.css')
 
 const initialState = {
-    expenses : [],
-    expensesTypes: [{
-        id: 0,
-        label: 'Food'
-    }, {
-        id: 1,
-        label: 'Tools'
-    }, {
-        id: 2,
-        label: 'Clothes'
-    }]
-};
+  expenses : [],
+  expensesTypes: [{
+    id: 0,
+    label: 'Food'
+  }, {
+    id: 1,
+    label: 'Tools'
+  }, {
+    id: 2,
+    label: 'Clothes'
+  }]
+}
 
 // const store = createStore(expenseApp, initialState)
 const store = createStore(
