@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { removeExpense } from '../actions'
+import { removeExpense } from '../actions/expense_asyncActions'
 import ExpenseList from '../components/ExpenseList'
 
 const getMonthlyExpenses = (expenses) => {

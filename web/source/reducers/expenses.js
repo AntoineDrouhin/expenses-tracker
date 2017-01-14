@@ -1,4 +1,4 @@
-import { SET_EXPENSES, ADD_EXPENSE } from '../actions'
+import { SET_EXPENSES, ADD_EXPENSE } from '../actions/expense_actions.js'
 
 const expense = (state = {}, action) => {
   switch (action.type) {
