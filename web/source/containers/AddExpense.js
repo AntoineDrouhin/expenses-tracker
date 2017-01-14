@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { postExpense } from '../actions'
+import { postExpense } from '../actions/expense_asyncActions'
 import ExpenseForm from '../components/ExpenseForm'
 
 const getExpensesTypes = (expensesTypes) => {

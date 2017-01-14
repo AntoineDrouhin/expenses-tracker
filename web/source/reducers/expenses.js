@@ -1,35 +1,35 @@
-import { SET_EXPENSES, ADD_EXPENSE } from '../actions'
+import { SET_EXPENSES, ADD_EXPENSE } from '../actions/expense_actions.js'
 
 const expense = (state = {}, action) => {
   switch (action.type) {
-    case ADD_EXPENSE:
-      return {
-        _id: action._id,
-        date: action.date,
-        amount: action.amount,
-        expenseType : action.expenseType
-      }
+  case ADD_EXPENSE:
+    return {
+      _id: action._id,
+      date: action.date,
+      amount: action.amount,
+      expenseType : action.expenseType
+    }
 
-    default:
-      return state
+  default:
+    return state
   }
 }
 
 const expenses = (state = [], action) => {
   switch (action.type) {
-    case 'ADD_EXPENSE':
-      return [
-        ...state,
-        expense(undefined, action)
-      ]
-    case 'DELETE_EXPENSE':
-      return state.filter( expense => expense._id !== action._id )
+  case 'ADD_EXPENSE':
+    return [
+      ...state,
+      expense(undefined, action)
+    ]
+  case 'DELETE_EXPENSE':
+    return state.filter( expense => expense._id !== action._id )
 
-    case SET_EXPENSES:
-      return action.expenses
+  case SET_EXPENSES:
+    return action.expenses
 
-    default:
-      return state
+  default:
+    return state
   }
 }
 

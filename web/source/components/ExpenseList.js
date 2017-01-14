@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import ExpenseItem from './ExpenseItem'
-import { Table, Panel, Col } from 'react-bootstrap'
+import { Table, Col } from 'react-bootstrap'
 import CenterPanel from './CenterPanel'
 import TotalExpense from './TotalExpense'
 
@@ -11,7 +11,7 @@ const ExpenseList = (props) => {
     <CenterPanel >
       <Col mdOffset={1} md={10}>
         <h4>My expenses</h4>
-        <Table style={{marginLeft: "auto", marginRight: "auto"}} responsive >
+        <Table style={{marginLeft: 'auto', marginRight: 'auto'}} responsive >
           <tbody >
             {props.expenses.map(expense =>
               <ExpenseItem
