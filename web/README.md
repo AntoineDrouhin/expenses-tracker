@@ -1,26 +1,15 @@
 # expenses-tracker
 
+## Use
+
 ```
 npm install
 npm start
 
 ```
 
+## Contribute
 
-#### State Shape
 ```
-{
-  expenseTypes: [
-    id,
-    label
-  ]
-  expenses: [
-    {
-      id,
-      expenseType,
-      amount,
-      date
-    }, ...
-  ]
-}
+npm install -g eslint eslint-plugin-react
 ```

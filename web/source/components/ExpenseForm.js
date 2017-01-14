@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react'
-import TypeSelector from './TypeSelector'
 import { FormControl, Form, ControlLabel, Button,
   Col, Panel} from 'react-bootstrap'
 
@@ -23,7 +22,6 @@ const ExpenseForm = (props) => {
           <Col md={3}>
             <ControlLabel htmlFor="get-amount">Amount :</ControlLabel>
             <FormControl
-              type="text"
               id="get-amount"
               inputRef={ (ref) => amountInput = ref }
               type="number" />

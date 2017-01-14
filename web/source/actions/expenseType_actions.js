@@ -1,5 +1,5 @@
 
-let nextExpenseTypeId = 0;
+let nextExpenseTypeId = 0
 
 export const addExpensetype = (label) => {
   return {

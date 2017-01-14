@@ -4,8 +4,8 @@ import expenses from './expenses'
 import expensesTypes from './expensesTypes'
 
 const expenseApp = combineReducers({
-    expenses,
-    expensesTypes
+  expenses,
+  expensesTypes
 })
 
 export default expenseApp

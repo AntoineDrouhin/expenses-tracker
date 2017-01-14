@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack-dev-server --progress --color --inline --hot",
     "test": "babel-tape-runner source/**/*.test.js | faucet",
-    "build": "webpack -p --config ./webpack.production.config.js"
+    "build": "webpack -p --config ./webpack.production.config.js",
+    "lint": "eslint ./source/**/*.js"
   },
   "author": "Antoine Drouhin",
   "license": "MIT",

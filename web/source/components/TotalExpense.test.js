@@ -1,8 +1,8 @@
 import test from 'tape'
 import React from 'react'
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme'
 
-import { Col, Label } from 'react-bootstrap'
+import { Label } from 'react-bootstrap'
 import TotalExpense from './TotalExpense'
 
 

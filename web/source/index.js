@@ -8,7 +8,7 @@ import App from './components/App'
 
 import { fetchExpenses } from './actions/expense_asyncActions.js'
 
-require('./style/Bootstrap-v3.3.6.css')
+require('./style/Bootstrap-v3.3.6.css')  /*eslint:ignore*/
 
 const initialState = {
   expenses : [],
