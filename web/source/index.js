@@ -4,7 +4,7 @@ import thunkMiddleware from 'redux-thunk'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import expenseApp from './reducers'
-import App from './components/App'
+import App from './containers/App'
 import Login from './components/Login'
 import { Router, Route, browserHistory } from 'react-router'
 
@@ -23,7 +23,12 @@ const initialState = {
   }, {
     id: 2,
     label: 'Clothes'
-  }]
+  }],
+  userInformation:{
+    email: 'label@domain.com',
+    password: 'label@domain.com',
+    connectionStatus: true
+  }
 }
 
 const store = createStore(
