@@ -7,6 +7,9 @@ module.exports = {
     path: './dist',
     publicpath: './dist'
   },
+  devServer: {
+    historyApiFallback: true,
+  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {

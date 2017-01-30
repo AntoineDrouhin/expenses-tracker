@@ -5,6 +5,8 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import expenseApp from './reducers'
 import App from './components/App'
+import Login from './components/Login'
+import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 
 import { fetchExpenses } from './actions/expense_asyncActions.js'
 
@@ -37,8 +39,11 @@ const store = createStore(
 store.dispatch(fetchExpenses())
 
 render(
-  <Provider store={store}>
-    <App/>
-  </Provider>,
+  <Provider store={store} >
+    <Router history={browserHistory} >
+      <Route path="/" component={App} />
+      <Route path="/login" component={Login} />
+    </Router >
+  </Provider >,
   document.getElementById('root')
 )
