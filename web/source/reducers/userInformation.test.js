@@ -2,10 +2,10 @@ import test from 'tape'
 import userInformation from  './userInformation.js'
 
 test( 'userInformation (reducer) info is SET properly', (assert) => {
-  const actual = userInformation(
+  const actual = user(
     {},
     {
-      type: 'SET_USERINFORMATION',
+      type: 'SET_USER',
       _id: 'abc',
       email: 'abc@yogourt.com',
       password: 'abc',

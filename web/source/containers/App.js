@@ -7,8 +7,9 @@ import { browserHistory } from 'react-router'
 
 export let App = (props) => {
 
-  if( props.userInformation == {} ||
-    !props.userInformation ||
+
+  if( !props.userInformation ||
+    !props.userInformation._id ||
     props.userInformation.connectionStatus == false
   ){
     // browserHistory is injected through props.
@@ -26,6 +27,7 @@ export let App = (props) => {
 App.propTypes = {
   bHistory: PropTypes.any,
   userInformation: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
     connectionStatus : PropTypes.bool.isRequired
@@ -34,7 +36,7 @@ App.propTypes = {
 
 const mapStateToProps = (state) => {
   const props = {}
-  props.userInformation = state.userInformation || {email: '', password: '', connectionStatus: false}
+  props.userInformation = state.userInformation || {_id: '',email: '', password: '', connectionStatus: false}
   props.bHistory = browserHistory
   return props
 }

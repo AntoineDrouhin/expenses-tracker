@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import expenseApp from './reducers'
 import App from './containers/App'
-import Login from './components/Login'
+import Login from './containers/Login'
 import { Router, Route, browserHistory } from 'react-router'
 
 import { fetchExpenses } from './actions/expense_asyncActions.js'
@@ -23,12 +23,7 @@ const initialState = {
   }, {
     id: 2,
     label: 'Clothes'
-  }],
-  userInformation:{
-    email: 'label@domain.com',
-    password: 'label@domain.com',
-    connectionStatus: true
-  }
+  }]
 }
 
 const store = createStore(
