@@ -2,12 +2,12 @@
 import { combineReducers } from 'redux'
 import expenses from './expenses'
 import expensesTypes from './expensesTypes'
-import userInformation from './userInformation'
+import user from './user'
 
 const expenseApp = combineReducers({
   expenses,
   expensesTypes,
-  userInformation
+  user
 })
 
 export default expenseApp

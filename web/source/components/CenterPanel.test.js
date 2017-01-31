@@ -18,7 +18,8 @@ test('CenterPanel (component) output if maxWidth left empty', (assert) => {
     style={{
       marginLeft: 'auto',
       marginRight: 'auto',
-      maxWidth: '950px'
+      maxWidth: '950px',
+      marginTop: '0px'
     }} />
   const actual = renderer.getRenderOutput()
 
@@ -34,7 +35,8 @@ test('CenterPanel (component) output if maxWidth set', (assert) => {
     style={{
       marginLeft: 'auto',
       marginRight: 'auto',
-      maxWidth: '250px'
+      maxWidth: '250px',
+      marginTop: '0px'
     }} />
   const actual = renderer.getRenderOutput()
 
@@ -50,7 +52,8 @@ test('CenterPanel (component) render inner div ', (assert) => {
     style={{
       marginLeft: 'auto',
       marginRight: 'auto',
-      maxWidth: '950px'
+      maxWidth: '950px',
+      marginTop: '0px'
     }} > <div> </div> </Panel>
   const actual = renderer.getRenderOutput()
 

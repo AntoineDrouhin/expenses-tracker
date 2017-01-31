@@ -7,7 +7,7 @@ import { browserHistory } from 'react-router'
 
 const Login = (props) => {
 
-  if( props.userInformation && props.userInformation.connectionStatus ){
+  if( props.user && props.user.connectionStatus ){
     browserHistory.push('/')
   }
 
@@ -17,7 +17,6 @@ const Login = (props) => {
     <CenterPanel maxWidth='300px' marginTop='30px'>
       <form onSubmit={e => {
         e.preventDefault() // prevent page refresh after submit
-        console.log('DEBUG',emailInput.value, passwordInput.value)
         props.onValidate( 'fakeid', emailInput.value, passwordInput.value )
       }}>
       <FormGroup>
@@ -48,7 +47,7 @@ const Login = (props) => {
 
 Login.propTypes = {
   'onValidate': PropTypes.func.isRequired,
-  userInformation: PropTypes.shape({
+  user: PropTypes.shape({
     _id: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
@@ -65,7 +64,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = (state) => {
-  return { userInformation: state.userInformation }
+  return { user: state.user }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

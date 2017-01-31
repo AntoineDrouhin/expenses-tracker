@@ -7,10 +7,11 @@ import CenterPanel from '../components/CenterPanel'
 import AddExpense from './AddExpense'
 import MonthlyExpenseList from './MonthlyExpenseList'
 
-test('App (container) properly display when called with userInformation', (t) => {
+test('App (container) properly display when called with user', (t) => {
   const props = {
     bHistory: [],
-    userInformation: {
+    user: {
+      _id: 'fakeid',
       email: 'name@domain.com',
       password: 'password',
       connectionStatus: true
@@ -28,7 +29,7 @@ test('App (container) properly display when called with userInformation', (t) =>
   t.end()
 })
 
-test('App (container) redirect to login when callend with no userInformation', (t) => {
+test('App (container) redirect to login when callend with no user', (t) => {
   const props = {
     bHistory:[]
   }
@@ -41,7 +42,8 @@ test('App (container) redirect to login when callend with no userInformation', (
 test('App (container) redirect to login when callend with connectionStatus false', (t) => {
   const props = {
     bHistory:[],
-    userInformation: {
+    user: {
+      _id: 'fakeid',
       email: 'name@domain.com',
       password: 'password',
       connectionStatus: false

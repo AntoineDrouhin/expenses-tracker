@@ -1,7 +1,7 @@
 import test from 'tape'
-import userInformation from  './userInformation.js'
+import user from  './user.js'
 
-test( 'userInformation (reducer) info is SET properly', (assert) => {
+test( 'user (reducer) info is SET properly', (assert) => {
   const actual = user(
     {},
     {
