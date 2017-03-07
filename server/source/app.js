@@ -1,11 +1,14 @@
 const express = require('express')
+const cors = require('cors')
+
+const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
 
 const app = express()
-const cors = require('cors')
 
 const mongoose = require('mongoose')
 const mongodb_address = process.env.MONGODB_ADDRESS
-const bodyParser = require('body-parser')
+
 
 if (!mongodb_address)
   throw 'ERROR : .env file must specify a MONGODB_ADDRESS field'
@@ -13,7 +16,17 @@ if (!mongodb_address)
 mongoose.connect(mongodb_address)
 
 app.use(cors())
+app.use(cookieParser())
 app.use(bodyParser.json())
+
+// Configuring Passport
+const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy
+require('./config/passport.js')(passport, LocalStrategy)
+const expressSession = require('express-session')
+app.use(expressSession({secret: 'mySecretKey'}))
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.get('/', (req, res) => {
   res.send('Welcome to expenses-tracker API')
@@ -23,6 +36,7 @@ const expense = require('./route/expense.js')
 app.use('/expense', expense)
 
 const login = require('./route/login.js')
+app.use('/login', function(){console.log('loginatempt'); passport.authenticate('local')})
 app.use('/login', login)
 
 
