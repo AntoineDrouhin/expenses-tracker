@@ -1,15 +1,19 @@
 
-const User = require('../model/expense.js')
+const User = require('../model/user.js')
 
 module.exports = function(passport, LocalStrategy){
   passport.use(new LocalStrategy({
     usernameField: 'email'
   }, function(email, password, done) {
-    User.findOne({ email: email }, function (err, user) {
+    console.log("test du user");
+    console.log(email, password);
+    User.findOne({ "email": email },"email password",function (err, user) {
+      console.log(err, user);
       if (err) { return done(err) }
       if (!user) {
         return done(null, false, { message: 'Incorrect email.' })
       }
+      console.log("test password");
       if (!user.validPassword(password)) {
         return done(null, false, { message: 'Incorrect password.' })
       }

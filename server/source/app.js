@@ -36,8 +36,16 @@ const expense = require('./route/expense.js')
 app.use('/expense', expense)
 
 const login = require('./route/login.js')
-app.use('/login', function(){console.log('loginatempt'); passport.authenticate('local')})
+
+
+// app.use('/login', function(req, res, next){
+//   console.log('loginatempt');
+//   console.log("passport passes");
+//   next(req, res);
+// 
+// })
 app.use('/login', login)
+
 
 
 module.exports = app
