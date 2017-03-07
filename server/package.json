@@ -6,7 +6,7 @@
   "scripts": {
     "start": "cross-env NODE_PATH=source NODE_ENV=production node source/server.js",
     "start-dev": "cross-env NODE_PATH=source NODE_ENV=production nodemon source/server.js",
-    "debug": "cross-env NODE_PATH=source nodemon --debug-brk --inspect source/server.js",
+    "debug": "cross-env NODE_PATH=source NODE_ENV=production nodemon --inspect source/server.js",
     "test": "exit -1",
     "lint": "eslint ./source/**/*.js"
   },
