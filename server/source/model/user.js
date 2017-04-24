@@ -5,6 +5,6 @@ const userModel = mongoose.model('User', mongoose.Schema({
   password: String,
   session: String
 })
-)
+,'User')
 
 module.exports = userModel

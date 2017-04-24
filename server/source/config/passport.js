@@ -7,17 +7,18 @@ module.exports = function(passport, LocalStrategy){
   }, function(email, password, done) {
     console.log("test du user");
     console.log(email, password);
-    User.findOne({ "email": email },"email password",function (err, user) {
+    User.findOne({ "email": email },function (err, user) {
       console.log(err, user);
       if (err) { return done(err) }
       if (!user) {
         return done(null, false, { message: 'Incorrect email.' })
       }
       console.log("test password");
-      if (!user.validPassword(password)) {
+      if (password != user.password) {
         return done(null, false, { message: 'Incorrect password.' })
       }
-      return done(null, user)
+      console.log("Password ok");
+      return done(null, user, { message: 'Correct password.' })
     })
   }))
 
