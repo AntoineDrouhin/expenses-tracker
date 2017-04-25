@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --progress --color --inline --hot",
+    "start": "webpack-dev-server --progress --color --inline --hot --open",
     "test": "babel-tape-runner source/**/*.test.js | faucet",
     "build": "webpack -p --config ./webpack.production.config.js",
     "lint": "eslint ./source/**/*.js"
