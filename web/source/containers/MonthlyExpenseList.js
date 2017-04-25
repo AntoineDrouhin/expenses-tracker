@@ -7,6 +7,7 @@ const getMonthlyExpenses = (expenses) => {
     expense.date = new Date(expense.date).toISOString().substring(0,10)
     return expense
   })
+  //TODO Fix (map unused)
 
   return expenses
 }

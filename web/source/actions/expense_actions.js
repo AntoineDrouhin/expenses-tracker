@@ -18,4 +18,5 @@ export const setExpenses = (expenses) => {
     type: SET_EXPENSES,
     expenses
   }
+  //TODO do like ADD_EXPENSES(Object.assign)
 }
