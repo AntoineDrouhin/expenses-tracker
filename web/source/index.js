@@ -4,7 +4,9 @@ import thunkMiddleware from 'redux-thunk'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import expenseApp from './reducers'
-import App from './components/App'
+import App from './containers/App'
+import Login from './containers/Login'
+import { Router, Route, browserHistory } from 'react-router'
 
 import { fetchExpenses } from './actions/expense_asyncActions.js'
 
@@ -24,7 +26,6 @@ const initialState = {
   }]
 }
 
-// const store = createStore(expenseApp, initialState)
 const store = createStore(
   expenseApp,
   initialState,
@@ -38,7 +39,10 @@ store.dispatch(fetchExpenses())
 
 render(
   <Provider store={store}>
-    <App/>
+    <Router history={browserHistory} >
+      <Route path="/" component={App} />
+      <Route path="/login" component={Login} />
+    </Router>
   </Provider>,
   document.getElementById('root')
 )

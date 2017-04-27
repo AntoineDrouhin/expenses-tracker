@@ -4,6 +4,7 @@ import { Panel } from 'react-bootstrap'
 const CenterPanel = (props) => {
 
   let maxWidth = props.maxWidth ? props.maxWidth : '950px'
+  let marginTop = props.marginTop ? props.marginTop : '0px'
 
   let cleanProps = Object.assign({}, props)
 
@@ -13,14 +14,16 @@ const CenterPanel = (props) => {
     <Panel style = {{
       marginLeft: 'auto',
       marginRight: 'auto',
-      maxWidth: maxWidth
+      maxWidth,
+      marginTop
     }}
        {...cleanProps} />
   )
 }
 
 CenterPanel.propTypes = {
-  maxWidth : PropTypes.string
+  maxWidth : PropTypes.string,
+  marginTop : PropTypes.string
 }
 
 export default CenterPanel

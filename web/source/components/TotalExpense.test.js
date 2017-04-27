@@ -6,19 +6,19 @@ import { Label } from 'react-bootstrap'
 import TotalExpense from './TotalExpense'
 
 
-test('TotalExpense contains 2 col item ', t => {
+test('TotalExpense (component) contains 2 col item ', t => {
   const wrapper = shallow(<TotalExpense totalAmount={2}/>)
   t.equal(wrapper.find('Col').length, 2)
   t.end()
 })
 
-test('The 1st Col elem has a son h3 containing "Total expense :"', t => {
+test('TotalExpense (component) 1st Col elem has a son h3 containing "Total expense :"', t => {
   const wrapper = shallow(<TotalExpense totalAmount={0}/>)
   t.equal(wrapper.contains(<h3 >Total expense :</h3>), true)
   t.end()
 })
 
-test('the component render the total expense properly', t => {
+test('TotalExpense (component) render the total expense properly', t => {
   const wrapper = shallow(<TotalExpense totalAmount={2}/>)
   t.equal(wrapper.contains(<h2><Label bsStyle="info">{2}</Label ></h2>), true)
   t.end()

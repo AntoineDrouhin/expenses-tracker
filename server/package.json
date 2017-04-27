@@ -7,17 +7,22 @@
     "start": "cross-env NODE_PATH=source NODE_ENV=production node source/server.js",
     "start-dev": "cross-env NODE_PATH=source NODE_ENV=production nodemon source/server.js",
     "debug": "cross-env NODE_PATH=source NODE_ENV=production nodemon --inspect source/server.js",
-    "test": "exit -1"
+    "test": "exit -1",
+    "lint": "eslint ./source/**/*.js"
   },
   "author": "Antoine Drouhin",
   "license": "MIT",
   "dependencies": {
     "body-parser": "1.15.2",
+    "cookie-parser": "1.4.3",
     "cors": "2.8.1",
     "cross-env": "3.1.4",
     "dotenv": "4.0.0",
     "express": "4.14.0",
-    "mongoose": "4.7.6"
+    "express-session": "1.15.1",
+    "mongoose": "4.7.6",
+    "passport": "0.3.2",
+    "passport-local": "1.0.0"
   },
   "devDependencies": {
     "eslint": "3.13.1",

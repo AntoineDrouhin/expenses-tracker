@@ -5,18 +5,18 @@ import { shallow } from 'enzyme'
 import ExpenseList from './ExpenseList'
 import TotalExpense from './TotalExpense'
 
-test('The expense list contains a totalExpense component', t => {
+test('ExpenseList (component) contain a totalExpense component', t => {
 
   const props =   { expenses : [
     {
       _id: '1',
-      date: Date.now(),
+      date: Date.now().toString(),
       expenseType: 'Food',
       amount: 34
     },
     {
       _id: '2',
-      date: Date.now(),
+      date: Date.now().toString(),
       expenseType: 'Clothes',
       amount: 6
     }
@@ -29,24 +29,24 @@ test('The expense list contains a totalExpense component', t => {
   t.end()
 })
 
-test('The expense list properly sum expenses amount', t => {
+test('ExpenseList (component) properly sum expenses amount', t => {
 
   const props =   { expenses : [
     {
       _id: '1',
-      date: Date.now(),
+      date: Date.now().toString(),
       expenseType: 'Food',
       amount: 120
     },
     {
       _id: '2',
-      date: Date.now(),
+      date: Date.now().toString(),
       expenseType: 'Clothes',
       amount: 50
     },
     {
       _id: '3',
-      date: Date.now(),
+      date: Date.now().toString(),
       expenseType: 'Medication',
       amount: 25
     }

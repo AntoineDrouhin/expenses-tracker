@@ -10,7 +10,7 @@ import {Panel} from 'react-bootstrap'
 const test = addAssertions(tape, { jsxEquals })
 const renderer = createRenderer()
 
-test('CenterPanel component output if maxWidth left empty', (assert) => {
+test('CenterPanel (component) output if maxWidth left empty', (assert) => {
   renderer.render(<CenterPanel />)
 
   const message = 'maxWidth is set correctly'
@@ -18,7 +18,8 @@ test('CenterPanel component output if maxWidth left empty', (assert) => {
     style={{
       marginLeft: 'auto',
       marginRight: 'auto',
-      maxWidth: '950px'
+      maxWidth: '950px',
+      marginTop: '0px'
     }} />
   const actual = renderer.getRenderOutput()
 
@@ -26,7 +27,7 @@ test('CenterPanel component output if maxWidth left empty', (assert) => {
   assert.end()
 })
 
-test('CenterPanel component output if maxWidth set', (assert) => {
+test('CenterPanel (component) output if maxWidth set', (assert) => {
   renderer.render(<CenterPanel maxWidth="250px"/>)
 
   const message = 'maxWidth is set correctly'
@@ -34,7 +35,8 @@ test('CenterPanel component output if maxWidth set', (assert) => {
     style={{
       marginLeft: 'auto',
       marginRight: 'auto',
-      maxWidth: '250px'
+      maxWidth: '250px',
+      marginTop: '0px'
     }} />
   const actual = renderer.getRenderOutput()
 
@@ -42,7 +44,7 @@ test('CenterPanel component output if maxWidth set', (assert) => {
   assert.end()
 })
 
-test('CenterPanel component render inner div ', (assert) => {
+test('CenterPanel (component) render inner div ', (assert) => {
   renderer.render(<CenterPanel> <div> </div> </CenterPanel>)
 
   const message = 'maxWidth render inner div correctly'
@@ -50,7 +52,8 @@ test('CenterPanel component render inner div ', (assert) => {
     style={{
       marginLeft: 'auto',
       marginRight: 'auto',
-      maxWidth: '950px'
+      maxWidth: '950px',
+      marginTop: '0px'
     }} > <div> </div> </Panel>
   const actual = renderer.getRenderOutput()
 
