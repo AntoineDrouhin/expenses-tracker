@@ -18,18 +18,20 @@ export const postUser = (email, password) => {
   }
 }
 
+// TODO Delete users
+
 export const login = (email, password) => {
   const user = {
     email,
     password
   }
   return (dispatch) => {
-    fetch(`${process.env.SERVER_ADDRESS}/user/${email}`, {
+    fetch(`${process.env.SERVER_ADDRESS}/login`, {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json'
       }),
-      body: JSON.stringify(password)
+      body: JSON.stringify(user)
     }).then(response => response.json())
         .then(json => dispatch(setUser(Object.assign({}, json))))
   }
