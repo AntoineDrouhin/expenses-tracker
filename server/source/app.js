@@ -24,9 +24,24 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 require('./config/passport.js')(passport, LocalStrategy)
 const expressSession = require('express-session')
-app.use(expressSession({secret: 'mySecretKey'}))
+app.use(expressSession({
+  secret: 'mySecretKey',
+  cookie: {
+    secure: true
+  } 
+}))
 app.use(passport.initialize())
 app.use(passport.session())
+
+// redirect HTTP to HTTPS
+// app.all('*', function(req, res, next){
+//   if (req.secure) {
+//     console.log("HTTPS api call")
+//     return next();
+//   };
+//   console.log("HTTP api call")
+//   res.redirect('https://'+req.hostname+':'+process.env.HTTPS_PORT+req.url);
+// });
 
 app.get('/', (req, res) => {
   res.send('Welcome to expenses-tracker API')
