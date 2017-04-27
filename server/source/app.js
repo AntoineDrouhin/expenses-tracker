@@ -24,7 +24,12 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 require('./config/passport.js')(passport, LocalStrategy)
 const expressSession = require('express-session')
-app.use(expressSession({secret: 'mySecretKey'}))
+app.use(expressSession({
+  secret: 'mySecretKey',
+  cookie: {
+    secure: true
+  } 
+}))
 app.use(passport.initialize())
 app.use(passport.session())
 
