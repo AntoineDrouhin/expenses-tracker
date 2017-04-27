@@ -38,4 +38,7 @@ app.use('/expense', expense)
 const login = require('./route/login.js')
 app.use('/login', login)
 
+const user = require('./route/user.js')
+app.use('/user', user)
+
 module.exports = app

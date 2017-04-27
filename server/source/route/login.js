@@ -10,5 +10,8 @@ router.post('/',passport.authenticate('local'),
     // `req.user` contains the authenticated user.
     res.json({connected:true, user: req.user})
   })
+ 
+// TODO : working login
+
 
 module.exports = router
