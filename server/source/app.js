@@ -7,7 +7,9 @@ const cookieParser = require('cookie-parser')
 const app = express()
 
 const mongoose = require('mongoose')
-const mongodb_address = process.env.MONGODB_ADDRESS
+const mongodb_address = process.env.NODE_ENV == 'test' ?
+  process.env.MONGODB_ADDRESS_TEST : process.env.MONGODB_ADDRESS
+
 
 
 if (!mongodb_address)
@@ -28,7 +30,7 @@ app.use(expressSession({
   secret: 'mySecretKey',
   cookie: {
     secure: true
-  } 
+  }
 }))
 app.use(passport.initialize())
 app.use(passport.session())

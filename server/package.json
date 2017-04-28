@@ -7,7 +7,7 @@
     "start": "cross-env NODE_PATH=source NODE_ENV=production node source/server.js",
     "start-dev": "cross-env NODE_PATH=source NODE_ENV=production nodemon source/server.js",
     "debug": "cross-env NODE_PATH=source NODE_ENV=production nodemon --inspect source/server.js",
-    "test": "exit -1",
+    "test": "cross-env NODE_PATH=source NODE_ENV=test mocha",
     "lint": "eslint ./source/**/*.js"
   },
   "author": "Antoine Drouhin",
@@ -25,7 +25,10 @@
     "passport-local": "1.0.0"
   },
   "devDependencies": {
+    "chai": "3.5.0",
+    "chai-http": "3.0.0",
     "eslint": "3.13.1",
+    "mocha": "3.3.0",
     "nodemon": "1.11.0"
   }
 }

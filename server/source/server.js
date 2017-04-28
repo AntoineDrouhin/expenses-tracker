@@ -31,3 +31,5 @@ const keyCert = {
 // var httpServer = http.createServer(app).listen(HTTP_PORT, function() {
 //   console.log('HTTP Server listening on port ' + HTTP_PORT);
 // })
+
+module.exports = app
