@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { FormGroup , ControlLabel, FormControl, Button } from 'react-bootstrap'
 import CenterPanel from '../components/CenterPanel'
-import { setUser } from '../actions/user_actions'
+import { login } from '../actions/user_asyncActions'
 import { browserHistory } from 'react-router'
 
 const Login = (props) => {
@@ -17,7 +17,7 @@ const Login = (props) => {
     <CenterPanel maxWidth='300px' marginTop='30px'>
       <form onSubmit={e => {
         e.preventDefault() // prevent page refresh after submit
-        props.onValidate( 'fakeid', emailInput.value, passwordInput.value )
+        props.onValidate(emailInput.value, passwordInput.value )
       }}>
       <FormGroup>
         <ControlLabel>Email address</ControlLabel>
@@ -57,8 +57,9 @@ Login.propTypes = {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onValidate: (_id, email, password) => {
-      dispatch(setUser(_id, email, password))
+    onValidate: (email, password) => {
+      debugger;
+      dispatch(login(email, password))
     }
   }
 }
