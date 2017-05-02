@@ -67,7 +67,6 @@ Login.propTypes = {
 const mapDispatchToProps = (dispatch) => {
   return {
     onValidate: (email, password) => {
-      debugger;
       dispatch(login(email, password))
     }
   }

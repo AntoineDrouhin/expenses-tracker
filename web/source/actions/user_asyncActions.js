@@ -26,7 +26,6 @@ export const login = (email, password) => {
     password
   }
   return (dispatch) => {
-    debugger;
     fetch(`${process.env.SERVER_ADDRESS}/login`, {
       method: 'POST',
       headers: new Headers({
