@@ -14,6 +14,23 @@ npm start
 
 ```
 
+#### Configure HTTPS
+
+The application had been designed to run in https mode for security.
+
+A standard key had been generate and saved in [/keys](./keys/).
+
+go to the server location path. <br />
+cd to keys <br />
+then :
+```
+:openssl genrsa 2048 > private.key
+:openssl req -new -key private.key -out cert.csr
+:openssl x509 -req -in cert.csr -signkey private.key -out certificate.pem
+```
+
+<!-- TODO Explain HTTPS configuration in production context -->
+
 ## Contribute
 
 1st time :
