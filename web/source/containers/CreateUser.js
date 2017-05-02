@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { FormGroup , ControlLabel, FormControl, Button, Row, Col } from 'react-bootstrap'
+import { FormGroup , ControlLabel, FormControl, Button } from 'react-bootstrap'
 import CenterPanel from '../components/CenterPanel'
-import { login } from '../actions/user_asyncActions'
+import { postUser } from '../actions/user_asyncactions'
 import { browserHistory } from 'react-router'
 
 const Login = (props) => {
@@ -17,7 +17,7 @@ const Login = (props) => {
     <CenterPanel maxWidth='300px' marginTop='30px'>
       <form onSubmit={e => {
         e.preventDefault() // prevent page refresh after submit
-        props.onValidate(emailInput.value, passwordInput.value )
+        props.onValidate(emailInput.value, passwordInput.value)
       }}>
       <FormGroup>
         <ControlLabel>Email address</ControlLabel>
@@ -35,20 +35,19 @@ const Login = (props) => {
           placeholder='easyAs123'
         />
       </FormGroup >
-      <Row>
-        <Col md={6}>
-          <Button onClick={() => browserHistory.push('/signUp')}>
-            Sign Up
-          </Button>
-        </Col>
-
-        <Col md={6}>
-          <Button type="submit" bsStyle="primary">
-            Sign In
-          </Button>
-        </Col>
-
-      </Row>
+      <FormGroup>
+        <ControlLabel>Password</ControlLabel>
+        <FormControl
+          type='password'
+          inputRef={ (ref) => passwordInput = ref }
+          placeholder='easyAs123'
+        />
+      </FormGroup >
+      <div style={{'textAlign': 'right' }}>
+        <Button type="submit" bsStyle="primary">
+          Submit
+        </Button>
+      </div>
       </form>
     </CenterPanel>
   )
@@ -67,8 +66,7 @@ Login.propTypes = {
 const mapDispatchToProps = (dispatch) => {
   return {
     onValidate: (email, password) => {
-      debugger;
-      dispatch(login(email, password))
+      dispatch(postUser(email, password))
     }
   }
 }
