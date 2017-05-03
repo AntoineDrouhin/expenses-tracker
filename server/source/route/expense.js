@@ -20,13 +20,13 @@ router.route('/')
       amount: req.body.amount,
       expenseType: req.body.expenseType
     })
-    expense.save(function (err, room) {
+    expense.save(function (err, exp) {
       if (err) {
         console.log(err)
       } else {
         console.log('Expense saved, value : '+ expense.amount)
       }
-      res.send(room)
+      res.send(exp)
     })
   })
   .delete((req, res) => {
