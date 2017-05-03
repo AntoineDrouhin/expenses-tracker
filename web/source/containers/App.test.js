@@ -14,7 +14,7 @@ test('App (container) properly display when called with user', (t) => {
       _id: 'fakeid',
       email: 'name@domain.com',
       password: 'password',
-      connectionStatus: true
+      connected: true
     }
   }
   const wrapper = shallow(<App {...props} />)
@@ -39,14 +39,14 @@ test('App (container) redirect to login when callend with no user', (t) => {
   t.end()
 })
 
-test('App (container) redirect to login when callend with connectionStatus false', (t) => {
+test('App (container) redirect to login when callend with connected false', (t) => {
   const props = {
     bHistory:[],
     user: {
       _id: 'fakeid',
       email: 'name@domain.com',
       password: 'password',
-      connectionStatus: false
+      connected: false
     }
   }
   // eslint-disable-next-line

@@ -7,7 +7,7 @@ import { browserHistory } from 'react-router'
 
 const Login = (props) => {
 
-  if( props.user && props.user.connectionStatus ){
+  if( props.user && props.user.connected ){
     browserHistory.push('/')
   }
 
@@ -59,7 +59,7 @@ Login.propTypes = {
     _id: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
-    connectionStatus: PropTypes.bool.isRequired
+    connected: PropTypes.bool.isRequired
   })
 }
 

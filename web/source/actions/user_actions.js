@@ -1,10 +1,11 @@
 
 export const SET_USER = 'SET_USER'
-export const setUser = (json) => {
+export const setUser = (user) => {
   return {
     type: SET_USER,
-    _id: json.user._id,
-    email: json.user.email,
-    connectionStatus: json.connected
+    _id: user._id,
+    email: user.email,
+    connected: user.connected,
+    error: user.error
   }
 }

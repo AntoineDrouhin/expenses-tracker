@@ -10,7 +10,7 @@ export let App = (props) => {
 
   if( !props.user ||
     !props.user._id ||
-    props.user.connectionStatus == false
+    !props.user.connected
   ){
     // browserHistory is injected through props.
     props.bHistory.push('/login')
@@ -29,14 +29,14 @@ App.propTypes = {
   user: PropTypes.shape({
     _id: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
-    connectionStatus : PropTypes.bool.isRequired
+    connected : PropTypes.bool.isRequired,
+    error :  PropTypes.bool.isRequired
   })
 }
 
 const mapStateToProps = (state) => {
   const props = {}
-  props.user = state.user || {_id: '',email: '', password: '', connectionStatus: false}
+  props.user = state.user || {_id: '',email: '', password: '', connected: false, error: false}
   props.bHistory = browserHistory
   return props
 }
