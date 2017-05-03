@@ -10,8 +10,6 @@ const mongoose = require('mongoose')
 const mongodb_address = process.env.NODE_ENV == 'test' ?
   process.env.MONGODB_ADDRESS_TEST : process.env.MONGODB_ADDRESS
 
-
-
 if (!mongodb_address)
   throw 'ERROR : .env file must specify a MONGODB_ADDRESS field'
 
@@ -57,5 +55,8 @@ app.use('/login', login)
 
 const user = require('./route/user.js')
 app.use('/user', user)
+
+const expenseType = require('./route/expenseType.js')
+app.use('/expenseType', expenseType)
 
 module.exports = app
