@@ -12,7 +12,6 @@ export let App = (props) => {
     !props.user._id ||
     props.user.connectionStatus == false
   ){
-    // browserHistory is injected through props.
     props.bHistory.push('/login')
   }
 

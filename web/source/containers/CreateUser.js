@@ -67,6 +67,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onValidate: (email, password) => {
       dispatch(postUser(email, password))
+      // TODO .then(e => (req, res) browserHistory.push('/login'))
     }
   }
 }

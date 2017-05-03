@@ -1,4 +1,4 @@
-import { SET_EXPENSES, ADD_EXPENSE } from '../actions/expense_actions.js'
+import { SET_EXPENSES, ADD_EXPENSE, SET_EXPENSE_ERROR } from '../actions/expense_actions.js'
 
 const expense = (state = {}, action) => {
   switch (action.type) {
@@ -15,22 +15,35 @@ const expense = (state = {}, action) => {
   }
 }
 
-const expenses = (state = [], action) => {
+const expenses = (state = {}, action) => {
+
+  let stateCopy = Object.assign({}, state)
+
   switch (action.type) {
   case 'ADD_EXPENSE':
-    return [
-      ...state,
-      expense(undefined, action)
-    ]
+    return Object.assign( stateCopy ,
+      { expenseList : state.expenseList.concat(expense(undefined, action)) }
+    )
+
   case 'DELETE_EXPENSE':
-    return state.filter( expense => expense._id !== action._id )
+    return Object.assign( stateCopy ,
+      { expenseList : state.expenseList.filter(expense => expense._id !== action._id ) }
+    )
 
   case SET_EXPENSES:
-    return action.expenses
+    return Object.assign( stateCopy ,
+      { expenseList : action.expenses }
+    )
+
+  case SET_EXPENSE_ERROR:
+    return Object.assign( stateCopy,
+      { expenseError : action.error }
+    )
 
   default:
     return state
   }
 }
+
 
 export default expenses
