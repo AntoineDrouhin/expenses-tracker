@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { FormGroup , ControlLabel, FormControl, Button } from 'react-bootstrap'
 import CenterPanel from '../components/CenterPanel'
-import { postUser } from '../actions/user_asyncactions'
+import { postUser } from '../actions/user_asyncActions'
 import { browserHistory } from 'react-router'
 
 const Login = (props) => {
