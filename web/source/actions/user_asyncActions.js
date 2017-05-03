@@ -13,7 +13,7 @@ export const postUser = (email, password) => {
       }),
       body: JSON.stringify(user)
     }).then(response => response.json())
-        .then(json => dispatch(setUser(Object.assign({}, json))))
+        .then(json => {/*Error message*/})
         // TODO error if user already exists
   }
 }
