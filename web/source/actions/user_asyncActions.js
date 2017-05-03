@@ -26,6 +26,7 @@ export const login = (email, password) => {
     email,
     password
   }
+
   return (dispatch) => {
     fetch(`${process.env.SERVER_ADDRESS}/login`, {
       method: 'POST',
@@ -34,6 +35,9 @@ export const login = (email, password) => {
       }),
       body: JSON.stringify(user)
     }).then(response => response.json())
-      .then(json => dispatch(setUser(Object.assign({}, json))))
+      .then(user => dispatch(setUser(Object.assign({}, user))))
+      .catch(function() {
+        dispatch(setUser({_id:false,email:false,connected:false, error:true}))
+      })
   }
 }

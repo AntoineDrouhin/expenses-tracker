@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { FormGroup , ControlLabel, FormControl, Button, Row, Col } from 'react-bootstrap'
+import {Alert, FormGroup , ControlLabel, FormControl, Button, Row, Col } from 'react-bootstrap'
 import CenterPanel from '../components/CenterPanel'
 import { login } from '../actions/user_asyncActions'
 import { browserHistory } from 'react-router'
 
 const Login = (props) => {
 
-  if( props.user && props.user.connectionStatus ){
+  if( props.user && props.user.connected ){
     browserHistory.push('/')
   }
 
@@ -50,18 +50,16 @@ const Login = (props) => {
 
       </Row>
       </form>
+      <br/>
+      {props.user.error &&
+        <Alert bsStyle="danger" >
+          <h4>Oh sorry!</h4>
+          <p>Plese check your connection information</p>
+        </Alert>
+      }
     </CenterPanel>
-  )
-}
 
-Login.propTypes = {
-  'onValidate': PropTypes.func.isRequired,
-  user: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
-    connectionStatus: PropTypes.bool.isRequired
-  })
+  )
 }
 
 const mapDispatchToProps = (dispatch) => {

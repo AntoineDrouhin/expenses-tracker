@@ -9,7 +9,7 @@ router.route('/')
     const user = new UserModel({
       email: req.body.email,
       password: req.body.password, //TODO encrypt password
-      expenseType: 'token' //TODO generate session
+      token: 'token' //TODO generate session
     })
     user.save(function (err, room) {
       if (err) {
