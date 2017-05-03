@@ -24,21 +24,21 @@ export let App = (props) => {
   )
 }
 
-App.propTypes = {
-  bHistory: PropTypes.any,
-  user: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    connected : PropTypes.bool.isRequired,
-    error :  PropTypes.bool.isRequired
-  })
-}
 
 const mapStateToProps = (state) => {
   const props = {}
   props.user = state.user || {_id: '',email: '', password: '', connected: false, error: false}
   props.bHistory = browserHistory
   return props
+}
+
+App.propTypes = {
+  bHistory: PropTypes.any,
+  user: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    connected : PropTypes.bool.isRequired,
+    error :  PropTypes.bool.isRequired
+  })
 }
 
 export default connect(mapStateToProps)(App)

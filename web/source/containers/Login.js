@@ -62,17 +62,6 @@ const Login = (props) => {
   )
 }
 
-Login.propTypes = {
-  'onValidate': PropTypes.func.isRequired,
-  user: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
-    connected: PropTypes.bool.isRequired,
-    error: PropTypes.bool.isRequired
-  })
-}
-
 const mapDispatchToProps = (dispatch) => {
   return {
     onValidate: (email, password) => {
