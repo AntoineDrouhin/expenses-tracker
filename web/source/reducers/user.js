@@ -7,8 +7,8 @@ const user = (state = {}, action) => {
     return {
       _id: action._id,
       email: action.email,
-      password: action.password,
-      connectionStatus: true
+      connected: action.connected,
+      error: action.error
     }
 
   default:

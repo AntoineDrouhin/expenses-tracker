@@ -8,10 +8,15 @@ router.post('/',passport.authenticate('local'),
   function(req, res) {
     // If this function gets called, authentication was successful.
     // `req.user` contains the authenticated user.
-    res.json({connected:true, user: req.user})
-  })
- 
-// TODO : working login
+    console.log('The user', req.user.email, 'is connected')
 
+    var jsonres = {
+      _id: req.user._id,
+      email: req.user.email,
+      connected: true,
+      error: false
+    }
+    res.json(jsonres)
+  })
 
 module.exports = router
