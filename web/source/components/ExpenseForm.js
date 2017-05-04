@@ -4,7 +4,7 @@ import { FormControl, Form, ControlLabel, Button,
 
 const ExpenseForm = (props) => {
 
-  let amountInput = null, typeInput = null, dateInput = null
+  let amountInput = null, typeInput = null, dateInput = null, addExpenseTypeInput = null
 
   // Actual date :  dd/mm/yyyy
   let defaultDateValue = (new Date()).toISOString().substring(0,10)
@@ -56,13 +56,31 @@ const ExpenseForm = (props) => {
 
         </Form>
       </form>
+
+      <form onSubmit={e => {
+        e.preventDefault()
+        props.onValidateType(addExpenseTypeInput.value)
+      }}>
+        <Form inline>
+          <Col md={4}>
+            <FormControl id="get-expenseType" type="text"
+              inputRef={ (ref) => addExpenseTypeInput = ref }
+             />
+          </Col>
+             <Col md={3}>
+                 <Button bsStyle="primary" type="submit">
+                   Validate
+                 </Button>
+             </Col>
+        </Form>
+      </form>
     </Panel>
   )
 }
 
 ExpenseForm.propTypes = {
   expensesTypes : PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    _id: PropTypes.number.isRequired,
     label: PropTypes.string.isRequired
   }).isRequired).isRequired,
   onValidate : PropTypes.func.isRequired

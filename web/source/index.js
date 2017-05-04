@@ -8,22 +8,14 @@ import App from './containers/App'
 import Login from './containers/Login'
 import { Router, Route, browserHistory } from 'react-router'
 
+import { fetchExpenseTypes } from './actions/expenseType_asyncActions.js'
 import { fetchExpenses } from './actions/expense_asyncActions.js'
 
 require('./style/Bootstrap-v3.3.6.css')  /*eslint:ignore*/
 
 const initialState = {
   expenses : [],
-  expensesTypes: [{
-    id: 0,
-    label: 'Food'
-  }, {
-    id: 1,
-    label: 'Tools'
-  }, {
-    id: 2,
-    label: 'Clothes'
-  }]
+  expensesTypes: []
 }
 
 const store = createStore(
@@ -36,6 +28,7 @@ const store = createStore(
 )
 
 store.dispatch(fetchExpenses())
+store.dispatch(fetchExpenseTypes())
 
 render(
   <Provider store={store}>
