@@ -13,8 +13,8 @@ export const postExpense = (amount, expenseType, date) => {
         'Content-Type': 'application/json'
       }),
       body: JSON.stringify(expense)
-    }).then(response => response.json())
-            .then(json => dispatch(addExpense(Object.assign({}, json))))
+    }).then(response => response.json() )
+      .then(json => dispatch(addExpense(Object.assign({}, json))))
   }
 }
 
@@ -34,10 +34,7 @@ export const removeExpense = (_id) => {
 export const fetchExpenses = () => {
   return function(dispatch) {
     return fetch(`${process.env.SERVER_ADDRESS}/expense`)
-            .then(response => {
-              const json = response.json()
-              return json
-            })
+            .then(response => response.json() )
             .then(json => dispatch(setExpenses(json)))
   }
 }

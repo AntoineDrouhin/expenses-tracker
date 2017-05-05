@@ -9,14 +9,16 @@ test( 'user (reducer) info is SET properly', (assert) => {
       _id: 'abc',
       email: 'abc@yogourt.com',
       password: 'abc',
-      connectionStatus: true
+      connected: true,
+      error: false
     }
   )
   const expected = {
     _id: 'abc',
     email: 'abc@yogourt.com',
     password: 'abc',
-    connectionStatus: true
+    connected: true,
+    error: false
   }
   assert.deepEqual( actual, expected )
   assert.end()

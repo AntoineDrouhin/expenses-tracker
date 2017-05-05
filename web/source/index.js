@@ -6,6 +6,7 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import expenseApp from './reducers'
 import App from './containers/App'
 import Login from './containers/Login'
+import CreateUser from './containers/CreateUser'
 import { Router, Route, browserHistory } from 'react-router'
 
 import { fetchExpenseTypes } from './actions/expenseType_asyncActions.js'
@@ -35,6 +36,7 @@ render(
     <Router history={browserHistory} >
       <Route path="/" component={App} />
       <Route path="/login" component={Login} />
+      <Route path="/signUp" component={CreateUser} />
     </Router>
   </Provider>,
   document.getElementById('root')

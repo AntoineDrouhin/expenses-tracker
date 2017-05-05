@@ -2,19 +2,18 @@ import { connect } from 'react-redux'
 import { removeExpense } from '../actions/expense_asyncActions'
 import ExpenseList from '../components/ExpenseList'
 
-const getMonthlyExpenses = (expenses) => {
-  expenses.map((expense) => {
-    expense.date = new Date(expense.date).toISOString().substring(0,10)
-    return expense
+const getExpenseList = (expenses) => {
+  return expenses.map((expense) => {
+    return Object.assign ( {},
+      expense,
+      { date : new Date(expense.date).toISOString().substring(0,10) }
+    )
   })
-  //TODO Fix (map unused)
-
-  return expenses
 }
 
 const mapStateToProps = (state) => {
   return {
-    expenses: getMonthlyExpenses(state.expenses)
+    expenses: getExpenseList(state.expenses.expenseList)
   }
 }
 
