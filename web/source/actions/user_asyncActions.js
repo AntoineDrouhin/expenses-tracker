@@ -21,9 +21,9 @@ export const postUser = (email, password) => {
 
 // TODO Delete users
 
-export const login = (email, password) => {
+export const login = (username, password) => {
   const user = {
-    email,
+    username, // attention username = email, mais coté server à cause du champs par defaut username choisi par le middleware ca pose probleme : à corriger
     password
   }
 
