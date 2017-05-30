@@ -7,15 +7,14 @@ router.route('/')
   .post((req, res) => {
     console.log('post user : ' + req.body.email)
     const user = new UserModel({
-      email: req.body.email,
+      email: req.body.email, // TODO check email doesn't exist
       password: req.body.password, //TODO encrypt password
-      token: 'token' //TODO generate session
     })
-    user.save(function (err, room) {
+    user.save(function (err, user) {
       if (err) {
         console.log(err)
       }
-      res.send(room)
+      res.send(user)
     })
   })
   .get((req, res) => {

@@ -30,7 +30,7 @@ module.exports = function(passport, LocalStrategy){
   // serializing, and querying the user record by ID from the database when
   // deserializing.
   passport.serializeUser(function(user, cb) {
-    cb(null, user.id)
+    cb(null, user._id)
   })
 
   passport.deserializeUser(function(id, cb) {
