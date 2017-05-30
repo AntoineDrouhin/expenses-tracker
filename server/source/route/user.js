@@ -26,6 +26,17 @@ router.route('/')
     })
   })
 
-// TODO : delete user
+
+router.route('/:id')
+  .delete((req, res) => {
+    console.log('delete user :' + req.params.id)
+    UserModel.find({ _id: req.params.id })
+      .remove()
+      .exec(err => {
+        console.log(err)
+        if (err) res.sendStatus(500)
+      })
+    res.sendStatus(200)
+  })
 
 module.exports = router
