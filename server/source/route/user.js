@@ -18,6 +18,13 @@ router.route('/')
       res.send(room)
     })
   })
+  .get((req, res) => {
+    console.log('get expense')
+    UserModel.find(function (err, expenses) {
+      if (err) return console.error(err)
+      res.json(expenses)
+    })
+  })
 
 // TODO : delete user
 
