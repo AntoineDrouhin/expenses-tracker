@@ -7,7 +7,6 @@ import { browserHistory } from 'react-router'
 
 export let App = (props) => {
 
-
   if( !props.user ||
     !props.user._id ||
     !props.user.connected

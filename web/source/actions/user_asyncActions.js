@@ -54,7 +54,6 @@ export const login = (email, password) => {
       .then(response => response.json())
       .then(user => dispatch(setUser(Object.assign({}, user))))
       // .catch(function() {
-      //   dispatch(setUser({_id:false,email:false,connected:false, error:true}))
-      // })
+
   }
 }

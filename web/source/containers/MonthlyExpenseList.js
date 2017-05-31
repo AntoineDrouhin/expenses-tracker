@@ -3,6 +3,11 @@ import { removeExpense } from '../actions/expense_asyncActions'
 import ExpenseList from '../components/ExpenseList'
 
 const getExpenseList = (expenses) => {
+
+  if (expenses === undefined || expenses === []){
+    return []
+  }
+  
   return expenses.map((expense) => {
     return Object.assign ( {},
       expense,
