@@ -18,7 +18,7 @@ router.route('/')
     })
   })
   .get((req, res) => {
-    console.log('get expense')
+    console.log('get user')
     UserModel.find(function (err, expenses) {
       if (err) return console.error(err)
       res.json(expenses)

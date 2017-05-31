@@ -1,3 +1,4 @@
+
 exports.randomString = function(len) {
   var buf = []
     , chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'

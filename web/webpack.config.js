@@ -1,4 +1,4 @@
-const webpack = require('webpack');
+const webpack = require('webpack')
 
 module.exports = {
   entry: './source/index.js',
@@ -13,7 +13,7 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        'SERVER_ADDRESS': '"https://127.0.0.1:3443"'
+        'SERVER_ADDRESS': '"https://localhost:3443"'
       }
     })
   ],
@@ -22,16 +22,16 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: "babel-loader"
+        loader: 'babel-loader'
       }, {
         test: /\.css$/,
-        loader: "style-loader!css-loader"
+        loader: 'style-loader!css-loader'
       }, {
         test: /\.png$/,
-        loader: "url-loader?limit=100000"
+        loader: 'url-loader?limit=100000'
       }, {
         test: /\.jpg$/,
-        loader: "file-loader"
+        loader: 'file-loader'
       }, {
         test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
         loader: 'url?limit=10000&mimetype=application/font-woff'
@@ -47,4 +47,4 @@ module.exports = {
       }
     ]
   }
-};
+}

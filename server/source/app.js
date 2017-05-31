@@ -1,8 +1,9 @@
 const express = require('express')
-const cors = require('cors')
+// const cors = require('cors')
 
-const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
+const utils = require('./service/utils')
 
 const app = express()
 
@@ -12,7 +13,7 @@ const mongodb_address = process.env.NODE_ENV == 'test' ?
 
 const UserModel = require('./model/user.js')
 const UserTokenModel = require('./model/userToken.js')
-const issueToken = require('./service/issueToken')
+// const issueToken = require('./service/issueToken')
 
 if (!mongodb_address)
   throw 'ERROR : .env file must specify a MONGODB_ADDRESS field'
@@ -21,30 +22,119 @@ if (!mongodb_address)
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const RememberMeStrategy = require('passport-remember-me').Strategy
+
 require('./config/passport.js')(passport, LocalStrategy)
 
 passport.use(new RememberMeStrategy(
   function(token, done) {
-
-    UserTokenModel.find({token: token}, function (err, userToken) {
+    console.log('REMEMBER ME STRATEGY => PARAMETER TOKEN', token)
+    UserTokenModel.findOne({token: token}, function (err, userToken) {
       if (err) { return done(err) }
-      // if (!uid) { return done(null, false) }
-
-      UserModel.find({_id : userToken.idUser}, (err, user) => {
+      if (!userToken) { return done(null, false) }
+      console.log('REMEMBER ME STRATEGY => USERTOKEN FOUNDED', userToken)
+      UserModel.findOne({_id : userToken.idUser}, (err, user) => {
+        console.log('REMEMBER ME STRATEGY => USER FOUNDED', user)
         if (err) { return done(err) }
         if (!user) { return done(null, false) }
         return done(null, user)
       })
     })
   },
-  issueToken
-))
+  function(user, done) {
+    var token =  utils.randomString(64)
+    console.log('REMEMBERME 2ND CALLBACK => USER ' + user )
+    console.log('REMEMBERME 2ND CALLBACK => TOKEN ' + token )
+    UserTokenModel.findOne({idUser: user._id},
+      function (err, userToken) {
+        console.log('REMEMBER ME STRATEGY 2ND CALLBACK => USERTOKEN ' + userToken)
+        if (err) { return done(err) }
+        if(!userToken) {
+          console.log('NEW USERTOKEN :> token ' + token)
+          console.log('NEW USERTOKEN :> user ' + user)
+          userToken =  new UserTokenModel({
+            token: token,
+            idUser: user._id,
+          })
+        } else {
+          userToken.token = token
+        }
+        console.log('REMEMBER ME STRATEGY 2ND CALLBACK => USERTOKEN ' + userToken)
+        userToken.save(function (err) {
+          if (err) { return done(err) }
+          return done(null, token)
+        })
+      }
+    )
+  }
+)
+  //
+  // User.findOne({username: oldUsername}, function (err, user) {
+  //   user.username = newUser.username;
+  //   user.password = newUser.password;
+  //   user.rights = newUser.rights;
+  //
+  //   user.save(function (err) {
+  //       if(err) {
+  //           console.error('ERROR!');
+  //       }
+  //   });
+// });
+)
+
+app.use(function(req, res, next){
+  console.log('OPTIONS DETECTION')
+  if (req.method === 'OPTIONS') {
+    console.log('!OPTIONS')
+    // console.dir(req.header)
+    var headers = {}
+    // IE8 does not allow domains to be specified, just the *
+    headers['Access-Control-Allow-Origin'] = req.headers.origin
+    // headers["Access-Control-Allow-Origin"] = "*"
+    headers['Access-Control-Allow-Methods'] = 'POST, GET, PUT, DELETE, OPTIONS'
+    headers['Access-Control-Allow-Credentials'] = true
+    headers['Access-Control-Max-Age'] = '86400' // 24 hours
+    headers['Access-Control-Allow-Headers'] = 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept'
+    res.writeHead(200, headers)
+    res.end()
+  } else {
+    console.log('NOT OPTIONS SETTING HEADERS ON THE RUN')
+    res.set({
+      'Access-Control-Allow-Origin': req.headers.origin,
+      'Access-Control-Allow-Methods': 'POST, GET, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Max-Age' : '86400', // 24 hours
+      'Access-Control-Allow-Headers' : 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept'
+    })
+    // res.append('Access-Control-Allow-Origin', req.headers.origin)
+    // res.append('Access-Control-Allow-Credentials', 'true')
+    // headers['Access-Control-Allow-Origin'] = req.headers.origin
+    // headers['Access-Control-Allow-Credentials'] = true
+
+    next()
+  }
+})
 
 mongoose.connect(mongodb_address)
 
-app.use(cors())
+// app.use(function(req, res, next){
+//   res.append('Access-Control-Allow-Credentials', 'true')
+//   res.append('Access-Control-Allow-Origin', process.env.SERVER_ADDRESS )
+//   next()
+// })
+
+
+// app.use(cors())
 app.use(cookieParser())
 app.use(bodyParser.json())
+
+
+
+
+// app.use(function(req, res, next) {
+//   res.header('Access-Control-Allow-Origin', 'https://127.0.0.1:3443' )
+//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+//   next()
+// })
 
 // app.post('/login',
 //   passport.authenticate('local', {failureRedirect: '/login', failureFlash: true }),
