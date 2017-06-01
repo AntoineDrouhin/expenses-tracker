@@ -5,6 +5,7 @@ import CenterPanel from './CenterPanel'
 import TotalExpense from './TotalExpense'
 
 const ExpenseList = (props) => {
+
   const totalAmount = props.expenses.reduce((a, b) => a + b.amount, 0)
 
   return (

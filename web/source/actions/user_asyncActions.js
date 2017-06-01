@@ -1,43 +1,44 @@
 import { setUser } from './user_actions.js'
 
 export const postUser = (email, password) => {
-  const user = {
-    email,
-    password
-  }
-  return (dispatch) => {
+  return (/*dispatch*/) => {
     fetch(`${process.env.SERVER_ADDRESS}/user`, {
       method: 'POST',
-      headers: new Headers({
-        'Content-Type': 'application/json'
-      }),
-      body: JSON.stringify(user)
-    })//.then(response => response.json())
-      //.then(json => /* dispatch(setUser(Object.assign({}, json)))*/)
-      // TODO return to login page if no error
-      // TODO error if user already exists
+      credentials: 'include',
+      headers: new Headers({'Content-Type': 'application/json'}),
+      body: JSON.stringify({email, password})
+    })
+      .then(response => response.json())
+      //TODO REDIRECT OR DISPLAY MESSAGE
+      // .then(json => if (json.success) { GO TO LOGIN}
+            // else { DISPLAY ERROR MESSAGE json.error })
   }
 }
 
 // TODO Delete users
 
 export const login = (email, password) => {
-  const user = {
-    email,
-    password
-  }
-
   return (dispatch) => {
     fetch(`${process.env.SERVER_ADDRESS}/login`, {
       method: 'POST',
-      headers: new Headers({
-        'Content-Type': 'application/json'
-      }),
-      body: JSON.stringify(user)
-    }).then(response => response.json())
+      credentials: 'include',
+      headers: new Headers({'Content-Type': 'application/json'}),
+      body: JSON.stringify({email, password})
+    })
+      .then(response => response.json())
       .then(user => dispatch(setUser(Object.assign({}, user))))
-      .catch(function() {
-        dispatch(setUser({_id:false,email:false,connected:false, error:true}))
-      })
+      // .catch(function() {
+
+  }
+}
+
+export const checkAuthentication = function () {
+  return (dispatch) => {
+    fetch(`${process.env.SERVER_ADDRESS}/checkauth`, {
+      method: 'GET',
+      credentials: 'include'
+    })
+      .then(response => response.json())
+      .then(user => dispatch(setUser(Object.assign({}, user))))
   }
 }
