@@ -2,19 +2,22 @@ const express = require('express')
 
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
-
+const logger = require('config/winston_config')
 const UserModel = require('./model/user.js')
 
 const app = express()
 
 // DataBase Configuration
 const mongoose = require('mongoose')
+mongoose.Promise = global.Promise
 const mongodb_address = process.env.NODE_ENV == 'test' ?
   process.env.MONGODB_ADDRESS_TEST : process.env.MONGODB_ADDRESS
 
 if (!mongodb_address) {
   throw 'ERROR : .env file must specify a MONGODB_ADDRESS field'
 }
+
+mongoose.connect(mongodb_address)
 
 // Passport Configuration
 const passport = require('passport')
@@ -40,18 +43,8 @@ app.use(function(req, res, next){
   }
 })
 
-mongoose.connect(mongodb_address)
-
 app.use(cookieParser())
 app.use(bodyParser.json())
-
-const expressSession = require('express-session')
-app.use(expressSession({
-  secret: 'mySecretKey',
-  cookie: {
-    secure: true
-  }
-}))
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next() }
@@ -69,7 +62,7 @@ app.get('/', (req, res) => {
 app.get('/checkauth', ensureAuthenticated, (req, res) => {
   UserModel.findById(req.session.passport.user, function (err, user) {
     if (err) {
-      console.log(err)
+      logger.error(err)
       res.sendStatus(500)
     }
     res.send({
@@ -85,9 +78,9 @@ const login = require('./route/login.js')
 app.use('/login', login)
 
 const expense = require('./route/expense.js')
-app.use('/expense'/*, ensureAuthenticated*/, expense)
+app.use('/expense', ensureAuthenticated, expense)
 
 const user = require('./route/user.js')
-app.use('/user', user)
+app.use('/user', ensureAuthenticated, user)
 
 module.exports = app
