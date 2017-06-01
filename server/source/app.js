@@ -3,6 +3,8 @@ const express = require('express')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 
+const UserModel = require('./model/user.js')
+
 const app = express()
 
 // DataBase Configuration
@@ -51,11 +53,10 @@ app.use(expressSession({
   }
 }))
 
-// Usefull for later
-// function ensureAuthenticated(req, res, next) {
-//   if (req.isAuthenticated()) { return next() }
-//   res.sendStatus(401)
-// }
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next() }
+  res.sendStatus(401)
+}
 
 app.use(passport.initialize())
 app.use(passport.session())
@@ -63,6 +64,21 @@ app.use(passport.authenticate('remember-me'))
 
 app.get('/', (req, res) => {
   res.send('Welcome to expenses-tracker API')
+})
+
+app.get('/checkauth', ensureAuthenticated, (req, res) => {
+  UserModel.findById(req.session.passport.user, function (err, user) {
+    if (err) {
+      console.log(err)
+      res.sendStatus(500)
+    }
+    res.send({
+      _id: user._id,
+      email: user.email,
+      connected: true,
+      error: false
+    })
+  })
 })
 
 const login = require('./route/login.js')
