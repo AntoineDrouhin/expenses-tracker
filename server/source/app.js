@@ -1,30 +1,50 @@
 const express = require('express')
-const cors = require('cors')
 
-const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
+
+const UserModel = require('./model/user.js')
 
 const app = express()
 
+// DataBase Configuration
 const mongoose = require('mongoose')
 const mongodb_address = process.env.NODE_ENV == 'test' ?
   process.env.MONGODB_ADDRESS_TEST : process.env.MONGODB_ADDRESS
 
-
-
-if (!mongodb_address)
+if (!mongodb_address) {
   throw 'ERROR : .env file must specify a MONGODB_ADDRESS field'
+}
+
+// Passport Configuration
+const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy
+const RememberMeStrategy = require('passport-remember-me').Strategy
+require('./config/passport_localStrategy.js')(passport, LocalStrategy)
+require('./config/passport_rememberMeStrategy.js')(passport, RememberMeStrategy)
+
+// Configure CORS
+app.use(function(req, res, next){
+  res.set({
+    'Access-Control-Allow-Origin': req.headers.origin,
+    'Access-Control-Allow-Methods': 'POST, GET, PUT, DELETE, OPTIONS',
+    'Access-Control-Allow-Credentials': 'true',
+    'Access-Control-Max-Age' : '86400', // 24 hours
+    'Access-Control-Allow-Headers' : 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept'
+  })
+  if (req.method === 'OPTIONS') {
+    res.status(200).end()
+  }
+  else {
+    next()
+  }
+})
 
 mongoose.connect(mongodb_address)
 
-app.use(cors())
 app.use(cookieParser())
 app.use(bodyParser.json())
 
-// Configuring Passport
-const passport = require('passport')
-const LocalStrategy = require('passport-local').Strategy
-require('./config/passport.js')(passport, LocalStrategy)
 const expressSession = require('express-session')
 app.use(expressSession({
   secret: 'mySecretKey',
@@ -32,28 +52,40 @@ app.use(expressSession({
     secure: true
   }
 }))
+
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next() }
+  res.sendStatus(401)
+}
+
 app.use(passport.initialize())
 app.use(passport.session())
-
-// redirect HTTP to HTTPS
-// app.all('*', function(req, res, next){
-//   if (req.secure) {
-//     console.log("HTTPS api call")
-//     return next();
-//   };
-//   console.log("HTTP api call")
-//   res.redirect('https://'+req.hostname+':'+process.env.HTTPS_PORT+req.url);
-// });
+app.use(passport.authenticate('remember-me'))
 
 app.get('/', (req, res) => {
   res.send('Welcome to expenses-tracker API')
 })
 
-const expense = require('./route/expense.js')
-app.use('/expense', expense)
+app.get('/checkauth', ensureAuthenticated, (req, res) => {
+  UserModel.findById(req.session.passport.user, function (err, user) {
+    if (err) {
+      console.log(err)
+      res.sendStatus(500)
+    }
+    res.send({
+      _id: user._id,
+      email: user.email,
+      connected: true,
+      error: false
+    })
+  })
+})
 
 const login = require('./route/login.js')
 app.use('/login', login)
+
+const expense = require('./route/expense.js')
+app.use('/expense'/*, ensureAuthenticated*/, expense)
 
 const user = require('./route/user.js')
 app.use('/user', user)

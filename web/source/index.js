@@ -10,6 +10,7 @@ import CreateUser from './containers/CreateUser'
 import { Router, Route, browserHistory } from 'react-router'
 
 import { fetchExpenses } from './actions/expense_asyncActions.js'
+import { checkAuthentication } from './actions/user_asyncActions.js'
 
 require('./style/Bootstrap-v3.3.6.css')  /*eslint:ignore*/
 
@@ -36,6 +37,7 @@ const store = createStore(
   )
 )
 
+store.dispatch(checkAuthentication())
 store.dispatch(fetchExpenses())
 
 render(
