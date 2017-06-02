@@ -7,10 +7,10 @@ function issueToken(user, done) {
 
   var token = utils.randomString(64)
   console.log('Token generé : ', token)
-  console.log('idUser : ', user._id)
+  console.log('userId : ', user._id)
   new userTokenModel({
     token: token,
-    idUser: user._id,
+    userId: user._id,
   })
     .save(function(err) {
       if (err) return done(err)

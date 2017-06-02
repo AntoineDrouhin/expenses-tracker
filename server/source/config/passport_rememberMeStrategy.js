@@ -9,7 +9,7 @@ module.exports = function(passport, RememberMeStrategy){
       UserTokenModel.findOne({token: token}, function (err, userToken) {
         if (err) { return done(err) }
         if (!userToken) { return done(null, false) }
-        UserModel.findOne({_id : userToken.idUser}, (err, user) => {
+        UserModel.findOne({_id : userToken.userId}, (err, user) => {
           if (err) { return done(err) }
           if (!user) { return done(null, false) }
           return done(null, user)
@@ -18,13 +18,13 @@ module.exports = function(passport, RememberMeStrategy){
     },
     function(user, done) {
       var token =  utils.randomString(64)
-      UserTokenModel.findOne({idUser: user._id},
+      UserTokenModel.findOne({userId: user._id},
         function (err, userToken) {
           if (err) { return done(err) }
           if(!userToken) {
             userToken =  new UserTokenModel({
               token: token,
-              idUser: user._id,
+              userId: user._id,
             })
           } else {
             userToken.token = token
