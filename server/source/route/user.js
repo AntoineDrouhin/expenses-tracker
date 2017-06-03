@@ -18,15 +18,15 @@ router.route('/')
     })
   })
 
-router.route('/:id')
-  .delete((req, res) => {
-    logger.info('DELETE USER :'+ req.params.id)
-    UserModel.find({ _id: req.params.id })
-      .remove()
-      .exec(err => {
-        if (err) { logger.error(err); res.sendStatus(500) }
-      })
-    res.sendStatus(200)
-  })
+// router.route('/:id')
+//   .delete((req, res) => {
+//     logger.info('DELETE USER :'+ req.params.id)
+//     UserModel.find({ _id: req.params.id })
+//       .remove()
+//       .exec(err => {
+//         if (err) { logger.error(err); res.sendStatus(500) }
+//       })
+//     res.sendStatus(200)
+//   })
 
 module.exports = router
