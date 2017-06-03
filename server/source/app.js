@@ -85,7 +85,7 @@ const login = require('./route/login.js')
 app.use('/login', login)
 
 const expense = require('./route/expense.js')
-app.use('/expense'/*, ensureAuthenticated*/, expense)
+app.use('/expense',ensureAuthenticated, expense)
 
 const user = require('./route/user.js')
 app.use('/user', user)

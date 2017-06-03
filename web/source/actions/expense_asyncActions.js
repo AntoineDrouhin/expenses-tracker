@@ -34,7 +34,9 @@ export const removeExpense = (_id) => {
 
 export const fetchExpenses = () => {
   return function(dispatch) {
-    return fetch(`${process.env.SERVER_ADDRESS}/expense`)
+    return fetch(`${process.env.SERVER_ADDRESS}/expense`, {
+      credentials: 'include',
+    })
             .then(response => response.json() )
             .then(json => dispatch(setExpenses(json)))
   }
