@@ -22,7 +22,7 @@ export const removeExpense = (_id) => {
     return fetch(`${process.env.SERVER_ADDRESS}/expense/${_id}`, {
       method: 'DELETE',
       credentials: 'include',
-      headers: new Headers({'Content-Type': 'application/json'}),
+      headers: new Headers({'Content-Type': 'application/json'})
     })
             .then(response => {
               if (response.ok) {
@@ -36,6 +36,7 @@ export const fetchExpenses = () => {
   return function(dispatch) {
     return fetch(`${process.env.SERVER_ADDRESS}/expense`, {
       credentials: 'include',
+      headers: new Headers({'Content-Type': 'application/json'})
     })
             .then(response => response.json() )
             .then(json => dispatch(setExpenses(json)))

@@ -32,7 +32,8 @@ const expenses = (state = {}, action) => {
 
   case SET_EXPENSES:
     return Object.assign( stateCopy ,
-      { expenseList : action.expenses }
+      { expenseList : action.expenses,
+        isInit : true}
     )
 
   case SET_EXPENSE_ERROR:
