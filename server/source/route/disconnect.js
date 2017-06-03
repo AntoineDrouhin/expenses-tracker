@@ -6,8 +6,8 @@ const UserTokenModel = require('../model/userToken')
 const logger = require('../config/winston_config')
 
 
-router.get('/',
-  function(req, res) {
+router.route('/')
+  .get(function(req, res) {
     logger.info('DISCONNECTION [USER : ' + req.session.passport.user+']')
     UserTokenModel.find({ userId : req.session.passport.user }).remove().exec(
       function (err) {
@@ -23,6 +23,8 @@ router.get('/',
     //   logger.info('DISCONNECTION [USER : ' + req.session.passport.user+']')
     //   res.status(200)
     // })
-  })
+  }
+)
+
 
 module.exports = router
