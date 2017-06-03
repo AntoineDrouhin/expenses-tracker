@@ -35,7 +35,7 @@ const ExpenseList = (props) => {
 }
 
 ExpenseList.propTypes = {
-  expenses : {
+  expenses : PropTypes.shape({
     expenseList: PropTypes.arrayOf(PropTypes.shape({
       _id: PropTypes.string.isRequired,
       date: PropTypes.string.isRequired,
@@ -43,7 +43,7 @@ ExpenseList.propTypes = {
       amount: PropTypes.number.isRequired
     }).isRequired).isRequired,
     isInit : PropTypes.bool.isRequired
-  },
+  }),
   onDeleteClick: PropTypes.func.isRequired,
   syncExpenses: PropTypes.func.isRequired
 }
