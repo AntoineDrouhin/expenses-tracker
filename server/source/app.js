@@ -77,6 +77,9 @@ app.get('/checkauth', ensureAuthenticated, (req, res) => {
 const login = require('./route/login.js')
 app.use('/login', login)
 
+const disconnect = require('./route/disconnect.js')
+app.use('/disconnect', ensureAuthenticated, disconnect)
+
 const expense = require('./route/expense.js')
 app.use('/expense', ensureAuthenticated, expense)
 
