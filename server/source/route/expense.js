@@ -7,9 +7,10 @@ const logger = require('../config/winston_config.js')
 
 router.route('/')
   .get((req, res) => {
+    console.log('get expense')
     logger.info('user : ' + req.session.passport.user + ' GET ALL EXPENSES')
-    ExpenseModel.find(function (err, expenses) {
-      if (err) { logger.error(err); res.sendStatus(500) }
+    ExpenseModel.find({ '_user': req.session.passport.user },function (err, expenses) {
+      if (err) return console.error(err)
       res.json(expenses)
     })
   })
@@ -18,35 +19,30 @@ router.route('/')
     const expense = new ExpenseModel({
       date: req.body.date,
       amount: req.body.amount,
-      expenseType: req.body.expenseType
+      expenseType: req.body.expenseType,
+      _user: req.session.passport.user
     })
     expense.save(function (err, room) {
       if (err) { logger.error(err); res.sendStatus(500) }
       res.send(room)
     })
   })
-  // .delete((req, res) => {
-  //   logger.info('user : ' + req.session.passport.user + ' Delete all expenses')
-  //   if (req.params.length < 1){
-  //     ExpenseModel.find({}).remove().exec(err => if (err) { logger.error(err); res.sendStatus(500)})
-  //   } else {
-  //     ExpenseModel.find(req.params[0]).remove().exec(err => if (err) { logger.error(err); res.sendStatus(500)})
-  //   }
-  //   res.sendStatus(200)
-  // })
+
 
 router.route('/:id')
-  .get((req, res) => {
-    logger.info('user : ' + req.session.passport.user + ' GET EXPENSE :' + req.params.id)
-    ExpenseModel.findOne({_id: req.params.id},function (err, expenses) {
-      if (err) { logger.error(err); res.sendStatus(500) }
-      res.json(expenses)
-    })
-  })
+  // ---Not use at the moment---
+  // .get((req, res) => {
+  //   console.log('get expense')
+  //   ExpenseModel.findOne({_id: req.params.id},function (err, expenses) {
+  //     if (err) return console.error(err)
+  //     res.json(expenses)
+  //   })
+  // })
   .delete((req, res) => {
-    logger.info('user : ' + req.session.passport.user + ' DELETE EXPENSE :' + req.params.id)
-    ExpenseModel.findOne({_id : req.params.id}).remove().exec(err => {
-      if (err) { logger.error(err); res.sendStatus(500) }
+    console.log('delete expense : id = ' + req.params.id)
+    ExpenseModel.find({_id : req.params.id, _user:req.session.passport.user}).remove().exec(err => {
+      console.log(err)
+      if (err) res.sendStatus(500)
     })
     res.sendStatus(200)
   })

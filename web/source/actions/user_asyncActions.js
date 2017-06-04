@@ -1,4 +1,5 @@
 import { setUser } from './user_actions.js'
+import { resetState } from './state_actions.js'
 
 export const postUser = (email, password) => {
   return (/*dispatch*/) => {
@@ -46,12 +47,7 @@ export const disconnect = function () {
       credentials: 'include'
     })
     .then( () => {
-      dispatch(setUser({
-        _id: '',
-        email: '',
-        connected: false,
-        error: false
-      }))
+      dispatch(resetState())
     })
   }
 }

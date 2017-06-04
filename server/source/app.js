@@ -81,9 +81,9 @@ const disconnect = require('./route/disconnect.js')
 app.use('/disconnect', ensureAuthenticated, disconnect)
 
 const expense = require('./route/expense.js')
-app.use('/expense', ensureAuthenticated, expense)
+app.use('/expense',ensureAuthenticated, expense)
 
 const user = require('./route/user.js')
-app.use('/user', ensureAuthenticated, user)
+app.use('/user', user)
 
 module.exports = app
