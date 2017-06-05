@@ -7,10 +7,9 @@ const logger = require('../config/winston_config.js')
 
 router.route('/')
   .get((req, res) => {
-    console.log('get expense')
     logger.info('user : ' + req.session.passport.user + ' GET ALL EXPENSES')
     ExpenseModel.find({ '_user': req.session.passport.user },function (err, expenses) {
-      if (err) return console.error(err)
+      if (err) { logger.error(err); res.sendStatus(500) }
       res.json(expenses)
     })
   })
@@ -32,18 +31,16 @@ router.route('/')
 router.route('/:id')
   // ---Not use at the moment---
   // .get((req, res) => {
-  //   console.log('get expense')
   //   ExpenseModel.findOne({_id: req.params.id},function (err, expenses) {
   //     if (err) return console.error(err)
   //     res.json(expenses)
   //   })
   // })
   .delete((req, res) => {
-    console.log('delete expense : id = ' + req.params.id)
     ExpenseModel.find({_id : req.params.id, _user:req.session.passport.user}).remove().exec(err => {
-      console.log(err)
-      if (err) res.sendStatus(500)
+      if (err) { logger.error(err); res.sendStatus(500) }
     })
+    logger.info('user : ' + req.session.passport.user + ' DELETE EXPENSE :', req.params.id)
     res.sendStatus(200)
   })
 
