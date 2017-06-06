@@ -1,13 +1,21 @@
 import React, { PropTypes } from 'react'
 import { FormControl, Form, ControlLabel, Button,
-  Col, Panel} from 'react-bootstrap'
+  Col, Panel,Modal} from 'react-bootstrap'
 
 const ExpenseForm = (props) => {
 
-  let amountInput = null, typeInput = null, dateInput = null
+  if( ! props.expensesTypes.isInit){
+    props.syncExpenseTypes()
+  }
+
+  let amountInput = null, typeInput = null, dateInput = null, addExpenseTypeInput = null
 
   // Actual date :  dd/mm/yyyy
   let defaultDateValue = (new Date()).toISOString().substring(0,10)
+
+  function close(){
+    props.onValidateModal(false)
+  }
 
   return (
     <Panel>
@@ -41,7 +49,7 @@ const ExpenseForm = (props) => {
             <Col md={12}>
             <FormControl componentClass="select"
               inputRef={ (ref) => typeInput = ref } >
-              {props.expensesTypes.map(expenseType =>
+              {props.expensesTypes.items.map(expenseType =>
                 <option key={expenseType.id} value={expenseType.label}>{expenseType.label}</option>
               )}
             </FormControl>
@@ -56,16 +64,68 @@ const ExpenseForm = (props) => {
 
         </Form>
       </form>
+
+      <button onClick={e => {
+        e.preventDefault()
+        props.onValidateModal(true)
+      }}>Update expense type</button>
+
+      <Modal show={props.displayOption.displayModal} onHide={close} >
+                <Modal.Header closeButton>
+                  <Modal.Title>Expense type management</Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{minheight: '150px'}}>
+                <form onSubmit={e => {
+                  e.preventDefault()
+                  props.onValidateType(addExpenseTypeInput.value)
+                }}>
+                  <Form inline>
+                    <Col md={4}>
+                      <FormControl id="get-expenseType" type="text"
+                        inputRef={ (ref) => addExpenseTypeInput = ref }
+                       />
+                    </Col>
+                       <Col md={3}>
+                           <Button bsStyle="primary" type="submit">
+                             Validate
+                           </Button>
+                       </Col>
+                  </Form>
+
+                  {props.expensesTypes.items.map(expenseType =>
+                    <div id = {expenseType.id} >
+                      {expenseType.label}
+                    </div>
+                  )}
+
+                </form>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button onClick={e => {
+                    e.preventDefault()
+                    props.onValidateModal(false)
+                  }}> Close</Button>
+                </Modal.Footer>
+              </Modal>
+
     </Panel>
   )
 }
 
 ExpenseForm.propTypes = {
-  expensesTypes : PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    label: PropTypes.string.isRequired
-  }).isRequired).isRequired,
-  onValidate : PropTypes.func.isRequired
+  expensesTypes : PropTypes.shape({
+    items : PropTypes.arrayOf(PropTypes.shape({
+      id : PropTypes.number.isRequired,
+      label : PropTypes.string.isRequired
+    }).isRequired).isRequired,
+    isInit : PropTypes.bool.isRequired
+  }).isRequired,
+  onValidate : PropTypes.func.isRequired,
+  syncExpenseTypes : PropTypes.func.isRequired,
+  onValidateModal : PropTypes.func.isRequired,
+  displayOption : PropTypes.shape({
+    displayModal : PropTypes.bool.isRequired
+  })
 }
 
 export default ExpenseForm
