@@ -17,7 +17,10 @@ require('./style/Bootstrap-v3.3.6.css')  /*eslint:ignore*/
 
 const initialState = {
   expenses : [],
-  expensesTypes: []
+  expensesTypes: [],
+  displayOptions : {
+    displayModal : false
+  }
 }
 
 const store = createStore(
@@ -32,6 +35,7 @@ const store = createStore(
 store.dispatch(checkAuthentication())
 store.dispatch(fetchExpenses())
 store.dispatch(fetchExpenseTypes())
+
 
 render(
   <Provider store={store}>

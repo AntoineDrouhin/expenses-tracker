@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import { FormControl, Form, ControlLabel, Button,
-  Col, Panel} from 'react-bootstrap'
+  Col, Panel,Modal} from 'react-bootstrap'
 
 const ExpenseForm = (props) => {
 
@@ -8,6 +8,10 @@ const ExpenseForm = (props) => {
 
   // Actual date :  dd/mm/yyyy
   let defaultDateValue = (new Date()).toISOString().substring(0,10)
+
+  function close(){
+    props.onValidateModal(false)
+  }
 
   return (
     <Panel>
@@ -57,23 +61,51 @@ const ExpenseForm = (props) => {
         </Form>
       </form>
 
-      <form onSubmit={e => {
+
+
+      <button onClick={e => {
         e.preventDefault()
-        props.onValidateType(addExpenseTypeInput.value)
-      }}>
-        <Form inline>
-          <Col md={4}>
-            <FormControl id="get-expenseType" type="text"
-              inputRef={ (ref) => addExpenseTypeInput = ref }
-             />
-          </Col>
-             <Col md={3}>
-                 <Button bsStyle="primary" type="submit">
-                   Validate
-                 </Button>
-             </Col>
-        </Form>
-      </form>
+        props.onValidateModal(true)
+      }}>Update expense type</button>
+
+      <Modal show={props.displayOption.displayModal} onHide={close} >
+                <Modal.Header closeButton>
+                  <Modal.Title>Expense type management</Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{minheight: '150px'}}>
+                <form onSubmit={e => {
+                  e.preventDefault()
+                  props.onValidateType(addExpenseTypeInput.value)
+                }}>
+                  <Form inline>
+                    <Col md={4}>
+                      <FormControl id="get-expenseType" type="text"
+                        inputRef={ (ref) => addExpenseTypeInput = ref }
+                       />
+                    </Col>
+                       <Col md={3}>
+                           <Button bsStyle="primary" type="submit">
+                             Validate
+                           </Button>
+                       </Col>
+                  </Form>
+
+                  {props.expensesTypes.map(expenseType =>
+                    <div id = {expenseType.id} >
+                      {expenseType.label}
+                    </div>
+                  )}
+
+                </form>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button onClick={e => {
+                    e.preventDefault()
+                    props.onValidateModal(false)
+                  }}> Close</Button>
+                </Modal.Footer>
+              </Modal>
+
     </Panel>
   )
 }
