@@ -83,10 +83,10 @@ app.use('/disconnect', ensureAuthenticated, disconnect)
 const expense = require('./route/expense.js')
 app.use('/expense',ensureAuthenticated, expense)
 
+const expenseType = require('./route/expenseType.js')
+app.use('/expenseType',ensureAuthenticated, expenseType)
+
 const user = require('./route/user.js')
 app.use('/user', user)
-
-const expenseType = require('./route/expenseType.js')
-app.use('/expenseType', expenseType)
 
 module.exports = app
