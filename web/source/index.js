@@ -3,28 +3,20 @@ import { render } from 'react-dom'
 import thunkMiddleware from 'redux-thunk'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
-import expenseApp from './reducers'
+import rootReducer from './reducers'
 import App from './containers/App'
 import Login from './containers/Login'
 import CreateUser from './containers/CreateUser'
 import { Router, Route, browserHistory } from 'react-router'
 
-import { fetchExpenseTypes } from './actions/expenseType_asyncActions.js'
-import { fetchExpenses } from './actions/expense_asyncActions.js'
+import initialState from './initialState'
+
 import { checkAuthentication } from './actions/user_asyncActions.js'
 
 require('./style/Bootstrap-v3.3.6.css')  /*eslint:ignore*/
 
-const initialState = {
-  expenses : [],
-  expensesTypes: [],
-  displayOptions : {
-    displayModal : false
-  }
-}
-
 const store = createStore(
-  expenseApp,
+  rootReducer,
   initialState,
   compose(
     applyMiddleware( thunkMiddleware ),
@@ -33,8 +25,6 @@ const store = createStore(
 )
 
 store.dispatch(checkAuthentication())
-store.dispatch(fetchExpenses())
-store.dispatch(fetchExpenseTypes())
 
 
 render(

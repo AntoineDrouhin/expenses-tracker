@@ -1,4 +1,6 @@
+
 require('dotenv').config()
+const logger = require('./config/winston_config')
 
 const app = require('app')
 const https = require('https')
@@ -22,14 +24,11 @@ const keyCert = {
 }
 
 // Mount HTTPS server
-/*var httpsServer =*/ https.createServer(keyCert, app)
+https.createServer(keyCert, app)
   .listen(HTTPS_PORT, function () {
-    console.log('HTTPS Server listening on port ' + HTTPS_PORT)
+    logger.info('= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =')
+    logger.info('= = = =      ' + 'Server started and listening on port ' + HTTPS_PORT + '      = = = =')
+    logger.info('= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =')
   })
-
-// Mount HTTP server (disabled)
-// var httpServer = http.createServer(app).listen(HTTP_PORT, function() {
-//   console.log('HTTP Server listening on port ' + HTTP_PORT);
-// })
 
 module.exports = app

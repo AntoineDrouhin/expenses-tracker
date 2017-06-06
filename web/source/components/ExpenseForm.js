@@ -4,6 +4,10 @@ import { FormControl, Form, ControlLabel, Button,
 
 const ExpenseForm = (props) => {
 
+  if( ! props.expensesTypes.isInit){
+    props.syncExpenseTypes()
+  }
+
   let amountInput = null, typeInput = null, dateInput = null, addExpenseTypeInput = null
 
   // Actual date :  dd/mm/yyyy
@@ -45,7 +49,7 @@ const ExpenseForm = (props) => {
             <Col md={12}>
             <FormControl componentClass="select"
               inputRef={ (ref) => typeInput = ref } >
-              {props.expensesTypes.map(expenseType =>
+              {props.expensesTypes.items.map(expenseType =>
                 <option key={expenseType.id} value={expenseType.label}>{expenseType.label}</option>
               )}
             </FormControl>
@@ -60,8 +64,6 @@ const ExpenseForm = (props) => {
 
         </Form>
       </form>
-
-
 
       <button onClick={e => {
         e.preventDefault()
@@ -90,7 +92,7 @@ const ExpenseForm = (props) => {
                        </Col>
                   </Form>
 
-                  {props.expensesTypes.map(expenseType =>
+                  {props.expensesTypes.items.map(expenseType =>
                     <div id = {expenseType.id} >
                       {expenseType.label}
                     </div>
@@ -111,11 +113,19 @@ const ExpenseForm = (props) => {
 }
 
 ExpenseForm.propTypes = {
-  expensesTypes : PropTypes.arrayOf(PropTypes.shape({
-    _id: PropTypes.number.isRequired,
-    label: PropTypes.string.isRequired
-  }).isRequired).isRequired,
-  onValidate : PropTypes.func.isRequired
+  expensesTypes : PropTypes.shape({
+    items : PropTypes.arrayOf(PropTypes.shape({
+      id : PropTypes.number.isRequired,
+      label : PropTypes.string.isRequired
+    }).isRequired).isRequired,
+    isInit : PropTypes.bool.isRequired
+  }).isRequired,
+  onValidate : PropTypes.func.isRequired,
+  syncExpenseTypes : PropTypes.func.isRequired,
+  onValidateModal : PropTypes.func.isRequired,
+  displayOption : PropTypes.shape({
+    displayModal : PropTypes.bool.isRequired
+  })
 }
 
 export default ExpenseForm

@@ -2,8 +2,10 @@ import React, { PropTypes } from 'react'
 import AddExpense from './AddExpense'
 import MonthlyExpenseList from './MonthlyExpenseList'
 import CenterPanel from '../components/CenterPanel'
+import TopBar from '../components/TopBar'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
+import { disconnect } from '../actions/user_asyncActions'
 
 export let App = (props) => {
 
@@ -16,12 +18,21 @@ export let App = (props) => {
 
   return (
     <CenterPanel >
+      <TopBar onDisconnect={props.onDisconnect}/>
       <AddExpense />
       <MonthlyExpenseList />
     </CenterPanel>
   )
 }
 
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onDisconnect: () => {
+      dispatch(disconnect())
+    }
+  }
+}
 
 const mapStateToProps = (state) => {
   const props = {}
@@ -36,7 +47,8 @@ App.propTypes = {
     _id: PropTypes.string.isRequired,
     connected : PropTypes.bool.isRequired,
     error :  PropTypes.bool.isRequired
-  })
+  }),
+  onDisconnect: PropTypes.func.isRequired
 }
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)

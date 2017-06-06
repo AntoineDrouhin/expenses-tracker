@@ -6,7 +6,11 @@ import TotalExpense from './TotalExpense'
 
 const ExpenseList = (props) => {
 
-  const totalAmount = props.expenses.reduce((a, b) => a + b.amount, 0)
+  if( ! props.expenses.isInit){
+    props.syncExpenses()
+  }
+
+  const totalAmount = props.expenses.expenseList.reduce((a, b) => a + b.amount, 0)
 
   return (
     <CenterPanel >
@@ -14,7 +18,7 @@ const ExpenseList = (props) => {
         <h4>My expenses</h4>
         <Table style={{marginLeft: 'auto', marginRight: 'auto'}} responsive >
           <tbody >
-            {props.expenses.map(expense =>
+            {props.expenses.expenseList.map(expense =>
               <ExpenseItem
                 key={expense._id}
                 {...expense}
@@ -31,13 +35,17 @@ const ExpenseList = (props) => {
 }
 
 ExpenseList.propTypes = {
-  expenses : PropTypes.arrayOf(PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-    expenseType: PropTypes.string.isRequired,
-    amount: PropTypes.number.isRequired
-  }).isRequired).isRequired,
-  onDeleteClick: PropTypes.func.isRequired
+  expenses : PropTypes.shape({
+    expenseList: PropTypes.arrayOf(PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      date: PropTypes.string.isRequired,
+      expenseType: PropTypes.string.isRequired,
+      amount: PropTypes.number.isRequired
+    }).isRequired).isRequired,
+    isInit : PropTypes.bool.isRequired
+  }),
+  onDeleteClick: PropTypes.func.isRequired,
+  syncExpenses: PropTypes.func.isRequired
 }
 
 export default ExpenseList

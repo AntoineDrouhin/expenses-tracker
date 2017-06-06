@@ -1,4 +1,5 @@
 import { setUser } from './user_actions.js'
+import { resetState } from './state_actions.js'
 
 export const postUser = (email, password) => {
   return (/*dispatch*/) => {
@@ -27,18 +28,26 @@ export const login = (email, password) => {
     })
       .then(response => response.json())
       .then(user => dispatch(setUser(Object.assign({}, user))))
-      // .catch(function() {
-
   }
 }
 
 export const checkAuthentication = function () {
   return (dispatch) => {
     fetch(`${process.env.SERVER_ADDRESS}/checkauth`, {
-      method: 'GET',
       credentials: 'include'
     })
       .then(response => response.json())
       .then(user => dispatch(setUser(Object.assign({}, user))))
+  }
+}
+
+export const disconnect = function () {
+  return (dispatch) => {
+    fetch(`${process.env.SERVER_ADDRESS}/disconnect`, {
+      credentials: 'include'
+    })
+    .then( () => {
+      dispatch(resetState())
+    })
   }
 }

@@ -4,10 +4,10 @@
   "description": "An api to store expenses data for expenses-tracker app",
   "main": "source/server.js",
   "scripts": {
-    "start": "cross-env NODE_PATH=source NODE_ENV=production node source/server.js",
-    "start-dev": "cross-env NODE_PATH=source NODE_ENV=production nodemon source/server.js",
-    "debug": "cross-env NODE_PATH=source NODE_ENV=production nodemon --inspect source/server.js",
-    "test": "cross-env NODE_PATH=source NODE_ENV=test mocha || true",
+    "start": "cross-env NODE_PATH=source NODE_ENV=production node source/server.js --color=always",
+    "start-dev": "cross-env NODE_PATH=source NODE_ENV=production nodemon source/server.js --color=always",
+    "debug": "cross-env NODE_PATH=source NODE_ENV=production nodemon --inspect source/server.js --color=always",
+    "test": "cross-env NODE_PATH=source NODE_ENV=test mocha --color=always",
     "lint": "eslint ./source/**/*.js"
   },
   "author": "Antoine Drouhin",
@@ -23,7 +23,8 @@
     "mongoose": "4.7.6",
     "passport": "0.3.2",
     "passport-local": "1.0.0",
-    "passport-remember-me": "0.0.1"
+    "passport-remember-me": "0.0.1",
+    "winston": "2.3.1"
   },
   "devDependencies": {
     "chai": "3.5.0",
