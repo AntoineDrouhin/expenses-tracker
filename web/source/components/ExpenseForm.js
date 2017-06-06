@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
-import { FormControl, Form, ControlLabel, Button,
-  Col, Panel} from 'react-bootstrap'
+import CenterPanel from '../components/CenterPanel'
+import { FormControl, Form, ControlLabel, Button, Col} from 'react-bootstrap'
 
 const ExpenseForm = (props) => {
 
@@ -10,7 +10,7 @@ const ExpenseForm = (props) => {
   let defaultDateValue = (new Date()).toISOString().substring(0,10)
 
   return (
-    <Panel>
+    <CenterPanel>
       <h4>Add an expense</h4>
       <form onSubmit={e => {
         e.preventDefault()
@@ -56,7 +56,7 @@ const ExpenseForm = (props) => {
 
         </Form>
       </form>
-    </Panel>
+    </CenterPanel>
   )
 }
 

@@ -1,11 +1,15 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import {Alert, FormGroup , ControlLabel, FormControl, Button, Row, Col } from 'react-bootstrap'
 import CenterPanel from '../components/CenterPanel'
 import { login } from '../actions/user_asyncActions'
 import { browserHistory } from 'react-router'
+import BG from '../img/expense_blur.png'
+import logo from '../img/logo.png'
 
 const Login = (props) => {
+
+
 
   if( props.user && props.user.connected ){
     browserHistory.push('/')
@@ -13,8 +17,28 @@ const Login = (props) => {
 
   let emailInput = null, passwordInput = null
 
+  var w = window,
+    d = document,
+    documentElement = d.documentElement,
+    body = d.getElementsByTagName('body')[0]
+
+  let style = {
+    background: 'url('+BG+')',
+    backgroundSize: 'cover',
+    padding: '15%',
+    height: w.innerHeight|| documentElement.clientHeight|| body.clientHeight
+  }
+
   return (
-    <CenterPanel maxWidth='300px' marginTop='30px'>
+    <div style={style}>
+    <div style={{boxShadow: '10px 10px 111px 6px rgba(0,0,0,0.75)', maxWidth:'300px', margin: 'auto'}}>
+    <CenterPanel  maxWidth='300px' >
+    <div style={{textAlign:'center', borderBottom:'1px solid #ccc', marginBottom:'10px'}}>
+      <div style={{marginTop:'4px', fontSize:'18px'}}>
+        <img style={{height:'60px',width:'60px'}} src={logo}/>
+      </div>
+      <h4>Expense Tracker</h4>
+      </div>
       <form onSubmit={e => {
         e.preventDefault() // prevent page refresh after submit
         props.onValidate(emailInput.value, passwordInput.value )
@@ -43,9 +67,11 @@ const Login = (props) => {
         </Col>
 
         <Col md={6}>
+        <div style={{'textAlign': 'right' }}>
           <Button type="submit" bsStyle="primary">
             Sign In
           </Button>
+          </div>
         </Col>
 
       </Row>
@@ -58,7 +84,8 @@ const Login = (props) => {
         </Alert>
       }
     </CenterPanel>
-
+    </div>
+    </div>
   )
 }
 

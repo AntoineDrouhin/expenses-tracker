@@ -4,6 +4,7 @@ import { FormGroup , ControlLabel, FormControl, Button } from 'react-bootstrap'
 import CenterPanel from '../components/CenterPanel'
 import { postUser } from '../actions/user_asyncActions'
 import { browserHistory } from 'react-router'
+import BG from '../img/expense_blur.png'
 
 const Login = (props) => {
 
@@ -12,9 +13,21 @@ const Login = (props) => {
   }
 
   let emailInput = null, passwordInput = null
+  var w = window,
+    d = document,
+    documentElement = d.documentElement,
+    body = d.getElementsByTagName('body')[0]
 
+  let style = {
+    background: 'url('+BG+')',
+    backgroundSize: 'cover',
+    padding: '15%',
+    height: w.innerHeight|| documentElement.clientHeight|| body.clientHeight
+  }
   return (
-    <CenterPanel maxWidth='300px' marginTop='30px'>
+    <div style={style}>
+    <div style={{boxShadow: '10px 10px 111px 6px rgba(0,0,0,0.75)', maxWidth:'300px', margin: 'auto'}}>
+    <CenterPanel maxWidth='300px'>
       <form onSubmit={e => {
         e.preventDefault() // prevent page refresh after submit
         props.onValidate(emailInput.value, passwordInput.value)
@@ -50,6 +63,8 @@ const Login = (props) => {
       </div>
       </form>
     </CenterPanel>
+    </div>
+    </div>
   )
 }
 
