@@ -3,7 +3,7 @@ const expenseType = (state = {}, action) => {
   switch (action.type) {
   case 'ADD_EXPENSETYPE':
     return {
-      _id: action._id,
+      id: action.id,
       label: action.label
     }
 
@@ -12,27 +12,15 @@ const expenseType = (state = {}, action) => {
   }
 }
 
-const expensesTypes = (state = {}, action) => {
+const expensesTypes = (state = [], action) => {
   switch (action.type) {
   case 'ADD_EXPENSETYPE':
-    return {
-      inInit : state.isInit,
-      item :[
-        ...state.items,
-        expenseType(undefined, action)]
-    }
+    return [
+      ...state,
+      expenseType(undefined, action)
+    ]
   case 'DELETE_EXPENSETYPE':
-    return {
-      items : state.items.filter(expenseType => expenseType.id !== action.id ),
-      isInit : state.isInit
-    }
-
-
-  case 'SET_EXPENSETYPE':
-    return {
-      items : action.expenseTypes,
-      isInit : true
-    }
+    return state.filter(expenseType => expenseType.id !== action.id )
 
   default:
     return state

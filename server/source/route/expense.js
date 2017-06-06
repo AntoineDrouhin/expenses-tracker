@@ -21,9 +21,9 @@ router.route('/')
       expenseType: req.body.expenseType,
       _user: req.session.passport.user
     })
-    expense.save(function (err, exp) {
+    expense.save(function (err, room) {
       if (err) { logger.error(err); res.sendStatus(500) }
-      res.send(exp)
+      res.send(room)
     })
   })
 
