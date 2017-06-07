@@ -47,25 +47,24 @@ const Login = (props) => {
         props.onValidate(emailInput.value, passwordInput.value )
       }}>
       <FormGroup>
-        <ControlLabel>Email address</ControlLabel>
+        <ControlLabel>{translate(props.lang, 'EMAIL_ADDRES')}</ControlLabel>
         <FormControl
           type='email'
           inputRef={ (ref) => emailInput = ref }
-          placeholder='my_address@domain.com'
-        />
+          placeholder={translate(props.lang, 'EMAIL_ADDRES_DISP')}/>
       </FormGroup>
       <FormGroup>
-        <ControlLabel>Password</ControlLabel>
+        <ControlLabel>{translate(props.lang, 'PASSWORD')}</ControlLabel>
         <FormControl
           type='password'
           inputRef={ (ref) => passwordInput = ref }
-          placeholder='easyAs123'
+          placeholder='*********'
         />
       </FormGroup >
       <Row>
         <Col md={6}>
           <Button onClick={() => browserHistory.push('/signUp')}>
-            Sign Up
+            {translate(props.lang, 'SIGN_UP')}
           </Button>
         </Col>
 

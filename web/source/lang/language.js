@@ -14,6 +14,22 @@ var trads = {
   'LANG_SELECTOR' : {
     'fr' : 'Choisir la langue',
     'en' : 'Choose the lang'
+  },
+  'EMAIL_ADDRES': {
+    'fr' : 'Adresse mail',
+    'en' : 'Email address'
+  },
+  'EMAIL_ADDRES_DISP': {
+    'fr' : 'mon_adresse@domaine.com',
+    'en' : 'my_adress@domain.com'
+  },
+  'PASSWORD': {
+    'fr' : 'Mot de passe',
+    'en' : 'Password'
+  },
+  'SIGN_UP': {
+    'fr' : 'S\'inscrire',
+    'en' : 'Sign up'
   }
 }
 
