@@ -4,6 +4,7 @@ import {Alert, FormGroup , ControlLabel, FormControl, Button, Row, Col } from 'r
 import CenterPanel from '../components/CenterPanel'
 import { login } from '../actions/user_asyncActions'
 import { browserHistory } from 'react-router'
+import translate from '../lang/language.js'
 import BG from '../img/expense_blur.png'
 import logo from '../img/logo.png'
 
@@ -69,7 +70,7 @@ const Login = (props) => {
         <Col md={6}>
         <div style={{'textAlign': 'right' }}>
           <Button type="submit" bsStyle="primary">
-            Sign In
+            {translate(props.lang, 'LOGIN_BTN')}
           </Button>
           </div>
         </Col>
@@ -98,7 +99,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = (state) => {
-  return { user: state.user }
+  return { user: state.user, lang : state.lang }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

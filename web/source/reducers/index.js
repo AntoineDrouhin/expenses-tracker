@@ -4,6 +4,7 @@ import expenses from './expenses'
 import expensesTypes from './expensesTypes'
 import user from './user'
 import global_state from './global_state'
+import lang from './lang'
 
 import initialState from '../initialState'
 
@@ -18,7 +19,8 @@ const appReducer = combineReducers({
   expenses,
   expensesTypes,
   user,
-  global_state
+  global_state,
+  lang
 })
 
 export default rootReducer
