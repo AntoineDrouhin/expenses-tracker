@@ -28,6 +28,7 @@ export const login = (email, password) => {
     })
       .then(response => response.json())
       .then(user => dispatch(setUser(Object.assign({}, user))))
+      .catch(() => dispatch(setUser({_id: null, email: null, connected: false,error: true})))
   }
 }
 
