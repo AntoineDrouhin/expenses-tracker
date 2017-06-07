@@ -81,8 +81,8 @@ const Login = (props) => {
       <br/>
       {props.user.error &&
         <Alert bsStyle="danger" >
-          <h4>Oh sorry!</h4>
-          <p>Plese check your connection information</p>
+          <h4>{translate(props.lang, 'SORRY')}</h4>
+          <p>{translate(props.lang, 'CHECK_INFO_CONNECTION')}</p>
         </Alert>
       }
     </CenterPanel>

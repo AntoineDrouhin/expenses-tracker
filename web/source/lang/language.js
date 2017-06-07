@@ -30,6 +30,14 @@ var trads = {
   'SIGN_UP': {
     'fr' : 'S\'inscrire',
     'en' : 'Sign up'
+  },
+  'SORRY' : {
+    'fr' : 'Oups désolé!',
+    'en' : 'Oh sorry!'
+  },
+  'CHECK_INFO_CONNECTION' : {
+    'fr' : 'Veuillez vérifier vos informations de connexions s\'il vous plait',
+    'en' : 'Plese check your connection information'
   }
 }
 
