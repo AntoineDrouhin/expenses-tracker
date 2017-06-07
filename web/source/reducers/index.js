@@ -1,7 +1,7 @@
 
 import { combineReducers } from 'redux'
 import expenses from './expenses'
-import expensesTypes from './expensesTypes'
+import expenseTypes from './expenseTypes'
 import user from './user'
 
 import displayOption from './displayOption'
@@ -17,7 +17,7 @@ const rootReducer = function(state, action) {
 
 const appReducer = combineReducers({
   expenses,
-  expensesTypes,
+  expenseTypes,
   user,
   displayOption,
   global_state
