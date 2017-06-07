@@ -2,6 +2,7 @@
 import React, { PropTypes } from 'react'
 import { Navbar, Button, Nav } from 'react-bootstrap'
 import BG from '../img/logo.png'
+import LangSelector from '../containers/langSelector'
 
 const TopBar = (props) => {
 
@@ -15,6 +16,7 @@ const TopBar = (props) => {
       <Nav pullRight>
         <div style={{marginTop:'8px'}}>
         <Button onClick={props.onDisconnect} bsStyle='danger'>Disconnect</Button>
+        <LangSelector></LangSelector>
         </div>
       </Nav>
     </Navbar>

@@ -7,6 +7,7 @@ import { browserHistory } from 'react-router'
 import translate from '../lang/language.js'
 import BG from '../img/expense_blur.png'
 import logo from '../img/logo.png'
+import LangSelector from '../containers/langSelector'
 
 const Login = (props) => {
 
@@ -32,6 +33,7 @@ const Login = (props) => {
 
   return (
     <div style={style}>
+    <div style={{position:'absolute', right:'15px', top:'15px' }}><LangSelector></LangSelector></div>
     <div style={{boxShadow: '10px 10px 111px 6px rgba(0,0,0,0.75)', maxWidth:'300px', margin: 'auto'}}>
     <CenterPanel  maxWidth='300px' >
     <div style={{textAlign:'center', borderBottom:'1px solid #ccc', marginBottom:'10px'}}>

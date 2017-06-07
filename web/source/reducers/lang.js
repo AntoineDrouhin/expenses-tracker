@@ -1,10 +1,8 @@
 import { SET_LANG } from '../actions/lang_actions.js'
-const lang = (state = {}, action) => {
+const lang = (state = 'fr', action) => {
   switch (action.type) {
   case SET_LANG:
-    return {
-      lang: action.lang
-    }
+    return action.lang
 
   default:
     return state
