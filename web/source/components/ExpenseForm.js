@@ -31,47 +31,51 @@ const ExpenseForm = (props) => {
         <Form inline>
 
           <Col md={3}>
-            <ControlLabel htmlFor="get-amount">{translate(props.lang, 'AMOUNT')} :</ControlLabel>
+            <ControlLabel htmlFor="get-amount">{translate(props.lang, 'AMOUNT')}</ControlLabel><br/>
             <FormControl
               id="get-amount"
               inputRef={ (ref) => amountInput = ref }
-              type="number" />
+              type="number"
+            />
           </Col>
 
           <Col md={3}>
-            <ControlLabel htmlFor="get-date">{translate(props.lang, 'DATE')} :</ControlLabel>
+            <ControlLabel htmlFor="get-date">{translate(props.lang, 'DATE')}</ControlLabel><br/>
             <FormControl id="get-date" type="date"
               inputRef={ (ref) => dateInput = ref }
-              defaultValue={defaultDateValue} />
+              defaultValue={defaultDateValue}
+              style={{width:'100%'}}
+               />
           </Col>
 
           <Col md={3}>
-            <Col md={12}>
-              <ControlLabel htmlFor="get-type">{translate(props.lang, 'TYPE')} :</ControlLabel>
-            </Col>
-            <Col md={12}>
+
+              <ControlLabel htmlFor="get-type">{translate(props.lang, 'TYPE')}</ControlLabel><br/>
+
             <FormControl componentClass="select"
               inputRef={ (ref) => typeInput = ref } >
               {props.expensesTypes.items.map(expenseType =>
                 <option key={expenseType.id} value={expenseType.label}>{expenseType.label}</option>
               )}
             </FormControl>
-            </Col>
-          </Col>
 
-          <Col md={3}>
+          </Col>
+          <br/>
+          <Col md={12} style={{display:'inline-block', textAlign: 'right'}}>
               <Button bsStyle="primary" type="submit">
                 {translate(props.lang, 'VALIDATE')}
               </Button>
+              <Button bsStyle="primary" style={{marginLeft: '5px'}} onClick={e => {
+                e.preventDefault()
+                props.onValidateModal(true)
+              }}>Update expense type</Button>
           </Col>
+
 
         </Form>
       </form>
 
-      <button onClick={e => {
-        e.preventDefault()
-        props.onValidateModal(true)
-      }}>Update expense type</button>
+
 
       <Modal show={props.displayOption.displayModal} onHide={close} >
                 <Modal.Header closeButton>
@@ -90,7 +94,7 @@ const ExpenseForm = (props) => {
                     </Col>
                        <Col md={3}>
                            <Button bsStyle="primary" type="submit">
-                             Validate
+                             {translate(props.lang, 'VALIDATE')}
                            </Button>
                        </Col>
                   </Form>
