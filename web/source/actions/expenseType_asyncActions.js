@@ -20,7 +20,8 @@ export const postExpenseType = (label) => {
 export const fetchExpenseTypes = () => {
   return function(dispatch) {
     return fetch(`${process.env.SERVER_ADDRESS}/expenseType`, {
-      credentials: 'include'
+      credentials: 'include',
+      headers: new Headers({'Content-Type': 'application/json'})
     })
             .then(response => response.json() )
             .then(json => dispatch(setExpensesType(json)))
