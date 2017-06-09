@@ -7,7 +7,7 @@ import translate from '../lang/language.js'
 
 const ExpenseForm = (props) => {
 
-  if( ! props.expensesTypes.isInit){
+  if( ! props.expenseTypes.isInit){
     props.syncExpenseTypes()
   }
 
@@ -54,7 +54,7 @@ const ExpenseForm = (props) => {
 
             <FormControl componentClass="select"
               inputRef={ (ref) => typeInput = ref } >
-              {props.expensesTypes.items.map(expenseType =>
+              {props.expenseTypes.items.map(expenseType =>
                 <option key={expenseType.id} value={expenseType.label}>{expenseType.label}</option>
               )}
             </FormControl>
@@ -99,7 +99,7 @@ const ExpenseForm = (props) => {
                        </Col>
                   </Form>
 
-                  {props.expensesTypes.items.map(expenseType =>
+                  {props.expenseTypes.items.map(expenseType =>
                     <div id = {expenseType.id} >
                       {expenseType.label}
                     </div>
@@ -121,7 +121,7 @@ const ExpenseForm = (props) => {
 }
 
 ExpenseForm.propTypes = {
-  expensesTypes : PropTypes.shape({
+  expenseTypes : PropTypes.shape({
     items : PropTypes.arrayOf(PropTypes.shape({
       id : PropTypes.number.isRequired,
       label : PropTypes.string.isRequired

@@ -12,12 +12,12 @@ const expenseType = (state = {}, action) => {
   }
 }
 
-const expensesTypes = (state = {}, action) => {
+const expenseTypes = (state = {}, action) => {
   switch (action.type) {
   case 'ADD_EXPENSETYPE':
     return {
       inInit : state.isInit,
-      item :[
+      items :[
         ...state.items,
         expenseType(undefined, action)]
     }
@@ -39,4 +39,4 @@ const expensesTypes = (state = {}, action) => {
   }
 }
 
-export default expensesTypes
+export default expenseTypes

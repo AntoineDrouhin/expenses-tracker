@@ -12,17 +12,9 @@ router.route('/')
     UserTokenModel.find({ userId : req.session.passport.user }).remove().exec(
       function (err) {
         if (err) { logger.error(err); res.sendStatus(500) }
+        res.sendStatus(200)
       }
     )
-
-    res.sendStatus(200)
-
-    // , function (err) {
-    //   if (err) { logger.error(err); res.sendStatus(500) }
-    //   // ExpenseModel.find({}).remove().exec(err => if (err) { logger.error(err); res.sendStatus(500)})
-    //   logger.info('DISCONNECTION [USER : ' + req.session.passport.user+']')
-    //   res.status(200)
-    // })
   }
 )
 
