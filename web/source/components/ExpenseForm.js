@@ -22,7 +22,7 @@ const ExpenseForm = (props) => {
 
   return (
     <CenterPanel>
-      <h4>{translate(props.lang, 'ADD_EXPENSE')}</h4>
+      <h4 className="main-section">{translate(props.lang, 'ADD_EXPENSE')}</h4>
       <form onSubmit={e => {
         e.preventDefault()
         props.onValidate(parseInt(amountInput.value), typeInput.value, new Date(dateInput.value))

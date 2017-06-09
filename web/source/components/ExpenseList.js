@@ -15,8 +15,9 @@ const ExpenseList = (props) => {
 
   return (
     <CenterPanel >
+    <h4 className="main-section"> {translate(props.lang, 'MY_EXPENSE')}</h4>
       <Col mdOffset={1} md={10}>
-        <h4>{translate(props.lang, 'MY_EXPENSE')}</h4>
+
         <Table style={{marginLeft: 'auto', marginRight: 'auto'}} responsive >
           <tbody >
             {props.expenses.expenseList.map(expense =>
