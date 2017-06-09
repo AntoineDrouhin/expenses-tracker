@@ -24,11 +24,11 @@ export const removeExpense = (_id) => {
       credentials: 'include',
       headers: new Headers({'Content-Type': 'application/json'})
     })
-            .then(response => {
-              if (response.ok) {
-                dispatch(deleteExpense(_id))
-              }
-            })
+      .then(response => {
+        if (response.ok) {
+          dispatch(deleteExpense(_id))
+        }
+      })
   }
 }
 
@@ -38,7 +38,7 @@ export const fetchExpenses = () => {
       credentials: 'include',
       headers: new Headers({'Content-Type': 'application/json'})
     })
-            .then(response => response.json() )
-            .then(json => dispatch(setExpenses(json)))
+      .then(response => response.json() )
+      .then(json => dispatch(setExpenses(json)))
   }
 }

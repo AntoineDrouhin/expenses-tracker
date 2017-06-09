@@ -5,7 +5,7 @@
 
 ```
 npm install
-npm start
+npm run start
 ```
 
 Do not forget to autorise the auto enrolated development certificate from the API.
