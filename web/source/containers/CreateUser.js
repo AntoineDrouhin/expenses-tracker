@@ -6,6 +6,8 @@ import { postUser } from '../actions/user_asyncActions'
 import { browserHistory } from 'react-router'
 import BG from '../img/expense_blur.png'
 import logo from '../img/logo.png'
+import LangSelector from '../containers/langSelector'
+import translate from '../lang/language.js'
 
 import { userCreationError } from '../actions/user_actions'
 
@@ -33,6 +35,7 @@ const CreateUser = (props) => {
   }
   return (
     <div style={style}>
+    <div style={{position:'absolute', right:'15px', top:'15px' }}><LangSelector></LangSelector></div>
     <div style={{boxShadow: '10px 10px 111px 6px rgba(0,0,0,0.75)', maxWidth:'300px', margin: 'auto'}}>
     <CenterPanel maxWidth='300px'>
     <div style={{textAlign:'center', borderBottom:'1px solid #ccc', marginBottom:'10px'}}>
@@ -50,38 +53,38 @@ const CreateUser = (props) => {
         }
       }}>
       <FormGroup>
-        <ControlLabel>Email address</ControlLabel>
+        <ControlLabel>{translate(props.lang, 'EMAIL_ADDRES')}</ControlLabel>
         <FormControl
           type='email'
           inputRef={ (ref) => emailInput = ref }
-          placeholder='my_address@domain.com'
+          placeholder={translate(props.lang, 'EMAIL_ADDRES_DISP')}
         />
       </FormGroup>
       <FormGroup>
-        <ControlLabel>Password</ControlLabel>
+        <ControlLabel>{translate(props.lang, 'PASSWORD')}</ControlLabel>
         <FormControl
           type='password'
           inputRef={ (ref) => passwordInput = ref }
-          placeholder='easyAs123'
+          placeholder='*********'
         />
       </FormGroup >
       <FormGroup>
-        <ControlLabel>Confirm Password</ControlLabel>
+        <ControlLabel>{translate(props.lang, 'CONFIRM_PASSWORD')}</ControlLabel>
         <FormControl
           type='password'
           inputRef={ (ref) => passwordConfirm = ref }
-          placeholder='easyAs123'
+          placeholder='*********'
         />
       </FormGroup >
       <div style={{'textAlign': 'right' }}>
         <Button type="submit" bsStyle="primary">
-          Submit
+          {translate(props.lang, 'SIGN_UP')}
         </Button>
       </div>
       </form>
       {props.createUserOptions.error &&
         <Alert bsStyle="danger" >
-          <h4>{'Error'}</h4>
+          <h4>{translate(props.lang, 'CHECK_INFO')}</h4>
           <p>{props.createUserOptions.errorMsg}</p>
         </Alert>
       }
@@ -103,7 +106,8 @@ CreateUser.propTypes = {
     error : PropTypes.bool.isRequired,
     errorMsg : PropTypes.string.isRequire,
     creationSuccess : PropTypes.bool.isRequired
-  })
+  }),
+  lang : PropTypes.string.isRequire,
 }
 
 const mapDispatchToProps = (dispatch) => {

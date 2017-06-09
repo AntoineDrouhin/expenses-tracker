@@ -27,6 +27,10 @@ var trads = {
     'fr' : 'Mot de passe',
     'en' : 'Password'
   },
+  'CONFIRM_PASSWORD': {
+    'fr' : 'Confirmer mot de passe',
+    'en' : 'Confirm password'
+  },
   'SIGN_UP': {
     'fr' : 'S\'inscrire',
     'en' : 'Sign up'
@@ -82,6 +86,10 @@ var trads = {
   'CLOSE': {
     'fr' : 'Fermer',
     'en' : 'Close'
+  },
+  'CHECK_INFO': {
+    'fr' : 'Veuillez vérifier vos informations',
+    'en' : 'Please check your information'
   }
 
 }
