@@ -5,6 +5,7 @@ import CenterPanel from '../components/CenterPanel'
 import { postUser } from '../actions/user_asyncActions'
 import { browserHistory } from 'react-router'
 import BG from '../img/expense_blur.png'
+import logo from '../img/logo.png'
 
 import { userCreationError } from '../actions/user_actions'
 
@@ -27,13 +28,19 @@ const CreateUser = (props) => {
   let style = {
     background: 'url('+BG+')',
     backgroundSize: 'cover',
-    padding: '15%',
+    padding: '10%',
     height: w.innerHeight|| documentElement.clientHeight|| body.clientHeight
   }
   return (
     <div style={style}>
     <div style={{boxShadow: '10px 10px 111px 6px rgba(0,0,0,0.75)', maxWidth:'300px', margin: 'auto'}}>
     <CenterPanel maxWidth='300px'>
+    <div style={{textAlign:'center', borderBottom:'1px solid #ccc', marginBottom:'10px'}}>
+      <div style={{marginTop:'4px', fontSize:'18px'}}>
+        <img style={{height:'60px',width:'60px'}} src={logo}/>
+      </div>
+      <h4>Expense Tracker</h4>
+      </div>
       <form onSubmit={e => {
         e.preventDefault() // prevent page refresh after submit
         if (passwordInput.value != null && passwordConfirm.value == passwordInput.value) {
