@@ -16,7 +16,7 @@ const TopBar = (props) => {
     </Navbar.Header>
       <Nav pullRight>
         <div style={{marginTop:'8px'}}>
-        <Button onClick={props.onDisconnect} bsStyle='danger'>{translate(props.lang, 'DISCONNECT')}</Button>
+        <Button onClick={props.onDisconnect} bsStyle='danger' style={{marginRight:'5px'}}>{translate(props.lang, 'DISCONNECT')}</Button>
         <LangSelector></LangSelector>
         </div>
       </Nav>

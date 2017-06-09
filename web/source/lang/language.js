@@ -70,6 +70,18 @@ var trads = {
   'TOTAL_EXPENSE': {
     'fr' : 'Total des dépenses',
     'en' : 'Total expenses'
+  },
+  'ADD_EXPENSE_TYPE' : {
+    'fr' : 'Ajouter un type de dépenses',
+    'en' : 'Add an expense type'
+  },
+  'NEW_EXPENSE_TYPE': {
+    'fr' : 'Nouvau type',
+    'en' : 'New type'
+  },
+  'CLOSE': {
+    'fr' : 'Fermer',
+    'en' : 'Close'
   }
 
 }

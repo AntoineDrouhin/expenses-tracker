@@ -68,7 +68,7 @@ const ExpenseForm = (props) => {
               <Button bsStyle="primary" style={{marginLeft: '5px'}} onClick={e => {
                 e.preventDefault()
                 props.onValidateModal(true)
-              }}>Update expense type</Button>
+              }}>{translate(props.lang, 'NEW_EXPENSE_TYPE')}</Button>
           </Col>
 
 
@@ -79,7 +79,7 @@ const ExpenseForm = (props) => {
 
       <Modal show={props.displayOption.displayModal} onHide={close} >
                 <Modal.Header closeButton>
-                  <Modal.Title>Expense type management</Modal.Title>
+                  <Modal.Title>{translate(props.lang, 'ADD_EXPENSE_TYPE')}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body style={{minheight: '150px'}}>
                 <form onSubmit={e => {
@@ -111,7 +111,7 @@ const ExpenseForm = (props) => {
                   <Button onClick={e => {
                     e.preventDefault()
                     props.onValidateModal(false)
-                  }}> Close</Button>
+                  }}>{translate(props.lang, 'CLOSE')}</Button>
                 </Modal.Footer>
               </Modal>
 
