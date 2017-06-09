@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 
 import CenterPanel from '../components/CenterPanel'
 import { FormControl, Form, ControlLabel, Button,
-  Col, Panel,Modal} from 'react-bootstrap'
+  Col, Modal} from 'react-bootstrap'
 
 const ExpenseForm = (props) => {
 

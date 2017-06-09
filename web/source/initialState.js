@@ -1,5 +1,4 @@
 
-
 const initialState = {
   expenses : {
     expenseList : [],
@@ -10,8 +9,13 @@ const initialState = {
     isInit : false
   },
   user : {_id: '',email: '', password: '', connected: false, error: false},
-  displayOptions : {
-    displayModal : false
+  displayOption : {
+    displayModal : false,
+    createUser : {
+      error : false,
+      errorMsg : '',
+      creationSuccess : false
+    }
   },
   lang : 'fr'
 }

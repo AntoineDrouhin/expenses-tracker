@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import { connect } from 'react-redux'
 import {Alert, FormGroup , ControlLabel, FormControl, Button, Row, Col } from 'react-bootstrap'
 import CenterPanel from '../components/CenterPanel'
@@ -8,10 +8,9 @@ import translate from '../lang/language.js'
 import BG from '../img/expense_blur.png'
 import logo from '../img/logo.png'
 import LangSelector from '../containers/langSelector'
+import redirectAfterLoginSuccess from '../actions/user_actions'
 
 const Login = (props) => {
-
-
 
   if( props.user && props.user.connected ){
     browserHistory.push('/')
@@ -91,16 +90,31 @@ const Login = (props) => {
   )
 }
 
+Login.propTypes = {
+  onValidate : PropTypes.func.isRequired,
+  redirectAfterLoginSuccess : PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    connected : PropTypes.bool.isRequired,
+    error :  PropTypes.bool.isRequired
+  }),
+  lang: PropTypes.string.isRequired,
+  redirectFromUserCreation: PropTypes.bool.isRequired
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
     onValidate: (email, password) => {
       dispatch(login(email, password))
+    },
+    redirectAfterLoginSuccess: () => {
+      dispatch(redirectAfterLoginSuccess())
     }
   }
 }
 
 const mapStateToProps = (state) => {
-  return { user: state.user, lang : state.lang }
+  return { user: state.user, lang : state.lang, redirectFromUserCreation : state.displayOption.createUser.creationSuccess  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)
