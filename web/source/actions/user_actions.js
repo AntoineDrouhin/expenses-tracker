@@ -9,3 +9,23 @@ export const setUser = (user) => {
     error: user.error
   }
 }
+
+export const USER_CREATION_ERROR = 'USER_CREATION_ERROR'
+export const userCreationError = (errorMsg) => {
+  return {
+    type : USER_CREATION_ERROR,
+    errorMsg
+  }
+}
+
+export const USER_CREATION_SUCCESS = 'USER_CREATION_SUCCESS'
+export const userCreationSuccess = () => {
+  return {
+    type : USER_CREATION_SUCCESS
+  }
+}
+
+export const REDIRECT_AFTER_LOGIN_SUCCESS = 'REDIRECT_AFTER_LOGIN_SUCCESS'
+export const redirectAfterLoginSuccess = () => {
+  return { type : REDIRECT_AFTER_LOGIN_SUCCESS }
+}

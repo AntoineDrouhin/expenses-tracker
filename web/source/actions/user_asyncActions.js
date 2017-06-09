@@ -1,8 +1,8 @@
-import { setUser } from './user_actions.js'
+import { setUser, userCreationError, userCreationSuccess } from './user_actions.js'
 import { resetState } from './state_actions.js'
 
 export const postUser = (email, password) => {
-  return (/*dispatch*/) => {
+  return (dispatch) => {
     fetch(`${process.env.SERVER_ADDRESS}/user`, {
       method: 'POST',
       credentials: 'include',
@@ -10,9 +10,15 @@ export const postUser = (email, password) => {
       body: JSON.stringify({email, password})
     })
       .then(response => response.json())
-      //TODO REDIRECT OR DISPLAY MESSAGE
-      // .then(json => if (json.success) { GO TO LOGIN}
-            // else { DISPLAY ERROR MESSAGE json.error })
+      .then(json => {
+        if ( json.error ) {
+          dispatch(userCreationError(json.errorMsg))
+        }
+        else {
+          dispatch(userCreationSuccess())
+        }
+      })
+
   }
 }
 
