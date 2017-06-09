@@ -14,15 +14,10 @@ export let App = (props) => {
   ){
     props.bHistory.push('/login')
   }
-  var w = window,
-    d = document,
-    documentElement = d.documentElement,
-    body = d.getElementsByTagName('body')[0]
-
 
   return (
     <div>
-      <TopBar onDisconnect={props.onDisconnect}/>
+      <TopBar onDisconnect={props.onDisconnect} lang={props.lang}/>
       <AddExpense />
       <MonthlyExpenseList />
     </div>
@@ -42,6 +37,7 @@ const mapStateToProps = (state) => {
   const props = {}
   props.user = state.user || {_id: '',email: '', password: '', connected: false, error: false}
   props.bHistory = browserHistory
+  props.lang = state.lang
   return props
 }
 
@@ -52,7 +48,8 @@ App.propTypes = {
     connected : PropTypes.bool.isRequired,
     error :  PropTypes.bool.isRequired
   }),
-  onDisconnect: PropTypes.func.isRequired
+  onDisconnect: PropTypes.func.isRequired,
+  lang : PropTypes.string.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

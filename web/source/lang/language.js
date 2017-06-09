@@ -38,7 +38,40 @@ var trads = {
   'CHECK_INFO_CONNECTION' : {
     'fr' : 'Veuillez vérifier vos informations de connexions s\'il vous plait',
     'en' : 'Plese check your connection information'
+  },
+  'DISCONNECT' : {
+    'fr' : 'Se déconnecter',
+    'en' : 'Log out'
+  },
+  'ADD_EXPENSE': {
+    'fr' : 'Ajouter une dépense',
+    'en' : 'Add an expense'
+  },
+  'AMOUNT': {
+    'fr' : 'Montant',
+    'en' : 'Amouunt'
+  },
+  'DATE': {
+    'fr' : 'Date',
+    'en' : 'Date'
+  },
+  'TYPE': {
+    'fr' : 'Type',
+    'en' : 'Type'
+  },
+  'VALIDATE': {
+    'fr' : 'Valider',
+    'en' : 'Validate'
+  },
+  'MY_EXPENSE': {
+    'fr' : 'Mes dépenses',
+    'en' : 'My expenses'
+  },
+  'TOTAL_EXPENSE': {
+    'fr' : 'Total des dépenses',
+    'en' : 'Total expenses'
   }
+
 }
 
 const translate = (lang, id) => {

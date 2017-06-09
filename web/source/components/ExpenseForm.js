@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import CenterPanel from '../components/CenterPanel'
 import { FormControl, Form, ControlLabel, Button, Col} from 'react-bootstrap'
+import translate from '../lang/language.js'
 
 const ExpenseForm = (props) => {
 
@@ -11,7 +12,7 @@ const ExpenseForm = (props) => {
 
   return (
     <CenterPanel>
-      <h4>Add an expense</h4>
+      <h4>{translate(props.lang, 'ADD_EXPENSE')}</h4>
       <form onSubmit={e => {
         e.preventDefault()
         props.onValidate(parseInt(amountInput.value), typeInput.value, new Date(dateInput.value))
@@ -20,7 +21,7 @@ const ExpenseForm = (props) => {
         <Form inline>
 
           <Col md={3}>
-            <ControlLabel htmlFor="get-amount">Amount :</ControlLabel>
+            <ControlLabel htmlFor="get-amount">{translate(props.lang, 'AMOUNT')} :</ControlLabel>
             <FormControl
               id="get-amount"
               inputRef={ (ref) => amountInput = ref }
@@ -28,7 +29,7 @@ const ExpenseForm = (props) => {
           </Col>
 
           <Col md={3}>
-            <ControlLabel htmlFor="get-date">Date :</ControlLabel>
+            <ControlLabel htmlFor="get-date">{translate(props.lang, 'DATE')} :</ControlLabel>
             <FormControl id="get-date" type="date"
               inputRef={ (ref) => dateInput = ref }
               defaultValue={defaultDateValue} />
@@ -36,7 +37,7 @@ const ExpenseForm = (props) => {
 
           <Col md={3}>
             <Col md={12}>
-              <ControlLabel htmlFor="get-type">Type :</ControlLabel>
+              <ControlLabel htmlFor="get-type">{translate(props.lang, 'TYPE')} :</ControlLabel>
             </Col>
             <Col md={12}>
             <FormControl componentClass="select"
@@ -50,7 +51,7 @@ const ExpenseForm = (props) => {
 
           <Col md={3}>
               <Button bsStyle="primary" type="submit">
-                Validate
+                {translate(props.lang, 'VALIDATE')}
               </Button>
           </Col>
 
@@ -65,7 +66,8 @@ ExpenseForm.propTypes = {
     id: PropTypes.number.isRequired,
     label: PropTypes.string.isRequired
   }).isRequired).isRequired,
-  onValidate : PropTypes.func.isRequired
+  onValidate : PropTypes.func.isRequired,
+  lang :PropTypes.string.isRequired
 }
 
 export default ExpenseForm

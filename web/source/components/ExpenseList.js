@@ -3,6 +3,7 @@ import ExpenseItem from './ExpenseItem'
 import { Table, Col } from 'react-bootstrap'
 import CenterPanel from './CenterPanel'
 import TotalExpense from './TotalExpense'
+import translate from '../lang/language.js'
 
 const ExpenseList = (props) => {
 
@@ -15,7 +16,7 @@ const ExpenseList = (props) => {
   return (
     <CenterPanel >
       <Col mdOffset={1} md={10}>
-        <h4>My expenses</h4>
+        <h4>{translate(props.lang, 'MY_EXPENSE')}</h4>
         <Table style={{marginLeft: 'auto', marginRight: 'auto'}} responsive >
           <tbody >
             {props.expenses.expenseList.map(expense =>
@@ -28,7 +29,7 @@ const ExpenseList = (props) => {
         </Table >
       </Col>
 
-      <TotalExpense totalAmount={totalAmount}/>
+      <TotalExpense totalAmount={totalAmount} lang={props.lang} />
 
     </CenterPanel>
   )
@@ -45,7 +46,8 @@ ExpenseList.propTypes = {
     isInit : PropTypes.bool.isRequired
   }),
   onDeleteClick: PropTypes.func.isRequired,
-  syncExpenses: PropTypes.func.isRequired
+  syncExpenses: PropTypes.func.isRequired,
+  lang : PropTypes.string.isRequired
 }
 
 export default ExpenseList

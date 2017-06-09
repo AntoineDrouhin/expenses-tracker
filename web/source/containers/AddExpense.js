@@ -8,7 +8,8 @@ const getExpensesTypes = (expensesTypes) => {
 
 const mapStateToProps = (state) => {
   return {
-    expensesTypes: getExpensesTypes(state.expensesTypes)
+    expensesTypes: getExpensesTypes(state.expensesTypes),
+    lang : state.lang
   }
 }
 

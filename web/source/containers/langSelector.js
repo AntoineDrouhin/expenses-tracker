@@ -31,8 +31,8 @@ const LangSelector = (props) => {
 
   return (
     <DropdownButton title={getImageFlag()} id="bg-nested-dropdown" pullRight={true}>
-      <MenuItem onClick={()=>props.onChange('fr')} eventKey="fr"><img style={style} src={flag_fr}/> {translate(props.lang, "FR")}</MenuItem>
-      <MenuItem onClick={()=>props.onChange('en')} eventKey="en"><img style={style} src={flag_en}/> {translate(props.lang, "EN")}</MenuItem>
+      <MenuItem onClick={()=>props.onChange('fr')} eventKey="fr"><img style={style} src={flag_fr}/> {translate(props.lang, 'FR')}</MenuItem>
+      <MenuItem onClick={()=>props.onChange('en')} eventKey="en"><img style={style} src={flag_en}/> {translate(props.lang, 'EN')}</MenuItem>
     </DropdownButton>
   )
 }

@@ -14,7 +14,7 @@ const getExpenseList = (expenses) => {
       { date : new Date(expense.date).toISOString().substring(0,10) }
     )
   })
-  
+
   return {
     expenseList: expList,
     isInit : expenses.isInit
@@ -23,7 +23,8 @@ const getExpenseList = (expenses) => {
 
 const mapStateToProps = (state) => {
   return {
-    expenses: getExpenseList(state.expenses)
+    expenses: getExpenseList(state.expenses),
+    lang: state.lang
   }
 }
 

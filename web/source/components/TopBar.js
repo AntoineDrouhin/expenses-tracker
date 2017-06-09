@@ -3,6 +3,7 @@ import React, { PropTypes } from 'react'
 import { Navbar, Button, Nav } from 'react-bootstrap'
 import BG from '../img/logo.png'
 import LangSelector from '../containers/langSelector'
+import translate from '../lang/language.js'
 
 const TopBar = (props) => {
 
@@ -15,7 +16,7 @@ const TopBar = (props) => {
     </Navbar.Header>
       <Nav pullRight>
         <div style={{marginTop:'8px'}}>
-        <Button onClick={props.onDisconnect} bsStyle='danger'>Disconnect</Button>
+        <Button onClick={props.onDisconnect} bsStyle='danger'>{translate(props.lang, 'DISCONNECT')}</Button>
         <LangSelector></LangSelector>
         </div>
       </Nav>
@@ -24,7 +25,8 @@ const TopBar = (props) => {
 }
 
 TopBar.propTypes = {
-  onDisconnect : PropTypes.func.isRequired
+  onDisconnect : PropTypes.func.isRequired,
+  lang : PropTypes.string
 }
 
 export default TopBar
