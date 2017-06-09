@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react'
 
 import CenterPanel from '../components/CenterPanel'
-import { FormControl, Form, ControlLabel, Button,
-  Col, Modal} from 'react-bootstrap'
+import { FormControl, Form, ControlLabel, Button, Col ,Modal} from 'react-bootstrap'
+import translate from '../lang/language.js'
+
 
 const ExpenseForm = (props) => {
 
@@ -21,7 +22,7 @@ const ExpenseForm = (props) => {
 
   return (
     <CenterPanel>
-      <h4>Add an expense</h4>
+      <h4 className="main-section">{translate(props.lang, 'ADD_EXPENSE')}</h4>
       <form onSubmit={e => {
         e.preventDefault()
         props.onValidate(parseInt(amountInput.value), typeInput.value, new Date(dateInput.value))
@@ -30,51 +31,55 @@ const ExpenseForm = (props) => {
         <Form inline>
 
           <Col md={3}>
-            <ControlLabel htmlFor="get-amount">Amount :</ControlLabel>
+            <ControlLabel htmlFor="get-amount">{translate(props.lang, 'AMOUNT')}</ControlLabel><br/>
             <FormControl
               id="get-amount"
               inputRef={ (ref) => amountInput = ref }
-              type="number" />
+              type="number"
+            />
           </Col>
 
           <Col md={3}>
-            <ControlLabel htmlFor="get-date">Date :</ControlLabel>
+            <ControlLabel htmlFor="get-date">{translate(props.lang, 'DATE')}</ControlLabel><br/>
             <FormControl id="get-date" type="date"
               inputRef={ (ref) => dateInput = ref }
-              defaultValue={defaultDateValue} />
+              defaultValue={defaultDateValue}
+              style={{width:'100%'}}
+               />
           </Col>
 
           <Col md={3}>
-            <Col md={12}>
-              <ControlLabel htmlFor="get-type">Type :</ControlLabel>
-            </Col>
-            <Col md={12}>
+
+              <ControlLabel htmlFor="get-type">{translate(props.lang, 'TYPE')}</ControlLabel><br/>
+
             <FormControl componentClass="select"
               inputRef={ (ref) => typeInput = ref } >
               {props.expenseTypes.items.map(expenseType =>
                 <option key={expenseType.id} value={expenseType.label}>{expenseType.label}</option>
               )}
             </FormControl>
-            </Col>
+
+          </Col>
+          <br/>
+          <Col md={12} style={{display:'inline-block', textAlign: 'right'}}>
+              <Button bsStyle="primary" type="submit">
+                {translate(props.lang, 'VALIDATE')}
+              </Button>
+              <Button bsStyle="primary" style={{marginLeft: '5px'}} onClick={e => {
+                e.preventDefault()
+                props.onValidateModal(true)
+              }}>{translate(props.lang, 'NEW_EXPENSE_TYPE')}</Button>
           </Col>
 
-          <Col md={3}>
-              <Button bsStyle="primary" type="submit">
-                Validate
-              </Button>
-          </Col>
 
         </Form>
       </form>
 
-      <button onClick={e => {
-        e.preventDefault()
-        props.onValidateModal(true)
-      }}>Update expense type</button>
+
 
       <Modal show={props.displayOption.displayModal} onHide={close} >
                 <Modal.Header closeButton>
-                  <Modal.Title>Expense type management</Modal.Title>
+                  <Modal.Title>{translate(props.lang, 'ADD_EXPENSE_TYPE')}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body style={{minheight: '150px'}}>
                 <form onSubmit={e => {
@@ -89,7 +94,7 @@ const ExpenseForm = (props) => {
                     </Col>
                        <Col md={3}>
                            <Button bsStyle="primary" type="submit">
-                             Validate
+                             {translate(props.lang, 'VALIDATE')}
                            </Button>
                        </Col>
                   </Form>
@@ -106,7 +111,7 @@ const ExpenseForm = (props) => {
                   <Button onClick={e => {
                     e.preventDefault()
                     props.onValidateModal(false)
-                  }}> Close</Button>
+                  }}>{translate(props.lang, 'CLOSE')}</Button>
                 </Modal.Footer>
               </Modal>
 
@@ -128,7 +133,8 @@ ExpenseForm.propTypes = {
   onValidateModal : PropTypes.func.isRequired,
   displayOption : PropTypes.shape({
     displayModal : PropTypes.bool.isRequired
-  })
+  }),
+  lang :PropTypes.string.isRequired
 }
 
 export default ExpenseForm

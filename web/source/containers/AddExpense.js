@@ -9,7 +9,8 @@ import { fetchExpenseTypes } from '../actions/expenseType_asyncActions.js'
 const mapStateToProps = (state) => {
   return {
     expenseTypes: state.expenseTypes,
-    displayOption : state.displayOption
+    displayOption : state.displayOption,
+    lang : state.lang
   }
 }
 

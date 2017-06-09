@@ -62,7 +62,7 @@ const Login = (props) => {
       </FormGroup >
       <Row>
         <Col md={6}>
-          <Button onClick={() => browserHistory.push('/signUp')}>
+          <Button bsStyle='danger'  onClick={() => browserHistory.push('/signUp')}>
             {translate(props.lang, 'SIGN_UP')}
           </Button>
         </Col>
@@ -101,6 +101,7 @@ Login.propTypes = {
   lang: PropTypes.string.isRequired,
   redirectFromUserCreation: PropTypes.bool.isRequired
 }
+
 
 const mapDispatchToProps = (dispatch) => {
   return {
