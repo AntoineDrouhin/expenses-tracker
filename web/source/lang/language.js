@@ -53,7 +53,7 @@ var trads = {
   },
   'AMOUNT': {
     'fr' : 'Montant',
-    'en' : 'Amouunt'
+    'en' : 'Amount'
   },
   'DATE': {
     'fr' : 'Date',
