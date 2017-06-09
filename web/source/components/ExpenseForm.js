@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react'
+
+import CenterPanel from '../components/CenterPanel'
 import { FormControl, Form, ControlLabel, Button,
-  Col, Panel,Modal} from 'react-bootstrap'
+  Col, Modal} from 'react-bootstrap'
 
 const ExpenseForm = (props) => {
 
@@ -18,7 +20,7 @@ const ExpenseForm = (props) => {
   }
 
   return (
-    <Panel>
+    <CenterPanel>
       <h4>Add an expense</h4>
       <form onSubmit={e => {
         e.preventDefault()
@@ -108,7 +110,8 @@ const ExpenseForm = (props) => {
                 </Modal.Footer>
               </Modal>
 
-    </Panel>
+    </CenterPanel>
+
   )
 }
 

@@ -1,0 +1,39 @@
+.panel-default {
+    background: #F5F5F5;
+}
+
+.panel {
+    box-shadow: none;
+    border: none;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #2DD0E9;
+    border-color: #2DD0E9;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #53DF83;
+    border-color: #53DF83;
+}
+
+
+.label-info {
+    background-color: #3F3F3F;
+}
+
+.navbar-default {
+   background : #3F3F3F;
+}
+
+@media (min-width: 768px) {
+.navbar {
+    border-radius: none;
+}
+}
+
+.navbar {
+    border: none;
+}

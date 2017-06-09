@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react'
 import AddExpense from './AddExpense'
 import MonthlyExpenseList from './MonthlyExpenseList'
-import CenterPanel from '../components/CenterPanel'
 import TopBar from '../components/TopBar'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
@@ -15,13 +14,18 @@ export let App = (props) => {
   ){
     props.bHistory.push('/login')
   }
+  var w = window,
+    d = document,
+    documentElement = d.documentElement,
+    body = d.getElementsByTagName('body')[0]
+
 
   return (
-    <CenterPanel >
+    <div>
       <TopBar onDisconnect={props.onDisconnect}/>
       <AddExpense />
       <MonthlyExpenseList />
-    </CenterPanel>
+    </div>
   )
 }
 

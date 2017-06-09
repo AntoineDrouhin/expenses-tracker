@@ -5,7 +5,7 @@ import expenseTypes from './expenseTypes'
 import user from './user'
 
 import displayOption from './displayOption'
-import global_state from './global_state'
+import lang from './lang'
 import initialState from '../initialState'
 
 const rootReducer = function(state, action) {
@@ -19,8 +19,8 @@ const appReducer = combineReducers({
   expenses,
   expenseTypes,
   user,
-  displayOption,
-  global_state
+  lang,
+  displayOption
 })
 
 export default rootReducer
