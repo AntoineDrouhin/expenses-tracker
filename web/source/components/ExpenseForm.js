@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 
 import CenterPanel from '../components/CenterPanel'
-import { FormControl, Form, ControlLabel, Button, Col ,Modal} from 'react-bootstrap'
+import { FormGroup, FormControl, Form, ControlLabel, Button, Col ,Modal} from 'react-bootstrap'
 import translate from '../lang/language.js'
 
 
@@ -12,7 +12,7 @@ const ExpenseForm = (props) => {
   }
 
   let amountInput = null, typeInput = null, dateInput = null, addExpenseTypeInput = null
-
+  let amountValState = 'null'
   // Actual date :  dd/mm/yyyy
   let defaultDateValue = (new Date()).toISOString().substring(0,10)
 
@@ -25,18 +25,25 @@ const ExpenseForm = (props) => {
       <h4 className="main-section">{translate(props.lang, 'ADD_EXPENSE')}</h4>
       <form onSubmit={e => {
         e.preventDefault()
-        props.onValidate(parseInt(amountInput.value), typeInput.value, new Date(dateInput.value))
+        if(amountInput.value != '' && !isNaN(amountInput.value)) {
+          amountValState = null
+          props.onValidate(parseInt(amountInput.value), typeInput.value, new Date(dateInput.value))
+        }
+        else {
+          amountValState = 'error'
+        }
       }}>
-
         <Form inline>
 
           <Col md={3}>
+          <FormGroup validationState={amountValState}>
             <ControlLabel htmlFor="get-amount">{translate(props.lang, 'AMOUNT')}</ControlLabel><br/>
             <FormControl
               id="get-amount"
               inputRef={ (ref) => amountInput = ref }
               type="number"
             />
+             </FormGroup>
           </Col>
 
           <Col md={3}>
@@ -132,7 +139,10 @@ ExpenseForm.propTypes = {
   syncExpenseTypes : PropTypes.func.isRequired,
   onValidateModal : PropTypes.func.isRequired,
   displayOption : PropTypes.shape({
-    displayModal : PropTypes.bool.isRequired
+    displayModal : PropTypes.bool.isRequired,
+    expenseForm : PropTypes.shape({
+      amountValSate: PropTypes.string.isRequired
+    })
   }),
   lang :PropTypes.string.isRequired
 }
