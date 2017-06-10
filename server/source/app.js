@@ -6,6 +6,20 @@ const logger = require('config/winston_config')
 const UserModel = require('./model/user.js')
 
 const app = express()
+const mailer = require('express-mailer')
+mailer.extend(app, {
+  from: 'expensetrackerinfo@gmail.com',
+  host: 'smtp.gmail.com', // hostname
+  secureConnection: true, // use SSL
+  port: 465, // port for secure SMTP
+  transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
+  auth: {
+    user: 'expensetrackerinfo@gmail.com',
+    pass: 'exptrack'
+  }
+})
+app.set('views', __dirname + '/mail')
+app.set('view engine', 'jade')
 
 // DataBase Configuration
 const mongoose = require('mongoose')
