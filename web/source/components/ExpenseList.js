@@ -18,7 +18,7 @@ class ExpenseList extends React.Component {
 
   filterList (filter) {
     let filteredExpenseList = this.props.expenses.expenseList
-      .filter(expense => expense.expenseType.indexOf(filter) >= 0)
+      .filter(expense => expense.expenseType.toUpperCase().indexOf(filter.toUpperCase()) >= 0)
     let totalAmount =  filteredExpenseList.reduce((a, b) => a + b.amount, 0)
     this.setState({
       filteredExpenseList,
@@ -48,6 +48,9 @@ class ExpenseList extends React.Component {
     <Navbar style={{'background' : '#E8E8E8'}}>
       <Navbar.Collapse>
       <Navbar.Header>
+        <Navbar.Brand>
+          Filtres
+        </Navbar.Brand>
       </Navbar.Header>
       <Navbar.Form pullLeft>
         <FormGroup>
