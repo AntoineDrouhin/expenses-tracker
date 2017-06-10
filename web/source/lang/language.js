@@ -90,7 +90,15 @@ var trads = {
   'CHECK_INFO': {
     'fr' : 'Veuillez vérifier vos informations',
     'en' : 'Please check your information'
-  }
+  },
+  'EXPENSE_TYPE': {
+    'fr' : 'Type de dépense',
+    'en' : 'Expense Type'
+  },
+  'DELETE': {
+    'fr' : 'Supprimer',
+    'en' : 'Delete'
+  },
 
 }
 
