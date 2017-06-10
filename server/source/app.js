@@ -8,17 +8,6 @@ const UserModel = require('./model/user.js')
 const app = express()
 const mailer = require('express-mailer')
 
-console.log(
-process.envMAIL_ADDRESS,
-process.envMAIL_HOST_NAME,
-process.envMAIL_SECURE_CONNECTION,
-process.envMAIL_PORT,
-process.envMAIL_TRANSPORT_METHOD,
-process.envMAIL_AUTH_USER,
-process.envMAIL_AUTH_PASSWORD
-)
-
-
 mailer.extend(app, {
   from: process.env.MAIL_ADDRESS,
   host: process.env.MAIL_HOST_NAME, // hostname
