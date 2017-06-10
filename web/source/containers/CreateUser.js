@@ -47,7 +47,7 @@ const CreateUser = (props) => {
       <form onSubmit={e => {
         e.preventDefault() // prevent page refresh after submit
         if (passwordInput.value != null && passwordConfirm.value == passwordInput.value) {
-          props.onValidate(emailInput.value, passwordInput.value)
+          props.onValidate(emailInput.value, passwordInput.value, props.lang)
         } else {
           props.onError('Password is different from password confirmation')
         }
@@ -112,8 +112,8 @@ CreateUser.propTypes = {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onValidate: (email, password) => {
-      dispatch(postUser(email, password))
+    onValidate: (email, password, lang) => {
+      dispatch(postUser(email, password, lang))
     },
     onError: (errorMsg) => {
       dispatch(userCreationError(errorMsg))
