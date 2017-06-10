@@ -7,17 +7,30 @@ const UserModel = require('./model/user.js')
 
 const app = express()
 const mailer = require('express-mailer')
+
+console.log(
+process.envMAIL_ADDRESS,
+process.envMAIL_HOST_NAME,
+process.envMAIL_SECURE_CONNECTION,
+process.envMAIL_PORT,
+process.envMAIL_TRANSPORT_METHOD,
+process.envMAIL_AUTH_USER,
+process.envMAIL_AUTH_PASSWORD
+)
+
+
 mailer.extend(app, {
-  from: 'expensetrackerinfo@gmail.com',
-  host: 'smtp.gmail.com', // hostname
-  secureConnection: true, // use SSL
-  port: 465, // port for secure SMTP
-  transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
+  from: process.env.MAIL_ADDRESS,
+  host: process.env.MAIL_HOST_NAME, // hostname
+  secureConnection: (process.env.MAIL_SECURE_CONNECTION === true || process.env.MAIL_SECURE_CONNECTION === 'true'), // use SSL
+  port: process.env.MAIL_PORT, // port for secure SMTP
+  transportMethod: process.env.MAIL_TRANSPORT_METHOD, // default is SMTP. Accepts anything that nodemailer accepts
   auth: {
-    user: 'expensetrackerinfo@gmail.com',
-    pass: 'exptrack'
+    user: process.env.MAIL_AUTH_USER,
+    pass: process.env.MAIL_AUTH_PASSWORD
   }
 })
+
 app.set('views', __dirname + '/mail')
 app.set('view engine', 'jade')
 
