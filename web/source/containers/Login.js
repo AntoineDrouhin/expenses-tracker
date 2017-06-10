@@ -9,7 +9,9 @@ import BG from '../img/expense_blur.png'
 import logo from '../img/logo.png'
 import LangSelector from '../containers/langSelector'
 import redirectAfterLoginSuccess from '../actions/user_actions'
-import ReCAPTCHA from 'react-google-recaptcha'
+import ReCAPTCHA_EN from '../components/captcha_en'
+import ReCAPTCHA_FR from '../components/captcha_fr'
+
 
 const Login = (props) => {
 
@@ -31,9 +33,20 @@ const Login = (props) => {
     height: w.innerHeight|| documentElement.clientHeight|| body.clientHeight
   }
 
-
-
-  let captcha = null
+  function renderCaptcha() {
+    switch (props.lang) {
+    case 'fr':
+      return <ReCAPTCHA_FR
+              sitekey={`${process.env.GCAPTCHA_PUBLIC_KEY}`}
+              callback={(value)=> { tokenCaptcha = value}}
+              />
+    default :
+      return <ReCAPTCHA_EN
+              sitekey={`${process.env.GCAPTCHA_PUBLIC_KEY}`}
+              callback={(value)=> {tokenCaptcha = value}}
+              />
+    }
+  }
 
 
   return (
@@ -68,13 +81,7 @@ const Login = (props) => {
       </FormGroup >
       <Row>
         <Col md={12}>
-        <ReCAPTCHA
-          ref={(el) => { captcha = el }}
-          sitekey={`${process.env.GCAPTCHA_PUBLIC_KEY}`}
-          onChange={(value)=> {
-            tokenCaptcha = value
-          }}
-        />
+        {renderCaptcha()}
         <br/>
         </Col>
       </Row>

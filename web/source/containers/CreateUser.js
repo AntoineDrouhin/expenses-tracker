@@ -11,6 +11,9 @@ import translate from '../lang/language.js'
 
 import { userCreationError } from '../actions/user_actions'
 
+import ReCAPTCHA_EN from '../components/captcha_en'
+import ReCAPTCHA_FR from '../components/captcha_fr'
+
 const CreateUser = (props) => {
 
   if( props.user && props.user.connected ){
@@ -21,7 +24,7 @@ const CreateUser = (props) => {
     browserHistory.push('/login')
   }
 
-  let emailInput = null, passwordInput = null, passwordConfirm = null
+  let emailInput = null, passwordInput = null, passwordConfirm = null, tokenCaptcha = null
   var w = window,
     d = document,
     documentElement = d.documentElement,
@@ -33,11 +36,26 @@ const CreateUser = (props) => {
     padding: '10%',
     height: w.innerHeight|| documentElement.clientHeight|| body.clientHeight
   }
+
+  function renderCaptcha() {
+    switch (props.lang) {
+    case 'fr':
+      return <ReCAPTCHA_FR
+              sitekey={`${process.env.GCAPTCHA_PUBLIC_KEY}`}
+              callback={(value)=> { tokenCaptcha = value}}
+              />
+    default :
+      return <ReCAPTCHA_EN
+              sitekey={`${process.env.GCAPTCHA_PUBLIC_KEY}`}
+              callback={(value)=> {tokenCaptcha = value}}
+              />
+    }
+  }
   return (
     <div style={style}>
     <div style={{position:'absolute', right:'15px', top:'15px' }}><LangSelector></LangSelector></div>
-    <div style={{boxShadow: '10px 10px 111px 6px rgba(0,0,0,0.75)', maxWidth:'300px', margin: 'auto'}}>
-    <CenterPanel maxWidth='300px'>
+    <div style={{boxShadow: '10px 10px 111px 6px rgba(0,0,0,0.75)', maxWidth:'332px', margin: 'auto'}}>
+    <CenterPanel maxWidth='332px'>
     <div style={{textAlign:'center', borderBottom:'1px solid #ccc', marginBottom:'10px'}}>
       <div style={{marginTop:'4px', fontSize:'18px'}}>
         <img style={{height:'60px',width:'60px'}} src={logo}/>
@@ -47,7 +65,7 @@ const CreateUser = (props) => {
       <form onSubmit={e => {
         e.preventDefault() // prevent page refresh after submit
         if (passwordInput.value != null && passwordConfirm.value == passwordInput.value) {
-          props.onValidate(emailInput.value, passwordInput.value, props.lang)
+          props.onValidate(emailInput.value, passwordInput.value, props.lang, tokenCaptcha)
         } else {
           props.onError('Password is different from password confirmation')
         }
@@ -76,6 +94,8 @@ const CreateUser = (props) => {
           placeholder='*********'
         />
       </FormGroup >
+      {renderCaptcha()}
+      <br/>
       <div style={{'textAlign': 'right' }}>
         <Button type="submit" bsStyle="primary">
           {translate(props.lang, 'SIGN_UP')}
@@ -112,8 +132,8 @@ CreateUser.propTypes = {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onValidate: (email, password, lang) => {
-      dispatch(postUser(email, password, lang))
+    onValidate: (email, password, lang, tokenCaptcha) => {
+      dispatch(postUser(email, password, lang, tokenCaptcha))
     },
     onError: (errorMsg) => {
       dispatch(userCreationError(errorMsg))

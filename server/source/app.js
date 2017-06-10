@@ -138,6 +138,6 @@ const expenseType = require('./route/expenseType.js')
 app.use('/expenseType',ensureAuthenticated, expenseType)
 
 const user = require('./route/user.js')
-app.use('/user', user)
+app.use('/user', ensureHuman, user)
 
 module.exports = app
