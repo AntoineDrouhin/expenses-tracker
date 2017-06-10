@@ -9,6 +9,7 @@ import BG from '../img/expense_blur.png'
 import logo from '../img/logo.png'
 import LangSelector from '../containers/langSelector'
 import redirectAfterLoginSuccess from '../actions/user_actions'
+import ReCAPTCHA from 'react-google-recaptcha'
 
 const Login = (props) => {
 
@@ -16,7 +17,7 @@ const Login = (props) => {
     browserHistory.push('/')
   }
 
-  let emailInput = null, passwordInput = null
+  let emailInput = null, passwordInput = null, tokenCaptcha = null
 
   var w = window,
     d = document,
@@ -26,15 +27,20 @@ const Login = (props) => {
   let style = {
     background: 'url('+BG+')',
     backgroundSize: 'cover',
-    padding: '15%',
+    padding: '10% 15%',
     height: w.innerHeight|| documentElement.clientHeight|| body.clientHeight
   }
+
+
+
+  let captcha = null
+
 
   return (
     <div style={style}>
     <div style={{position:'absolute', right:'15px', top:'15px' }}><LangSelector></LangSelector></div>
-    <div style={{boxShadow: '10px 10px 111px 6px rgba(0,0,0,0.75)', maxWidth:'300px', margin: 'auto'}}>
-    <CenterPanel  maxWidth='300px' >
+    <div style={{boxShadow: '10px 10px 111px 6px rgba(0,0,0,0.75)', maxWidth:'332px', margin: 'auto'}}>
+    <CenterPanel  maxWidth='332px' >
     <div style={{textAlign:'center', borderBottom:'1px solid #ccc', marginBottom:'10px'}}>
       <div style={{marginTop:'4px', fontSize:'18px'}}>
         <img style={{height:'60px',width:'60px'}} src={logo}/>
@@ -43,7 +49,7 @@ const Login = (props) => {
       </div>
       <form onSubmit={e => {
         e.preventDefault() // prevent page refresh after submit
-        props.onValidate(emailInput.value, passwordInput.value )
+        props.onValidate(emailInput.value, passwordInput.value, tokenCaptcha)
       }}>
       <FormGroup>
         <ControlLabel>{translate(props.lang, 'EMAIL_ADDRES')}</ControlLabel>
@@ -60,6 +66,18 @@ const Login = (props) => {
           placeholder='*********'
         />
       </FormGroup >
+      <Row>
+        <Col md={12}>
+        <ReCAPTCHA
+          ref={(el) => { captcha = el }}
+          sitekey={`${process.env.GCAPTCHA_PUBLIC_KEY}`}
+          onChange={(value)=> {
+            tokenCaptcha = value
+          }}
+        />
+        <br/>
+        </Col>
+      </Row>
       <Row>
         <Col md={6}>
           <Button bsStyle='danger'  onClick={() => browserHistory.push('/signUp')}>
@@ -105,8 +123,8 @@ Login.propTypes = {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onValidate: (email, password) => {
-      dispatch(login(email, password))
+    onValidate: (email, password, tokenCaptcha) => {
+      dispatch(login(email, password, tokenCaptcha))
     },
     redirectAfterLoginSuccess: () => {
       dispatch(redirectAfterLoginSuccess())

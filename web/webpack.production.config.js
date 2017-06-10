@@ -13,7 +13,8 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         'SERVER_ADDRESS': '"http://localhost:3000"',
-        'NODE_ENV': JSON.stringify('production')
+        'NODE_ENV': JSON.stringify('production'),
+        'GCAPTCHA_PUBLIC_KEY' : '"6Lcg7CQUAAAAACOO9rQyGwP6XN2hprlTh268VldF"'
       }
     }),
     new webpack.optimize.UglifyJsPlugin({

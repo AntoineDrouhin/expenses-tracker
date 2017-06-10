@@ -24,13 +24,13 @@ export const postUser = (email, password, lang) => {
 
 // TODO Delete users
 
-export const login = (email, password) => {
+export const login = (email, password, tokenCaptcha) => {
   return (dispatch) => {
     fetch(`${process.env.SERVER_ADDRESS}/login`, {
       method: 'POST',
       credentials: 'include',
       headers: new Headers({'Content-Type': 'application/json'}),
-      body: JSON.stringify({email, password})
+      body: JSON.stringify({email, password, tokenCaptcha})
     })
       .then(response => response.json())
       .then(user => dispatch(setUser(Object.assign({}, user))))

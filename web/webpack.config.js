@@ -13,7 +13,8 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        'SERVER_ADDRESS': '"https://localhost:3443"'
+        'SERVER_ADDRESS': '"https://localhost:3443"',
+        'GCAPTCHA_PUBLIC_KEY' : '"6Lcg7CQUAAAAACOO9rQyGwP6XN2hprlTh268VldF"'
       }
     })
   ],
