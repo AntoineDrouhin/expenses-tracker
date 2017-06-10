@@ -1,7 +1,9 @@
 const webpack = require('webpack')
 
 module.exports = {
-  entry: './source/index.js',
+  entry: { app :
+    ['react-hot-loader/patch', './source/index.js']
+  },
   output: {
     filename: 'bundle.js',
     path: './dist',
@@ -22,7 +24,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loaders: ['react-hot-loader/webpack', 'babel-loader']
       }, {
         test: /\.css$/,
         loader: 'style-loader!css-loader'
