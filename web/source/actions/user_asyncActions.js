@@ -1,13 +1,13 @@
 import { setUser, userCreationError, userCreationSuccess } from './user_actions.js'
 import { resetState } from './state_actions.js'
 
-export const postUser = (email, password) => {
+export const postUser = (email, password, lang) => {
   return (dispatch) => {
     fetch(`${process.env.SERVER_ADDRESS}/user`, {
       method: 'POST',
       credentials: 'include',
       headers: new Headers({'Content-Type': 'application/json'}),
-      body: JSON.stringify({email, password})
+      body: JSON.stringify({email, password, lang})
     })
       .then(response => response.json())
       .then(json => {

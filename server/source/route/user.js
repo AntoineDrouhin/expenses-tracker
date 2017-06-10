@@ -20,7 +20,7 @@ router.route('/')
       })
       user.save(function (err, user) {
         if (err) { logger.error(err); res.sendStatus(500) }
-        req.app.mailer.send('usercreation', {
+        req.app.mailer.send('usercreation_'+req.body.lang, {
           to: req.body.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
           subject: 'Bienvenue sur Expense Tracker', // REQUIRED.
           mail:req.body.email // All additional properties are also passed to the template as local variables.
