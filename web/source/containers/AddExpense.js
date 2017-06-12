@@ -9,7 +9,7 @@ import { deleteAsyncExpenseType } from  '../actions/expenseType_asyncActions.js'
 
 const mapStateToProps = (state) => {
   return {
-    expensesTypes: state.expensesTypes,
+    expenseTypes: state.expenseTypes,
     displayOption : state.displayOption
   }
 }

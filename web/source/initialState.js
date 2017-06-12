@@ -5,7 +5,7 @@ const initialState = {
     expenseList : [],
     isInit : false
   },
-  expensesTypes: {
+  expenseTypes: {
     items : [],
     isInit : false
   },

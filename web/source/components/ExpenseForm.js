@@ -6,7 +6,7 @@ import { FormControl, Form, ControlLabel, Button,
 
 const ExpenseForm = (props) => {
 
-  if( ! props.expensesTypes.isInit){
+  if( ! props.expenseTypes.isInit){
     props.syncExpenseTypes()
   }
 
@@ -90,7 +90,7 @@ const ExpenseForm = (props) => {
             <Col md={12}>
             <FormControl componentClass="select"
               inputRef={ (ref) => typeInput = ref } >
-              {props.expensesTypes.items.map(expenseType =>
+              {props.expenseTypes.items.map(expenseType =>
                 <option key={expenseType.id} value={expenseType.label}>{expenseType.label}</option>
               )}
             </FormControl>
@@ -120,6 +120,26 @@ const ExpenseForm = (props) => {
                   e.preventDefault()
                   props.onValidateType(addExpenseTypeInput.value)
                 }}>
+
+                  <Form inline>
+                    <Col md={4}>
+                      <FormControl id="get-expenseType" type="text"
+                        inputRef={ (ref) => addExpenseTypeInput = ref }
+                       />
+                    </Col>
+                       <Col md={3}>
+                           <Button bsStyle="primary" type="submit">
+                             Validate
+                           </Button>
+                       </Col>
+                  </Form>
+
+                  {props.expenseTypes.items.map(expenseType =>
+                    <div id = {expenseType.id} >
+                      {expenseType.label}
+                    </div>
+                  )}
+
 
                     <Form style={{height : '10px',marginLeft: '35%',marginBottom : '20px'}}>
                       <Col md={4}>
@@ -174,7 +194,7 @@ const ExpenseForm = (props) => {
 }
 
 ExpenseForm.propTypes = {
-  expensesTypes : PropTypes.shape({
+  expenseTypes : PropTypes.shape({
     items : PropTypes.arrayOf(PropTypes.shape({
       id : PropTypes.number.isRequired,
       label : PropTypes.string.isRequired
