@@ -8,10 +8,10 @@ export const addExpenseType = (label,_id) => {
   }
 }
 
-export const deleteExpenseType = (id) => {
+export const deleteExpenseType = (_id) => {
   return {
     type: 'DELETE_EXPENSETYPE',
-    id
+    _id
   }
 }
 

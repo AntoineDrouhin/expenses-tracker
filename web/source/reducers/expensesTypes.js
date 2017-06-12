@@ -23,7 +23,7 @@ const expensesTypes = (state = {}, action) => {
     }
   case 'DELETE_EXPENSETYPE':
     return {
-      items : state.items.filter(expenseType => expenseType.id !== action.id ),
+      items : state.items.filter(expenseType => expenseType._id !== action._id ),
       isInit : state.isInit
     }
 

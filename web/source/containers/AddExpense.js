@@ -5,6 +5,7 @@ import { postExpenseType } from '../actions/expenseType_asyncActions'
 import { setDisplayModalTrue} from '../actions/displayModal_actions'
 import { setDisplayModalFalse} from '../actions/displayModal_actions'
 import { fetchExpenseTypes } from '../actions/expenseType_asyncActions.js'
+import { deleteAsyncExpenseType } from  '../actions/expenseType_asyncActions.js'
 
 const mapStateToProps = (state) => {
   return {
@@ -27,6 +28,9 @@ const mapDispatchToProps = (dispatch) => {
       }else{
         dispatch(setDisplayModalFalse())
       }
+    },
+    clickDeleteExpenseType : (_id) => {
+      dispatch(deleteAsyncExpenseType(_id))
     },
     syncExpenseTypes : () => {
       dispatch(fetchExpenseTypes())

@@ -38,5 +38,12 @@ router.route('/:id')
       })
     })
   })
+  // .update((req,res) => {
+  //   logger.info('user : ' + req.session.passport.user + ' UPDATE EXPENSETYPES :', req.params.id)
+  //   ExpenseTypeModel.find({_id : req.params.id}).remove().exec(err => {
+  //     if (err) { logger.error(err); res.sendStatus(500) }
+  //
+  //   })
+  // })
 
 module.exports = router
