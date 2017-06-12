@@ -1,7 +1,9 @@
 import React, { PropTypes } from 'react'
 
 import CenterPanel from '../components/CenterPanel'
-import { FormGroup, FormControl, Form, ControlLabel, Button, Col ,Modal} from 'react-bootstrap'
+
+import { FormGroup, FormControl, Form, ControlLabel, Button, Col ,Modal,Glyphicon} from 'react-bootstrap'
+
 import translate from '../lang/language.js'
 
 
@@ -88,31 +90,49 @@ const ExpenseForm = (props) => {
                 <Modal.Header closeButton>
                   <Modal.Title>{translate(props.lang, 'ADD_EXPENSE_TYPE')}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body style={{minheight: '150px'}}>
+                <Modal.Body style={{minheight: '150px',textAlign: 'center'}} >
                 <form onSubmit={e => {
                   e.preventDefault()
                   props.onValidateType(addExpenseTypeInput.value)
                 }}>
-                  <Form inline>
-                    <Col md={4}>
-                      <FormControl id="get-expenseType" type="text"
-                        inputRef={ (ref) => addExpenseTypeInput = ref }
-                       />
-                    </Col>
-                       <Col md={3}>
-                           <Button bsStyle="primary" type="submit">
-                             {translate(props.lang, 'VALIDATE')}
-                           </Button>
-                       </Col>
-                  </Form>
 
-                  {props.expenseTypes.items.map(expenseType =>
-                    <div id = {expenseType.id} >
-                      {expenseType.label}
-                    </div>
-                  )}
-
+                    <Form style={{height : '10px',marginLeft: '35%',marginBottom : '20px'}}>
+                      <Col md={4}>
+                        <FormControl  id="get-expenseType" type="text"
+                          inputRef={ (ref) => addExpenseTypeInput = ref }
+                         />
+                      </Col>
+                         <Col md={3} >
+                             <Button style={{display : 'inline-block'}} bsStyle="primary" type="submit">
+                               Validate
+                             </Button>
+                         </Col>
+                    </Form>
                 </form>
+
+                  <Col  mdOffset={4} md={8} style = {{marginTop : '40px'}}>
+                    <div style={{fontSize: '2em',textAlign: 'center',fontStyle : 'italic'}}>
+                    {props.expenseTypes.items.map(expenseType =>
+
+                      <tr style = {{textAlign : 'center'}} id = {expenseType._id} >
+
+                      <td id = {'label_'+expenseType._id} style = {{textAlign: 'left'}}>  {expenseType.label} </td>
+
+                        <td><Button onClick={e => {
+                          e.preventDefault()
+                          props.clickDeleteExpenseType(expenseType._id)
+                        }} style={{marginLeft:'25px'}} bsStyle="danger"  >
+                          <Glyphicon glyph="remove" />
+                        </Button > </td>
+
+                      </tr>
+
+                    )}
+
+                    </div>
+                 </Col>
+
+
                 </Modal.Body>
                 <Modal.Footer>
                   <Button onClick={e => {
