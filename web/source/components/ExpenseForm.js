@@ -2,8 +2,7 @@ import React, { PropTypes } from 'react'
 
 import CenterPanel from '../components/CenterPanel'
 
-import { FormControl, Form, ControlLabel, Button,
-  Col,Modal,Glyphicon,FormGroup} from 'react-bootstrap'
+import { FormGroup, FormControl, Form, ControlLabel, Button, Col ,Modal,Glyphicon} from 'react-bootstrap'
 
 import translate from '../lang/language.js'
 
@@ -96,6 +95,7 @@ const ExpenseForm = (props) => {
                   e.preventDefault()
                   props.onValidateType(addExpenseTypeInput.value)
                 }}>
+
                     <Form style={{height : '10px',marginLeft: '35%',marginBottom : '20px'}}>
                       <Col md={4}>
                         <FormControl  id="get-expenseType" type="text"
@@ -128,6 +128,7 @@ const ExpenseForm = (props) => {
                       </tr>
 
                     )}
+
                     </div>
                  </Col>
 
