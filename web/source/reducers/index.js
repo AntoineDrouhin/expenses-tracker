@@ -5,7 +5,6 @@ import expenseTypes from './expenseTypes'
 import user from './user'
 
 import displayOption from './displayOption'
-import global_state from './global_state'
 import lang from './lang'
 import initialState from '../initialState'
 

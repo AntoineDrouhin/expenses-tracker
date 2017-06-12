@@ -10,8 +10,10 @@ import CreateUser from './containers/CreateUser'
 import { Router, Route, browserHistory } from 'react-router'
 
 import initialState from './initialState'
-
 import { checkAuthentication } from './actions/user_asyncActions.js'
+
+
+import { AppContainer } from 'react-hot-loader'
 
 require('./style/Bootstrap-v3.3.6.css')  /*eslint:ignore*/
 require('./style/custom.css')  /*eslint:ignore*/
@@ -26,15 +28,15 @@ const store = createStore(
 )
 
 store.dispatch(checkAuthentication())
-
-
 render(
+  <AppContainer>
   <Provider store={store}>
     <Router history={browserHistory} >
       <Route path="/" component={App} />
       <Route path="/login" component={Login} />
       <Route path="/signUp" component={CreateUser} />
     </Router>
-  </Provider>,
+  </Provider>
+  </AppContainer>,
   document.getElementById('root')
 )

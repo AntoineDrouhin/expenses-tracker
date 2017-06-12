@@ -6,6 +6,24 @@ const logger = require('config/winston_config')
 const UserModel = require('./model/user.js')
 
 const app = express()
+const mailer = require('express-mailer')
+
+const https = require('https')
+
+mailer.extend(app, {
+  from: process.env.MAIL_ADDRESS,
+  host: process.env.MAIL_HOST_NAME, // hostname
+  secureConnection: (process.env.MAIL_SECURE_CONNECTION === true || process.env.MAIL_SECURE_CONNECTION === 'true'), // use SSL
+  port: process.env.MAIL_PORT, // port for secure SMTP
+  transportMethod: process.env.MAIL_TRANSPORT_METHOD, // default is SMTP. Accepts anything that nodemailer accepts
+  auth: {
+    user: process.env.MAIL_AUTH_USER,
+    pass: process.env.MAIL_AUTH_PASSWORD
+  }
+})
+
+app.set('views', __dirname + '/mail')
+app.set('view engine', 'jade')
 
 // DataBase Configuration
 const mongoose = require('mongoose')
@@ -51,6 +69,39 @@ function ensureAuthenticated(req, res, next) {
   res.sendStatus(401)
 }
 
+function ensureHuman(req, res, next) {
+  var url = 'https://www.google.com/recaptcha/api/siteverify?secret='+ process.env.GCAPTCHA_SECRET_KEY+ '&response=' + req.body.tokenCaptcha
+  if (req.body.tokenCaptcha) {
+    https.get(url,function(resg) {
+      var data = ''
+      resg.on('data', function (chunk) {
+        data += chunk.toString()
+      })
+      resg.on('end', function() {
+        try {
+          var parsedData = JSON.parse(data)
+          console.log(parsedData)
+          if(parsedData.success) {
+            logger.info('ENSURE HUMAN : OK')
+            return next()
+          } else {
+            logger.info('ENSURE HUMAN : NOK')
+            res.sendStatus(401)
+          }
+        } catch (e) {
+          logger.error('ENSURE HUMAN : INVALID GOOGLE RETURN')
+          res.sendStatus(401)
+        }
+
+      })
+    })
+  }
+  else {
+    logger.info('ENSURE HUMAN : NO TOKEN IN BODY REQUEST')
+    res.sendStatus(401)
+  }
+}
+
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(passport.authenticate('remember-me'))
@@ -75,7 +126,7 @@ app.get('/checkauth', ensureAuthenticated, (req, res) => {
 })
 
 const login = require('./route/login.js')
-app.use('/login', login)
+app.use('/login', ensureHuman, login)
 
 const disconnect = require('./route/disconnect.js')
 app.use('/disconnect', ensureAuthenticated, disconnect)
@@ -87,6 +138,6 @@ const expenseType = require('./route/expenseType.js')
 app.use('/expenseType',ensureAuthenticated, expenseType)
 
 const user = require('./route/user.js')
-app.use('/user', user)
+app.use('/user', ensureHuman, user)
 
 module.exports = app

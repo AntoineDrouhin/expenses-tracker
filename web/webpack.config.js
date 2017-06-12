@@ -1,7 +1,9 @@
 const webpack = require('webpack')
 
 module.exports = {
-  entry: './source/index.js',
+  entry: { app :
+    ['react-hot-loader/patch', './source/index.js']
+  },
   output: {
     filename: 'bundle.js',
     path: './dist',
@@ -13,7 +15,8 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        'SERVER_ADDRESS': '"https://localhost:3443"'
+        'SERVER_ADDRESS': '"https://localhost:3443"',
+        'GCAPTCHA_PUBLIC_KEY' : '"6Lcg7CQUAAAAACOO9rQyGwP6XN2hprlTh268VldF"'
       }
     })
   ],
@@ -22,7 +25,10 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
+        query: {
+          presets:[ 'es2015', 'react', 'stage-2' ]
+        }
       }, {
         test: /\.css$/,
         loader: 'style-loader!css-loader'

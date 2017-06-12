@@ -19,11 +19,14 @@
     "cross-env": "3.1.4",
     "dotenv": "4.0.0",
     "express": "4.14.0",
+    "express-mailer": "^0.3.1",
     "express-session": "1.15.1",
+    "jade": "^1.11.0",
     "mongoose": "4.7.6",
     "passport": "0.3.2",
     "passport-local": "1.0.0",
     "passport-remember-me": "0.0.1",
+    "password-hash": "^1.2.2",
     "winston": "2.3.1"
   },
   "devDependencies": {

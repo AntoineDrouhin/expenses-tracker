@@ -1,30 +1,36 @@
-import { setUser } from './user_actions.js'
+import { setUser, userCreationError, userCreationSuccess } from './user_actions.js'
 import { resetState } from './state_actions.js'
 
-export const postUser = (email, password) => {
-  return (/*dispatch*/) => {
+export const postUser = (email, password, lang, tokenCaptcha) => {
+  return (dispatch) => {
     fetch(`${process.env.SERVER_ADDRESS}/user`, {
       method: 'POST',
       credentials: 'include',
       headers: new Headers({'Content-Type': 'application/json'}),
-      body: JSON.stringify({email, password})
+      body: JSON.stringify({email, password, lang, tokenCaptcha})
     })
       .then(response => response.json())
-      //TODO REDIRECT OR DISPLAY MESSAGE
-      // .then(json => if (json.success) { GO TO LOGIN}
-            // else { DISPLAY ERROR MESSAGE json.error })
+      .then(json => {
+        if ( json.error ) {
+          dispatch(userCreationError(json.errorMsg))
+        }
+        else {
+          dispatch(userCreationSuccess())
+        }
+      })
+
   }
 }
 
 // TODO Delete users
 
-export const login = (email, password) => {
+export const login = (email, password, tokenCaptcha) => {
   return (dispatch) => {
     fetch(`${process.env.SERVER_ADDRESS}/login`, {
       method: 'POST',
       credentials: 'include',
       headers: new Headers({'Content-Type': 'application/json'}),
-      body: JSON.stringify({email, password})
+      body: JSON.stringify({email, password, tokenCaptcha})
     })
       .then(response => response.json())
       .then(user => dispatch(setUser(Object.assign({}, user))))
