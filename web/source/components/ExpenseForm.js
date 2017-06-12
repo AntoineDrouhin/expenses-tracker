@@ -120,27 +120,7 @@ const ExpenseForm = (props) => {
                   e.preventDefault()
                   props.onValidateType(addExpenseTypeInput.value)
                 }}>
-
-                  <Form inline>
-                    <Col md={4}>
-                      <FormControl id="get-expenseType" type="text"
-                        inputRef={ (ref) => addExpenseTypeInput = ref }
-                       />
-                    </Col>
-                       <Col md={3}>
-                           <Button bsStyle="primary" type="submit">
-                             Validate
-                           </Button>
-                       </Col>
-                  </Form>
-
-                  {props.expenseTypes.items.map(expenseType =>
-                    <div id = {expenseType.id} >
-                      {expenseType.label}
-                    </div>
-                  )}
-
-
+            
                     <Form style={{height : '10px',marginLeft: '35%',marginBottom : '20px'}}>
                       <Col md={4}>
                         <FormControl  id="get-expenseType" type="text"
@@ -157,7 +137,7 @@ const ExpenseForm = (props) => {
 
                   <Col  mdOffset={4} md={8} style = {{marginTop : '40px'}}>
                     <div style={{fontSize: '2em',textAlign: 'center',fontStyle : 'italic'}}>
-                    {props.expensesTypes.items.map(expenseType =>
+                    {props.expenseTypes.items.map(expenseType =>
 
                       <tr style = {{textAlign : 'center'}} id = {expenseType._id} >
 
