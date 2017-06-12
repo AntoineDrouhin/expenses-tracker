@@ -1,7 +1,9 @@
 const webpack = require('webpack')
 
 module.exports = {
-  entry: './source/index.js',
+  entry: { app :
+    ['react-hot-loader/patch', './source/index.js']
+  },
   output: {
     filename: 'bundle.js',
     path: './dist',
