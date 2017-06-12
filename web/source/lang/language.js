@@ -80,8 +80,8 @@ var trads = {
     'en' : 'Add an expense type'
   },
   'NEW_EXPENSE_TYPE': {
-    'fr' : 'Nouvau type',
-    'en' : 'New type'
+    'fr' : 'Gerer les types',
+    'en' : 'Manage types'
   },
   'CLOSE': {
     'fr' : 'Fermer',
